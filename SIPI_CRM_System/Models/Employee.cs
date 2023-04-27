@@ -10,5 +10,6 @@ namespace SIPI_CRM_System.Models
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string Position { get; set; } = null!;
+        public bool IsAdmin { get; set; }
     }
 }
