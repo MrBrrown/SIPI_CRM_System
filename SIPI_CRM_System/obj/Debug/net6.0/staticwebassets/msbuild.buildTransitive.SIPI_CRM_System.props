@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/SIPI_CRM_System.props" />
+</Project>
