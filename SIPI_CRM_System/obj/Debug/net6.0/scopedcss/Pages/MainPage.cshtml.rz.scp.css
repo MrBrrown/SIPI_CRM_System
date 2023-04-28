@@ -1,0 +1,6 @@
+.gradient-color[b-19zk1pc1cz] {
+    background: radial-gradient(circle, rgba(110,77,59,1) 0%, rgba(0,0,0,1) 98%);
+    background-repeat: repeat-y;
+    min-height: 100vh;
+    background-attachment: fixed;
+}

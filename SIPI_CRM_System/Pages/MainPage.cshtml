@@ -2,8 +2,11 @@
 @model SIPI_CRM_System.Pages.MainPageModel
 @{
     @if (Request.Query["isadmin"] == "True")
-            Layout = "~/Pages/Shared/_AdminLayout.cshtml";
-        else
-            Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    else
+        Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
 }
 
+<section class="gradient-color">
+    <h1>color</h1>
+</section>

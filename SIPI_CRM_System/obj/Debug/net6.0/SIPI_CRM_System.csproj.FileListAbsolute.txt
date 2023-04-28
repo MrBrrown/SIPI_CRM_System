@@ -57,3 +57,6 @@
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/SIPI_CRM_System.csproj.CopyComplete
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/Index.cshtml.rz.scp.css
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/Shared/_AdminLayout.cshtml.rz.scp.css
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/Shared/_EmployeeLayout.cshtml.rz.scp.css
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/MainPage.cshtml.rz.scp.css

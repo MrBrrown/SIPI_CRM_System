@@ -9,8 +9,16 @@ namespace SIPI_CRM_System.Pages
 {
 	public class MainPageModel : PageModel
     {
+        private static string redirectUserString = "";
+
         public void OnGet()
         {
+            redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"];
+        }
+
+        public IActionResult OnPostExit()
+        {
+            return Redirect("/Index");
         }
     }
 }
