@@ -3,15 +3,12 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml.css">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml" />
-      <File FileName="SIPI_CRM_System/Pages/Index.cshtml.css" />
-      <File FileName="SIPI_CRM_System/Pages/Index.cshtml" />
-      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml.css" Line="29" Column="26" />
+      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml" Line="20" Column="22" />
+      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml.css" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,11 +17,8 @@
             <Node name="SIPI_CRM_System" expanded="True">
               <Node name="Pages" expanded="True">
                 <Node name="Shared" expanded="True">
-                  <Node name="_AdminLayout.cshtml" expanded="True">
-                    <Node name="_AdminLayout.cshtml.css" selected="True" />
-                  </Node>
+                  <Node name="_AdminLayout.cshtml" selected="True" />
                 </Node>
-                <Node name="Index.cshtml" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -32,4 +26,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
