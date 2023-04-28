@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Employee` (
   `Login` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `Position` VARCHAR(45) NOT NULL,
+  `IsAdmin` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
