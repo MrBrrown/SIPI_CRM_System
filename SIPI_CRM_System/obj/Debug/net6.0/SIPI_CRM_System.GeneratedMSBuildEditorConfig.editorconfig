@@ -16,8 +16,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/MainPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFpblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_EmployeeLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19FbXBsb3llZUxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_LoginLayout.cshtml]
@@ -35,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ck5xepj1lm
 
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
+using SIPI_CRM_System.Services.LoginPageRep;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddDbContext<CRMdbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("CRMdb")));
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<ILoginPageRepository, DataBaseLoginPageRepository>();
 
 var app = builder.Build();
 

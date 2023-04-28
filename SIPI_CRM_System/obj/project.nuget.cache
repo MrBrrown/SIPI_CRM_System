@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "L+ddglw0Evk6iVmcCdpnjaTVT5yQHflKSQ6RVi92F8tT/hhl3/9mruewEre8SBLC/UILo4fTSukWy3AhZrPPgQ==",
+  "dgSpecHash": "1aFmtY3/L8EN3FU/kfkogO068lv4fIe1LTVVwh6qV192QCYHg1kcrwtcNfHtI8I0hZ9QXdRkK7/+egQLYk08jQ==",
   "success": true,
   "projectFilePath": "/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/SIPI_CRM_System.csproj",
   "expectedPackageFiles": [
+    "/Users/artemgusev/.nuget/packages/bootstrap/5.2.3/bootstrap.5.2.3.nupkg.sha512",
     "/Users/artemgusev/.nuget/packages/google.protobuf/3.19.4/google.protobuf.3.19.4.nupkg.sha512",
     "/Users/artemgusev/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/artemgusev/.nuget/packages/k4os.compression.lz4/1.2.6/k4os.compression.lz4.1.2.6.nupkg.sha512",

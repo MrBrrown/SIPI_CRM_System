@@ -1,20 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SIPI_CRM_System.Services.LoginPageRep;
 
 namespace SIPI_CRM_System.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ILoginPageRepository _context;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(ILoginPageRepository context)
     {
-        _logger = logger;
+        _context = context;
     }
 
-    public void OnGet()
+    public IActionResult OnPost()
     {
+        var Login = Request.Form["Login"];
+        var Password = Request.Form["Password"];
 
+        if (_context.CheckAuthorization(Login, Password))
+        {
+            var employee = _context.GetEmployee(Login);
+            return Redirect("/MainPage?login=" + Login+"&isadmin="+employee.IsAdmin.ToString());
+        }
+        else
+            return Redirect("/Index?invalid=True");
     }
 }
 
