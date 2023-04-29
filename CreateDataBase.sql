@@ -205,6 +205,8 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder` (
   `Price` VARCHAR(45) NULL,
   `Discount` INT NULL,
   `OrderDateTime` DATETIME NOT NULL,
+  `IsReserved` TINYINT NOT NULL,
+  `IsDone` TINYINT NOT NULL,
   `Employee_ID` INT NOT NULL,
   `Table_ID` INT NOT NULL,
   `Client_ID` INT NOT NULL,
