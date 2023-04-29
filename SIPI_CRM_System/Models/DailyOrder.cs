@@ -14,6 +14,8 @@ namespace SIPI_CRM_System.Models
         public string? Price { get; set; }
         public int? Discount { get; set; }
         public DateTime OrderDateTime { get; set; }
+        public sbyte IsReserved { get; set; }
+        public sbyte IsDone { get; set; }
         public int EmployeeId { get; set; }
         public int TableId { get; set; }
         public int ClientId { get; set; }
