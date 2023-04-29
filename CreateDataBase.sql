@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Client` (
   `Name` VARCHAR(45) NOT NULL,
   `PhoneNumber` VARCHAR(10) NOT NULL,
   `Email` VARCHAR(45) NULL,
+  `Discount` INT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
@@ -31,34 +32,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRMdb`.`Table` (
   `ID` INT NOT NULL,
-  `Number` INT NOT NULL,
   `Places` INT NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CRMdb`.`Order`
+-- Table `CRMdb`.`Position`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CRMdb`.`Order` (
+CREATE TABLE IF NOT EXISTS `CRMdb`.`Position` (
   `ID` INT NOT NULL,
-  `Price` DECIMAL(9,2) NULL,
-  `OrderDateTime` DATETIME NOT NULL,
-  `Client_idClient` INT NOT NULL,
-  `Table_idTable` INT NOT NULL,
-  PRIMARY KEY (`ID`),
-  INDEX `fk_Order_Client_idx` (`Client_idClient` ASC) VISIBLE,
-  INDEX `fk_Order_Table1_idx` (`Table_idTable` ASC) VISIBLE,
-  CONSTRAINT `fk_Order_Client`
-    FOREIGN KEY (`Client_idClient`)
-    REFERENCES `CRMdb`.`Client` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Order_Table1`
-    FOREIGN KEY (`Table_idTable`)
-    REFERENCES `CRMdb`.`Table` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `Name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
 
@@ -70,9 +55,48 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Employee` (
   `Name` VARCHAR(45) NOT NULL,
   `Login` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
-  `Position` VARCHAR(45) NOT NULL,
-  `IsAdmin` tinyint(1) NOT NULL,
-  PRIMARY KEY (`ID`))
+  `IsAdmin` TINYINT NOT NULL,
+  `Position_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_Employee_Position1_idx` (`Position_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_Employee_Position1`
+    FOREIGN KEY (`Position_ID`)
+    REFERENCES `CRMdb`.`Position` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CRMdb`.`Order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CRMdb`.`Order` (
+  `ID` INT NOT NULL,
+  `Price` DECIMAL(9,2) NULL,
+  `Discount` INT NULL,
+  `OrderDateTime` DATETIME NOT NULL,
+  `Client_ID` INT NOT NULL,
+  `Table_ID` INT NOT NULL,
+  `Employee_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_Order_Client1_idx` (`Client_ID` ASC) VISIBLE,
+  INDEX `fk_Order_Table1_idx` (`Table_ID` ASC) VISIBLE,
+  INDEX `fk_Order_Employee1_idx` (`Employee_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_Order_Client1`
+    FOREIGN KEY (`Client_ID`)
+    REFERENCES `CRMdb`.`Client` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Order_Table1`
+    FOREIGN KEY (`Table_ID`)
+    REFERENCES `CRMdb`.`Table` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Order_Employee1`
+    FOREIGN KEY (`Employee_ID`)
+    REFERENCES `CRMdb`.`Employee` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -173,7 +197,85 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Order_Dish` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `CRMdb`.`DailyOrder`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder` (
+  `ID` INT NOT NULL,
+  `Price` VARCHAR(45) NULL,
+  `Discount` INT NULL,
+  `OrderDateTime` DATETIME NOT NULL,
+  `Employee_ID` INT NOT NULL,
+  `Table_ID` INT NOT NULL,
+  `Client_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_DailyOrder_Employee1_idx` (`Employee_ID` ASC) VISIBLE,
+  INDEX `fk_DailyOrder_Table1_idx` (`Table_ID` ASC) VISIBLE,
+  INDEX `fk_DailyOrder_Client1_idx` (`Client_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_DailyOrder_Employee1`
+    FOREIGN KEY (`Employee_ID`)
+    REFERENCES `CRMdb`.`Employee` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DailyOrder_Table1`
+    FOREIGN KEY (`Table_ID`)
+    REFERENCES `CRMdb`.`Table` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DailyOrder_Client1`
+    FOREIGN KEY (`Client_ID`)
+    REFERENCES `CRMdb`.`Client` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CRMdb`.`DailyOrder_Dish`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder_Dish` (
+  `ID` INT NOT NULL,
+  `Dish_ID` INT NOT NULL,
+  `DailyOrder_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_DailyOrder_Dish_Dish2_idx` (`Dish_ID` ASC) VISIBLE,
+  INDEX `fk_DailyOrder_Dish_DailyOrder1_idx` (`DailyOrder_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_DailyOrder_Dish_Dish2`
+    FOREIGN KEY (`Dish_ID`)
+    REFERENCES `CRMdb`.`Dish` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DailyOrder_Dish_DailyOrder1`
+    FOREIGN KEY (`DailyOrder_ID`)
+    REFERENCES `CRMdb`.`DailyOrder` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CRMdb`.`DailyOrder_Dish`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder_Dish` (
+  `ID` INT NOT NULL,
+  `Dish_ID` INT NOT NULL,
+  `DailyOrder_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_DailyOrder_Dish_Dish2_idx` (`Dish_ID` ASC) VISIBLE,
+  INDEX `fk_DailyOrder_Dish_DailyOrder1_idx` (`DailyOrder_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_DailyOrder_Dish_Dish2`
+    FOREIGN KEY (`Dish_ID`)
+    REFERENCES `CRMdb`.`Dish` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DailyOrder_Dish_DailyOrder1`
+    FOREIGN KEY (`DailyOrder_ID`)
+    REFERENCES `CRMdb`.`DailyOrder` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
