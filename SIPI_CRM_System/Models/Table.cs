@@ -7,13 +7,14 @@ namespace SIPI_CRM_System.Models
     {
         public Table()
         {
+            DailyOrders = new HashSet<DailyOrder>();
             Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
-        public int Number { get; set; }
         public int Places { get; set; }
 
+        public virtual ICollection<DailyOrder> DailyOrders { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

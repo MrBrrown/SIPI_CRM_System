@@ -7,6 +7,7 @@ namespace SIPI_CRM_System.Models
     {
         public Dish()
         {
+            DailyOrderDishes = new HashSet<DailyOrderDish>();
             OrderDishes = new HashSet<OrderDish>();
             ProductDishes = new HashSet<ProductDish>();
         }
@@ -17,6 +18,7 @@ namespace SIPI_CRM_System.Models
         public decimal? Mass { get; set; }
         public decimal Price { get; set; }
 
+        public virtual ICollection<DailyOrderDish> DailyOrderDishes { get; set; }
         public virtual ICollection<OrderDish> OrderDishes { get; set; }
         public virtual ICollection<ProductDish> ProductDishes { get; set; }
     }

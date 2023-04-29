@@ -1,23 +1,22 @@
 ﻿<Properties StartupConfiguration="{E4C41CC0-9C81-4A9C-9916-149DD23785CA}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Services/LoginPageRep/DataBaseLoginPageRepository.cs">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml" Line="20" Column="22" />
-      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml.css" />
+      <File FileName="SIPI_CRM_System/Pages/Index.cshtml.cs" Line="23" Column="56" />
+      <File FileName="SIPI_CRM_System/Services/LoginPageRep/DataBaseLoginPageRepository.cs" Line="17" Column="85" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="SIPI_CRM_System" expanded="True">
+          <Node name="SIPI_CRM_System">
             <Node name="SIPI_CRM_System" expanded="True">
               <Node name="Pages" expanded="True">
-                <Node name="Shared" expanded="True">
-                  <Node name="_AdminLayout.cshtml" selected="True" />
+                <Node name="Shared" expanded="True" />
+                <Node name="Index.cshtml" expanded="True" />
+              </Node>
+              <Node name="Services" expanded="True">
+                <Node name="LoginPageRep" expanded="True">
+                  <Node name="DataBaseLoginPageRepository.cs" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -27,4 +26,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
