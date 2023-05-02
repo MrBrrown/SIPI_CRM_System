@@ -9,10 +9,12 @@
   <ItemGroup>
     <None Remove="Services\" />
     <None Remove="Services\LoginPageRep\" />
+    <None Remove="Services\MainPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Services\LoginPageRep\" />
+    <Folder Include="Services\MainPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">

@@ -75,19 +75,16 @@ namespace SIPI_CRM_System.Models
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.DailyOrders)
                     .HasForeignKey(d => d.ClientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_DailyOrder_Client1");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.DailyOrders)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_DailyOrder_Employee1");
 
                 entity.HasOne(d => d.Table)
                     .WithMany(p => p.DailyOrders)
                     .HasForeignKey(d => d.TableId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_DailyOrder_Table1");
             });
 
@@ -179,19 +176,16 @@ namespace SIPI_CRM_System.Models
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ClientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Order_Client1");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Order_Employee1");
 
                 entity.HasOne(d => d.Table)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.TableId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Order_Table1");
             });
 

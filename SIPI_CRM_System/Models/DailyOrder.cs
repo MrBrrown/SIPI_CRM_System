@@ -14,15 +14,15 @@ namespace SIPI_CRM_System.Models
         public string? Price { get; set; }
         public int? Discount { get; set; }
         public DateTime OrderDateTime { get; set; }
-        public sbyte IsReserved { get; set; }
-        public sbyte IsDone { get; set; }
-        public int EmployeeId { get; set; }
-        public int TableId { get; set; }
-        public int ClientId { get; set; }
+        public bool IsReserved { get; set; }
+        public bool IsDone { get; set; }
+        public int? EmployeeId { get; set; }
+        public int? TableId { get; set; }
+        public int? ClientId { get; set; }
 
-        public virtual Client Client { get; set; } = null!;
-        public virtual Employee Employee { get; set; } = null!;
-        public virtual Table Table { get; set; } = null!;
+        public virtual Client? Client { get; set; }
+        public virtual Employee? Employee { get; set; }
+        public virtual Table? Table { get; set; }
         public virtual ICollection<DailyOrderDish> DailyOrderDishes { get; set; }
     }
 }

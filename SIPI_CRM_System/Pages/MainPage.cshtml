@@ -8,5 +8,56 @@
 }
 
 <section class="gradient-color">
-    <h1>Main Page</h1>
+    <div class="d-grid">
+        <button class="btn btn-primary text-light new-order-button"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNewOrder"
+                aria-controls="offcanvasNewOrder">
+            Новый заказ
+        </button>
+        <!--Offcanvas right-->
+        <div class="offcanvas offcanvas-end new-order-offcanvas" tabindex="-1" id="offcanvasNewOrder" aria-labelledby="offcanvasNewOrderLabel">
+            <div class="offcanvas-header text-light">
+                <h5 class="offcanvas-title" id="offcanvasNewOrder">Новый заказ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small">
+                <form asp-page-handler="create" method="post">
+                    <input class="form-control" type="date" name="Date" />
+                    <input class="form-control" type="time" name="Time" />
+                    <button type="submit" class="btn-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+        @if (Model.dailyOrders.Any())
+        {
+            @foreach (var item in Model.dailyOrders.ToList())
+            {
+                var cardId = "card-" + item.Id.ToString();
+
+                <div class="card m-2 @cardId">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5>@item.OrderDateTime.Date</h5>
+                    </div>
+                    @if (item.IsReserved)
+                    {
+                        <style type="text/css">
+                        .@cardId {
+                            background-color: green;
+                        }
+                        </style>
+                    }
+                    else
+                    {
+                        <style type="text/css">
+                        .@cardId {
+                            background-color: yellow;
+                        }
+                        </style>
+                    }
+                </div>
+            }
+        }
+    </div>
 </section>
