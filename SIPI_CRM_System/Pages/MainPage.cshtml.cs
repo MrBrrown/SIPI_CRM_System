@@ -15,6 +15,7 @@ namespace SIPI_CRM_System.Pages
         private readonly IMainPageRepository _context;
 
         public IEnumerable<DailyOrder> dailyOrders;
+        public IEnumerable<Dish> dishes;
 
         public MainPageModel(IMainPageRepository context)
         {
@@ -34,11 +35,20 @@ namespace SIPI_CRM_System.Pages
             return Redirect("/MainPage" + redirectUserString);
         }
 
+        public IActionResult OnPostSetOrderDone(int id)
+        {
+            _context.SetOrderStatusDone(id);
+            return Redirect("/MainPage" + redirectUserString);
+        }
+
         public void OnGet()
         {
             dailyOrders = _context.GetDayliOrders().Where(x => x.OrderDateTime.ToShortDateString() == DateTime.Now.ToShortDateString())
                 .OrderByDescending(x => x.IsReserved).
                 ThenByDescending(x => x.OrderDateTime);
+
+            dishes = _context.GetDishes();
+
             redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
         }
 

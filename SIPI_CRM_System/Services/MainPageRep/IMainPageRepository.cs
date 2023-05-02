@@ -9,7 +9,11 @@ namespace SIPI_CRM_System.Services.MainPageRep
 
 		IEnumerable<DailyOrder> GetDayliOrders();
 
+		IEnumerable<Dish> GetDishes();
+
 		DailyOrder GetDailyOrderById(int id);
+
+		void SetOrderStatusDone(int id);
 	}
 }
 

@@ -202,7 +202,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder` (
   `ID` INT NOT NULL,
-  `Price` VARCHAR(45) NULL,
+  `Price` DECIMAL(9,2) NULL,
   `Discount` INT NULL,
   `OrderDateTime` DATETIME NOT NULL,
   `IsReserved` TINYINT NOT NULL,

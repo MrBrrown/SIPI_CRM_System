@@ -40,6 +40,7 @@
                 var cardId = "card-" + item.Id.ToString();
 
                 <div class="card m-2 @cardId">
+                    <!--Card color-->
                     @if (item.IsReserved)
                     {
                         <style type="text/css">
@@ -53,6 +54,7 @@
                         <style type="text/css">
                         .@cardId {
                             background-color: green;
+                            pointer-events: none;
                         }
                         </style>
                     }
@@ -64,8 +66,23 @@
                         }
                         </style>
                     }
+                    <!--Card header-->
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5>@item.OrderDateTime.ToShortDateString() @item.OrderDateTime.ToShortTimeString()</h5>
+                        <form asp-page-handler="SetOrderDone" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn btn-success">Заказ выполенен</button>
+                        </form>
+                    </div>
+                    <!--Card body-->
+                    <div class="card-body">
+                        @foreach (var dish_order in item.DailyOrderDishes.ToList())
+                        {
+                                <ul>
+                                    <li>
+                                        @Model.dishes.First(x => x.Id == dish_order.DishId).Name
+                                    </li>
+                                </ul>
+                        }
                     </div>
                 </div>
             }

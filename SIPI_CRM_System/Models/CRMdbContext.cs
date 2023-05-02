@@ -68,7 +68,7 @@ namespace SIPI_CRM_System.Models
 
                 entity.Property(e => e.EmployeeId).HasColumnName("Employee_ID");
 
-                entity.Property(e => e.Price).HasMaxLength(45);
+                entity.Property(e => e.Price).HasPrecision(9);
 
                 entity.Property(e => e.TableId).HasColumnName("Table_ID");
 

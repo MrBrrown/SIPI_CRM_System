@@ -11,7 +11,7 @@ namespace SIPI_CRM_System.Models
         }
 
         public int Id { get; set; }
-        public string? Price { get; set; }
+        public decimal? Price { get; set; }
         public int? Discount { get; set; }
         public DateTime OrderDateTime { get; set; }
         public bool IsReserved { get; set; }
