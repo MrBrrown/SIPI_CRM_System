@@ -11,7 +11,7 @@ namespace SIPI_CRM_System.Pages
 {
 	public class MainPageModel : PageModel
     {
-        private static string redirectUserString = "";
+        private static string redirectUserString = ""; //Необоходимо задавать на каждой станице в методе  OnGet(), по нему происходит сохранение действующего пользователя
         private readonly IMainPageRepository _context;
 
         public IEnumerable<DailyOrder> dailyOrders;
@@ -25,17 +25,21 @@ namespace SIPI_CRM_System.Pages
         {
             var date = Request.Form["Date"];
             var time = Request.Form["Time"];
-            DateTime dateTime = DateTime.Parse(date + " " + time);
 
-            _context.CreateDailyOrder(dateTime, true);
+            if (time == "")
+                _context.CreateDailyOrder(DateTime.Now, false);
+            else
+                _context.CreateDailyOrder(DateTime.Parse(date + " " + time), true);
 
             return Redirect("/MainPage" + redirectUserString);
         }
 
         public void OnGet()
         {
-            dailyOrders = _context.GetDayliOrders();
-            redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"];
+            dailyOrders = _context.GetDayliOrders().Where(x => x.OrderDateTime.ToShortDateString() == DateTime.Now.ToShortDateString())
+                .OrderByDescending(x => x.IsReserved).
+                ThenByDescending(x => x.OrderDateTime);
+            redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
         }
 
         public IActionResult OnPostExit()

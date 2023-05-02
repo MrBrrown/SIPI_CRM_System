@@ -9,6 +9,7 @@
 
 <section class="gradient-color">
     <div class="d-grid">
+        <!--New Order Buttton-->
         <button class="btn btn-primary text-light new-order-button"
                 type="button"
                 data-bs-toggle="offcanvas"
@@ -30,6 +31,8 @@
                 </form>
             </div>
         </div>
+
+        <!--Daily Orders Cards-->
         @if (Model.dailyOrders.Any())
         {
             @foreach (var item in Model.dailyOrders.ToList())
@@ -37,10 +40,15 @@
                 var cardId = "card-" + item.Id.ToString();
 
                 <div class="card m-2 @cardId">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5>@item.OrderDateTime.Date</h5>
-                    </div>
                     @if (item.IsReserved)
+                    {
+                        <style type="text/css">
+                        .@cardId {
+                            background-color: red;
+                        }
+                        </style>
+                    }
+                    else if (item.IsDone)
                     {
                         <style type="text/css">
                         .@cardId {
@@ -56,6 +64,9 @@
                         }
                         </style>
                     }
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5>@item.OrderDateTime.ToShortDateString() @item.OrderDateTime.ToShortTimeString()</h5>
+                    </div>
                 </div>
             }
         }

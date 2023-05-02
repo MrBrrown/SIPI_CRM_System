@@ -8,6 +8,8 @@ namespace SIPI_CRM_System.Services.MainPageRep
 		void CreateDailyOrder(DateTime orderTime, bool isReserved);
 
 		IEnumerable<DailyOrder> GetDayliOrders();
+
+		DailyOrder GetDailyOrderById(int id);
 	}
 }
 
