@@ -36,9 +36,9 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ck5xepj1lm
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/MainPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFpblBhZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-19zk1pc1cz
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/MainPage/MainPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFpblBhZ2UvTWFpblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-708837tbp7
 
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19BZG1pbkxheW91dC5jc2h0bWw=
@@ -51,3 +51,7 @@ build_metadata.AdditionalFiles.CssScope = b-fcxgst3h2b
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-bq0frcww7h
+
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/UserPage/UserPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlclBhZ2UvVXNlclBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-1rjssg8h57

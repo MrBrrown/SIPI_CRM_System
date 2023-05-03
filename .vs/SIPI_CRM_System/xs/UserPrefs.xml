@@ -1,27 +1,36 @@
 ﻿<Properties StartupConfiguration="{E4C41CC0-9C81-4A9C-9916-149DD23785CA}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/MainPage.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml" Line="68" Column="22" />
-      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml.cs" Line="53" Column="10" />
-      <File FileName="SIPI_CRM_System/Services/MainPageRep/DataBaseMainPageRepository.cs" Line="74" Column="51" />
-      <File FileName="SIPI_CRM_System/Models/OrderDish.cs" Line="13" Column="1" />
-      <File FileName="SIPI_CRM_System/Program.cs" Line="10" Column="1" />
+      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml" Line="28" Column="44" />
+      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml" Line="26" Column="34" />
+      <File FileName="SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml.css" Line="47" Column="2" />
+      <File FileName="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml.css" Line="18" Column="1" />
+      <File FileName="SIPI_CRM_System/Pages/Shared/_Layout.cshtml" Line="19" Column="26" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SIPI_CRM_System">
-            <Node name="SIPI_CRM_System" expanded="True" />
+            <Node name="SIPI_CRM_System">
+              <Node name="Pages" expanded="True">
+                <Node name="MainPage" expanded="True">
+                  <Node name="MainPage.cshtml" selected="True" />
+                </Node>
+                <Node name="Shared" expanded="True">
+                  <Node name="_AdminLayout.cshtml" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
 </Properties>

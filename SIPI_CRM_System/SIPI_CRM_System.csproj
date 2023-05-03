@@ -10,11 +10,15 @@
     <None Remove="Services\" />
     <None Remove="Services\LoginPageRep\" />
     <None Remove="Services\MainPageRep\" />
+    <None Remove="Pages\MainPage\" />
+    <None Remove="Pages\UserPage\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Services\LoginPageRep\" />
     <Folder Include="Services\MainPageRep\" />
+    <Folder Include="Pages\MainPage\" />
+    <Folder Include="Pages\UserPage\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">

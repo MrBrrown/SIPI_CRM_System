@@ -1,13 +1,97 @@
 ﻿@page
 @model SIPI_CRM_System.Pages.MainPageModel
 @{
+    string login = Request.Query["login"];
+    string isAdmin = Request.Query["isadmin"];
+
     @if (Request.Query["isadmin"] == "True")
         Layout = "~/Pages/Shared/_AdminLayout.cshtml";
     else
         Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
 }
 
-<section class="gradient-color">
+
+<!--Menu Button Offcanvas left-->
+<div class="offcanvas offcanvas-start menu-offcanvas"
+     tabindex="-1"
+     id="offcanvasMenu"
+     aria-labelledby="offcanvasMenu">
+    <!--Offcanvas header-->
+    <div class="offcanvas-header text-light">
+        <h5 class="offcanvas-title" id="offcanvasMenu">Главное меню</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <!--Offcanvas body-->
+    <div class="offcanvas-body">
+        <nav class="dashboard-nav-list">
+            <!--User Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/UserPage/UserPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Личный кабинет
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Main Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MainPage/MainPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Stock Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MainPage/MainPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Склад
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Menu Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MainPage/MainPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Меню
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Admin Page-->
+            @if (isAdmin == "True")
+            {
+                <div class="nav-item-divider"></div>
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/MainPage/MainPage"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin">
+                    Панель администатора
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            }
+        </nav>
+    </div>
+</div>
+
+
+<section>
     <div class="d-grid">
         <!--New Order Buttton-->
         <button class="btn btn-primary text-light new-order-button"
@@ -22,10 +106,12 @@
              tabindex="-1"
              id="offcanvasNewOrder"
              aria-labelledby="offcanvasNewOrderLabel">
+            <!--Offacnvas header-->
             <div class="offcanvas-header text-light">
                 <h5 class="offcanvas-title" id="offcanvasNewOrder">Новый заказ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+            <!--Offacnvas body-->
             <div class="offcanvas-body small m-3">
                 <form asp-page-handler="create" method="post">
                     <div class="form-floating">
@@ -97,7 +183,7 @@
                     <!--Card header-->
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5>
-                            |Дата заказа: @item.OrderDateTime.ToShortDateString() @item.OrderDateTime.ToShortTimeString()|  
+                            |Дата заказа: @item.OrderDateTime.ToShortDateString() @item.OrderDateTime.ToShortTimeString()|
                             |Номер стола - @Model.tables.First(x => x.Id == item.TableId).Id|
                         </h5>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -119,10 +205,12 @@
                                      tabindex="-1"
                                      id="@reserveActivateOffcanvasId"
                                      aria-labelledby="@reserveActivateOffcanvasId">
+                                    <!--Offcanvas header-->
                                     <div class="offcanvas-header text-light">
                                         <h5 id="@reserveActivateOffcanvasId">Клиенты пришли?</h5>
                                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
+                                    <!--Offcanvas body-->
                                     <div class="offcanvas-body">
                                         <div class="btn-toolbar" role="toolbar">
                                             <div class="btn-group me-2" role="group">
@@ -149,10 +237,12 @@
                                  tabindex="-1"
                                  id="@deleteOffcanvasId"
                                  aria-labelledby="@deleteOffcanvasId">
+                                <!--Offcanvas header-->
                                 <div class="offcanvas-header text-light">
                                     <h5 id="@deleteOffcanvasId">Подтвердите удаление заказа:</h5>
                                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
+                                <!--Offcanvas body-->
                                 <div class="offcanvas-body">
                                     <div class="btn-toolbar" role="toolbar">
                                         <div class="btn-group me-2" role="group">
@@ -172,11 +262,11 @@
                     <div class="card-body">
                         @foreach (var dish_order in item.DailyOrderDishes.ToList())
                         {
-                                <ul>
-                                    <li>
-                                        @Model.dishes.First(x => x.Id == dish_order.DishId).Name
-                                    </li>
-                                </ul>
+                            <ul>
+                                <li>
+                                    @Model.dishes.First(x => x.Id == dish_order.DishId).Name
+                                </li>
+                            </ul>
                         }
                     </div>
                 </div>

@@ -41,19 +41,19 @@ namespace SIPI_CRM_System.Pages
 
             _context.CreateDailyOrder(order);
 
-            return Redirect("/MainPage" + redirectUserString);
+            return Redirect("/MainPage/MainPage" + redirectUserString);
         }
 
         public IActionResult OnPostSetOrderDone(int id)
         {
             _context.SetOrderStatusDone(id);
-            return Redirect("/MainPage" + redirectUserString);
+            return Redirect("/MainPage/MainPage" + redirectUserString);
         }
 
         public IActionResult OnPostDeleteOrder(int id)
         {
             _context.DeleteDailyOrder(id);
-            return Redirect("/MainPage" + redirectUserString);
+            return Redirect("/MainPage/MainPage" + redirectUserString);
         }
 
         public IActionResult OnPostSetReservedOrderActive(int id)
@@ -64,7 +64,7 @@ namespace SIPI_CRM_System.Pages
 
             _context.UpdateDailyOrder(order);
 
-            return Redirect("/MainPage" + redirectUserString);
+            return Redirect("/MainPage/MainPage" + redirectUserString);
         }
 
         public IActionResult OnPostExit()
