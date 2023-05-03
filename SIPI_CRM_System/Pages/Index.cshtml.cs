@@ -15,6 +15,7 @@ public class IndexModel : PageModel
 
     public IActionResult OnPost()
     {
+        return Redirect("/StockPage");
         var Login = Request.Form["Login"];
         var Password = Request.Form["Password"];
 

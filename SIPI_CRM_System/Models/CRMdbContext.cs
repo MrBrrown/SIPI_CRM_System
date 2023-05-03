@@ -33,7 +33,7 @@ namespace SIPI_CRM_System.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("Server = localhost; Database = CRMdb; Uid = root; Pwd = password;");
+                optionsBuilder.UseMySQL("Server = localhost; Database = CRMdb; Uid = root; Pwd = 2220rorooad;");
             }
         }
 
@@ -231,7 +231,11 @@ namespace SIPI_CRM_System.Models
 
                 entity.Property(e => e.Category).HasMaxLength(45);
 
-                entity.Property(e => e.Name).HasMaxLength(45);
+                entity.Property(e => e.Amount);
+                
+                entity.Property(e => e.LifeTime);
+                
+                entity.Property(e => e.DeliveryDateTime);
             });
 
             modelBuilder.Entity<ProductDish>(entity =>
