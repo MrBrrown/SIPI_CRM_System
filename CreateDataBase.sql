@@ -56,13 +56,13 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Employee` (
   `Login` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `IsAdmin` TINYINT NOT NULL,
-  `Position_ID` INT NOT NULL,
+  `Position_ID` INT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_Employee_Position1_idx` (`Position_ID` ASC) VISIBLE,
   CONSTRAINT `fk_Employee_Position1`
     FOREIGN KEY (`Position_ID`)
     REFERENCES `CRMdb`.`Position` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE SET NULL
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -141,12 +141,12 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Product_Dish` (
   CONSTRAINT `fk_Product_Dish_Product1`
     FOREIGN KEY (`Product_ID`)
     REFERENCES `CRMdb`.`Product` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Product_Dish_Dish1`
     FOREIGN KEY (`Dish_ID`)
     REFERENCES `CRMdb`.`Dish` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -245,12 +245,12 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder_Dish` (
   CONSTRAINT `fk_DailyOrder_Dish_Dish2`
     FOREIGN KEY (`Dish_ID`)
     REFERENCES `CRMdb`.`Dish` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DailyOrder_Dish_DailyOrder1`
     FOREIGN KEY (`DailyOrder_ID`)
     REFERENCES `CRMdb`.`DailyOrder` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -268,12 +268,12 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`DailyOrder_Dish` (
   CONSTRAINT `fk_DailyOrder_Dish_Dish2`
     FOREIGN KEY (`Dish_ID`)
     REFERENCES `CRMdb`.`Dish` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DailyOrder_Dish_DailyOrder1`
     FOREIGN KEY (`DailyOrder_ID`)
     REFERENCES `CRMdb`.`DailyOrder` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

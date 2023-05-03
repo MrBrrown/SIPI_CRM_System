@@ -17,27 +17,50 @@
                 aria-controls="offcanvasNewOrder">
             Новый заказ
         </button>
-        <!--Offcanvas right-->
-        <div class="offcanvas offcanvas-end new-order-offcanvas" tabindex="-1" id="offcanvasNewOrder" aria-labelledby="offcanvasNewOrderLabel">
+        <!--New Order Offcanvas right-->
+        <div class="offcanvas offcanvas-end new-order-offcanvas"
+             tabindex="-1"
+             id="offcanvasNewOrder"
+             aria-labelledby="offcanvasNewOrderLabel">
             <div class="offcanvas-header text-light">
                 <h5 class="offcanvas-title" id="offcanvasNewOrder">Новый заказ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body small">
+            <div class="offcanvas-body small m-3">
                 <form asp-page-handler="create" method="post">
-                    <input class="form-control" type="date" name="Date" />
-                    <input class="form-control" type="time" name="Time" />
+                    <div class="form-floating">
+                        <div class="col">
+                            <label for="validationCustom04" class="form-label">State</label>
+                            <select class="form-select" id="validationCustom" required name="TableId">
+                                <option selected disabled value="">Номер стола</option>
+                                @foreach (var table in Model.tables)
+                                {
+                                    <option value="@table.Id">Стол номер - @table.Id</option>
+                                }
+                            </select>
+                            <div class="invalid-feedback">
+                                Необходимо выбрать стол
+                            </div>
+                        </div>
+                    </div>
+                    <input class="form-control date-contorl" type="date" name="Date" />
+                    <input class="form-control time-control" type="time" name="Time" />
                     <button type="submit" class="btn-primary">Создать</button>
                 </form>
             </div>
         </div>
-
         <!--Daily Orders Cards-->
         @if (Model.dailyOrders.Any())
         {
             @foreach (var item in Model.dailyOrders.ToList())
             {
                 var cardId = "card-" + item.Id.ToString();
+                var cardBodyId = "card-body-" + item.Id.ToString();
+
+                var doneButtonId = "done-button-" + item.Id.ToString();
+
+                var deleteOffcanvasId = "delete-offcanvas-" + item.Id.ToString();
+                var reserveActivateOffcanvasId = "reserve-activate-offcanvas-" + item.Id.ToString();
 
                 <div class="card m-2 @cardId">
                     <!--Card color-->
@@ -46,6 +69,10 @@
                         <style type="text/css">
                         .@cardId {
                             background-color: red;
+                            color: white;
+                        }
+                        .@doneButtonId {
+                            pointer-events: none;
                         }
                         </style>
                     }
@@ -55,6 +82,7 @@
                         .@cardId {
                             background-color: green;
                             pointer-events: none;
+                            color: white;
                         }
                         </style>
                     }
@@ -68,10 +96,77 @@
                     }
                     <!--Card header-->
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5>@item.OrderDateTime.ToShortDateString() @item.OrderDateTime.ToShortTimeString()</h5>
-                        <form asp-page-handler="SetOrderDone" asp-route-id="@item.Id" method="post">
-                            <button type="submit" class="btn btn-success">Заказ выполенен</button>
-                        </form>
+                        <h5>
+                            |Дата заказа: @item.OrderDateTime.ToShortDateString() @item.OrderDateTime.ToShortTimeString()|  
+                            |Номер стола - @Model.tables.First(x => x.Id == item.TableId).Id|
+                        </h5>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <!--Order Done Button-->
+                            <form asp-page-handler="SetOrderDone" asp-route-id="@item.Id" method="post">
+                                <button type="submit" class="btn btn-success @doneButtonId">Заказ выполенен</button>
+                            </form>
+                            <!--Reserve Order Activate Button-->
+                            @if (item.IsReserved)
+                            {
+                                <button class="btn btn-primary reserve-activate-button"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#@reserveActivateOffcanvasId"
+                                        aria-controls="@reserveActivateOffcanvasId">
+                                    Подтвердить бронь
+                                </button>
+                                <!--Confirm Reserve Activate Offcanvas Rigth-->
+                                <div class="offcanvas offcanvas-end delete-offcanvas"
+                                     tabindex="-1"
+                                     id="@reserveActivateOffcanvasId"
+                                     aria-labelledby="@reserveActivateOffcanvasId">
+                                    <div class="offcanvas-header text-light">
+                                        <h5 id="@reserveActivateOffcanvasId">Клиенты пришли?</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <div class="btn-toolbar" role="toolbar">
+                                            <div class="btn-group me-2" role="group">
+                                                <form asp-page-handler="SetReservedOrderActive" asp-route-id="@item.Id" method="post">
+                                                    <button type="submit" class="btn btn-success">Подтвердить</button>
+                                                </form>
+                                            </div>
+                                            <div class="btn-group me-2" role="group">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <!--Order Delete Button-->
+                            <button class="btn btn-danger"
+                                    data-bs-toggle="offcanvas"
+                                    data-bs-target="#@deleteOffcanvasId"
+                                    aria-controls="@deleteOffcanvasId">
+                                Удалить заказ
+                            </button>
+                            <!--Confirm delete Offcanvas Rigth-->
+                            <div class="offcanvas offcanvas-end delete-offcanvas"
+                                 tabindex="-1"
+                                 id="@deleteOffcanvasId"
+                                 aria-labelledby="@deleteOffcanvasId">
+                                <div class="offcanvas-header text-light">
+                                    <h5 id="@deleteOffcanvasId">Подтвердите удаление заказа:</h5>
+                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <div class="btn-toolbar" role="toolbar">
+                                        <div class="btn-group me-2" role="group">
+                                            <form asp-page-handler="DeleteOrder" asp-route-id="@item.Id" method="post">
+                                                <button type="submit" class="btn btn-success">Подтвердить</button>
+                                            </form>
+                                        </div>
+                                        <div class="btn-group me-2" role="group">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!--Card body-->
                     <div class="card-body">

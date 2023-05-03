@@ -13,16 +13,8 @@ namespace SIPI_CRM_System.Services.MainPageRep
             _context = context;
 		}
 
-        public async void CreateDailyOrder(DateTime orderTime, bool isReserved)
+        public async void CreateDailyOrder(DailyOrder order)
         {
-            var order = new DailyOrder()
-            {
-                Id = _context.DailyOrders.Any() ? _context.DailyOrders.OrderBy(x => x.Id).Last().Id + 1 : 1,
-                OrderDateTime = orderTime,
-                IsReserved = isReserved,
-                IsDone = false,
-            };
-
             _context.DailyOrders.Add(order);
             await _context.SaveChangesAsync();
         }
@@ -35,6 +27,11 @@ namespace SIPI_CRM_System.Services.MainPageRep
         public IEnumerable<Dish> GetDishes()
         {
             return _context.Dishes;
+        }
+
+        public IEnumerable<Table> GetTables()
+        {
+            return _context.Tables;
         }
 
         public DailyOrder GetDailyOrderById(int id)
@@ -73,6 +70,22 @@ namespace SIPI_CRM_System.Services.MainPageRep
                 _context.OrderDishes.Add(navigation);
                 await _context.SaveChangesAsync();
             }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async void DeleteDailyOrder(int id)
+        {
+            var order = _context.DailyOrders.Include(x => x.DailyOrderDishes).First(x => x.Id == id);
+
+            _context.DailyOrders.Remove(order);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async void UpdateDailyOrder(DailyOrder order)
+        {
+            _context.DailyOrders.Update(order);
 
             await _context.SaveChangesAsync();
         }

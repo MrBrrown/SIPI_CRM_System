@@ -16,9 +16,9 @@ namespace SIPI_CRM_System.Models
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
         public bool IsAdmin { get; set; }
-        public int PositionId { get; set; }
+        public int? PositionId { get; set; }
 
-        public virtual Position Position { get; set; } = null!;
+        public virtual Position? Position { get; set; }
         public virtual ICollection<DailyOrder> DailyOrders { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

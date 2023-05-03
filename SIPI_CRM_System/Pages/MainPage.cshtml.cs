@@ -16,6 +16,7 @@ namespace SIPI_CRM_System.Pages
 
         public IEnumerable<DailyOrder> dailyOrders;
         public IEnumerable<Dish> dishes;
+        public IEnumerable<Table> tables;
 
         public MainPageModel(IMainPageRepository context)
         {
@@ -26,11 +27,19 @@ namespace SIPI_CRM_System.Pages
         {
             var date = Request.Form["Date"];
             var time = Request.Form["Time"];
+            var tableId = Request.Form["TableId"];
+            dailyOrders = _context.GetDayliOrders();
 
-            if (time == "")
-                _context.CreateDailyOrder(DateTime.Now, false);
-            else
-                _context.CreateDailyOrder(DateTime.Parse(date + " " + time), true);
+            var order = new DailyOrder()
+            {
+                Id = dailyOrders.Any() ? dailyOrders.OrderBy(x => x.Id).Last().Id + 1 : 1,
+                OrderDateTime = time == "" ? DateTime.Now : DateTime.Parse(date + " " + time),
+                IsReserved = time == "" ? false : true,
+                IsDone = false,
+                TableId = Int32.Parse(tableId)
+            };
+
+            _context.CreateDailyOrder(order);
 
             return Redirect("/MainPage" + redirectUserString);
         }
@@ -41,20 +50,40 @@ namespace SIPI_CRM_System.Pages
             return Redirect("/MainPage" + redirectUserString);
         }
 
-        public void OnGet()
+        public IActionResult OnPostDeleteOrder(int id)
         {
-            dailyOrders = _context.GetDayliOrders().Where(x => x.OrderDateTime.ToShortDateString() == DateTime.Now.ToShortDateString())
-                .OrderByDescending(x => x.IsReserved).
-                ThenByDescending(x => x.OrderDateTime);
+            _context.DeleteDailyOrder(id);
+            return Redirect("/MainPage" + redirectUserString);
+        }
 
-            dishes = _context.GetDishes();
+        public IActionResult OnPostSetReservedOrderActive(int id)
+        {
+            var order = _context.GetDailyOrderById(id);
 
-            redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
+            order.IsReserved = false;
+
+            _context.UpdateDailyOrder(order);
+
+            return Redirect("/MainPage" + redirectUserString);
         }
 
         public IActionResult OnPostExit()
         {
             return Redirect("/Index");
+        }
+
+        public void OnGet()
+        {
+            dailyOrders = _context.GetDayliOrders().Where(x => x.OrderDateTime.ToShortDateString() == DateTime.Now.ToShortDateString())
+                .OrderByDescending(x => x.IsReserved)
+                .ThenBy(x => x.IsDone)
+                .ThenByDescending(x => x.OrderDateTime);
+
+            dishes = _context.GetDishes();
+
+            tables = _context.GetTables();
+
+            redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
         }
     }
 }

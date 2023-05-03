@@ -4,18 +4,21 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Models/DailyOrder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/MainPage.cshtml">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml" Line="68" Column="69" />
-      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml.cs" Line="27" Column="45" />
-      <File FileName="SIPI_CRM_System/Services/MainPageRep/IMainPageRepository.cs" Line="14" Column="35" />
-      <File FileName="SIPI_CRM_System/Services/MainPageRep/DataBaseMainPageRepository.cs" Line="56" Column="49" />
-      <File FileName="SIPI_CRM_System/Models/DailyOrder.cs" Line="17" Column="45" />
-      <File FileName="SIPI_CRM_System/Models/Employee.cs" Line="19" Column="44" />
+      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml" Line="68" Column="22" />
+      <File FileName="SIPI_CRM_System/Pages/MainPage.cshtml.cs" Line="53" Column="10" />
+      <File FileName="SIPI_CRM_System/Services/MainPageRep/DataBaseMainPageRepository.cs" Line="74" Column="51" />
+      <File FileName="SIPI_CRM_System/Models/OrderDish.cs" Line="13" Column="1" />
+      <File FileName="SIPI_CRM_System/Program.cs" Line="10" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State name="__root__" />
+        <State name="__root__">
+          <Node name="SIPI_CRM_System">
+            <Node name="SIPI_CRM_System" expanded="True" />
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
