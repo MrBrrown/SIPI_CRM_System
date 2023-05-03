@@ -24,8 +24,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/StockPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU3RvY2tQYWdlLmNzaHRtbA==
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/StockPage/StockPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU3RvY2tQYWdlL1N0b2NrUGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewImports.cshtml]
@@ -35,6 +35,10 @@ build_metadata.AdditionalFiles.CssScope =
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ck5xepj1lm
 
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/MainPage/MainPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFpblBhZ2UvTWFpblBhZ2UuY3NodG1s
@@ -51,10 +55,6 @@ build_metadata.AdditionalFiles.CssScope = b-fcxgst3h2b
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-bq0frcww7h
-
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/StockPage/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU3RvY2tQYWdlL0luZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = b-f80dk1eu1d
 
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/UserPage/UserPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlclBhZ2UvVXNlclBhZ2UuY3NodG1s
