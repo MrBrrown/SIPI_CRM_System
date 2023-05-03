@@ -1,15 +1,20 @@
 using SIPI_CRM_System.Models;
 
-namespace SIPI_CRM_System.Services.ProductRep;
+namespace SIPI_CRM_System.Services.StockPage;
 
-public interface IProductRepository
+public interface IStockPageRepository
 {
     IEnumerable<Product> GetProducts();
+
     List<string> GetAllCategories();
+
     Product GetProductById(int id);
-    int GetLastProductId();
+
     void AddProduct(Product product);
+
     void RemoveProductById(int id);
+
     void Update(Product product);
+
     IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck);
 }

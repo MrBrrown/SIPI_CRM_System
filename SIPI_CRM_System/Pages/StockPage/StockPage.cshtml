@@ -2,20 +2,111 @@
 @model SIPI_CRM_System.Pages.StockPageModel
 
 @{
-    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    string login = Request.Query["login"];
+    string isAdmin = Request.Query["isadmin"];
+
+    @if (Request.Query["isadmin"] == "True")
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    else
+        Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
 }
+
+
+<!--Menu Button Offcanvas left-->
+<div class="offcanvas offcanvas-start menu-offcanvas"
+     tabindex="-1"
+     id="offcanvasMenu"
+     aria-labelledby="offcanvasMenu">
+    <!--Offcanvas header-->
+    <div class="offcanvas-header text-light">
+        <h5 class="offcanvas-title" id="offcanvasMenu">Главное меню</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <!--Offcanvas body-->
+    <div class="offcanvas-body">
+        <nav class="dashboard-nav-list">
+            <!--User Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/UserPage/UserPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Личный кабинет
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Main Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MainPage/MainPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Stock Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/StockPage/StockPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Склад
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Menu Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MainPage/MainPage"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin">
+                Меню
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Admin Page-->
+            @if (isAdmin == "True")
+            {
+                <div class="nav-item-divider"></div>
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/MainPage/MainPage"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin">
+                    Панель администатора
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            }
+        </nav>
+    </div>
+</div>
+
+
 
 <div class="container text-center">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-light">
             @if (!Model.Categories.Any())
             {
-                <h1>Не добавленны объекты</h1>
+                <h1 class="text-light">Не добавленны объекты</h1>
             }
             else
             {
                 <h1>Категории</h1>
-                <form asp-page-handler="UpdateCategories" method="post">
+                <form asp-page-handler="UpdateCategories"
+                      asp-route-login="@login"
+                      asp-route-isadmin="@isAdmin"
+                      method="post">
                     @foreach (var item in Model.Categories)
                     {
                         var CategotyID = item + "Id";
@@ -26,147 +117,165 @@
                             </label>
                         </div>
                     }
-                    <button class="btn btn-primary m-2" >Обновить выбор</button>
+                    <button class="btn btn-primary m-2">Обновить выбор</button>
                 </form>
             }
         </div>
         <div class="col-sm-10">
-            <h1 class="title m-2">Продукты</h1>
-        <!--Add offCanvasRight-->
-        <div class="d-grid">
-            <button class="btn btn-primary m-2"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offCanvasRightAdd"
-                    aria-controls="offCanvasRightAdd">
-                Добавить новый продукт
-            </button>
-        </div>
-        <div class="offcanvas offcanvas-end" tabindex="-1"
-             id="offCanvasRightAdd"
-             aria-labelledby="offCanvasRightAdd">
-            <div class="offcanvas-header">
-                <h1 id="offCanvasRightAdd">Добавить новый продукт:</h1>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h1 class="title m-2 text-light">Продукты</h1>
+            <!--Add offCanvasRight-->
+            <div class="d-grid">
+                <button class="btn btn-primary m-2"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offCanvasRightAdd"
+                        aria-controls="offCanvasRightAdd">
+                    Добавить новый продукт
+                </button>
             </div>
-            <div class="offcanvas-body">
-                <form asp-page-handler="Add" method="post">
-                    <div class="form-group">
-                        <label for="Name">Название:</label>
-                        <input type="text" class="form-control" name="Name" placeholder="Имя">
-                    </div>
-                    <div class="form-group">
-                        <label for="Category">Категория:</label>
-                        <input class="form-control" name="Category" placeholder="Категория">
-                    </div>
-                    <div class="form-group">
-                        <label for="Amount">Количество:</label>
-                        <input class="form-control" name="Amount" placeholder="Количество шт">
-                    </div>
-                    <div class="btn-toolbar m-4" role="toolbar">
-                        <div class="btn-group me-2" role="group">
-                            <button class="btn btn-success">Добавить</button>
+            <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+                 id="offCanvasRightAdd"
+                 aria-labelledby="offCanvasRightAdd">
+                <div class="offcanvas-header">
+                    <h1 id="offCanvasRightAdd">Добавить новый продукт:</h1>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form asp-page-handler="Add" method="post">
+                        <div class="form-group">
+                            <label for="Name">Название:</label>
+                            <input type="text" class="form-control" name="Name" placeholder="Имя">
                         </div>
-                        <div class="btn-group me-2" role="group">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                        <div class="form-group">
+                            <label for="Category">Категория:</label>
+                            <input class="form-control" name="Category" placeholder="Категория">
                         </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        @if (!Model.Products.Any())
-        {
-            <h1>Не добавленны объекты</h1>
-        }
-        else
-        {
-            foreach (var item in Model.Products)
-            {
-                var offcanvasRightDeleteID = "offcanvasRightDelete" + item.Id;
-                var offCanvasRightEditID = "offCanvasRightEdit" + item.Id;
-
-                <div class="card m-2">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5>@item.Name</h5>
-                        <div class="btn-group" role="group">
-                            <!--Edit offCanvasRight-->
-                            <button class="btn btn-success"
-                                    data-bs-toggle="offcanvas"
-                                    data-bs-target="#@offCanvasRightEditID"
-                                    aria-controls="@offCanvasRightEditID">
-                                Edit
-                            </button>
-                            <div class="offcanvas offcanvas-end" tabindex="-1"
-                                 id="@offCanvasRightEditID"
-                                 aria-labelledby="@offCanvasRightEditID">
-                                <div class="offcanvas-header">
-                                    <h1 id="@offCanvasRightEditID">@item.Name</h1>
-                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                </div>
-                                <div class="offcanvas-body">
-                                    <form asp-page-handler="Update" asp-route-id="@item.Id" method="post">
-                                        <div class="form-group">
-                                            <label for="Name">Название:</label>
-                                            <input type="text" class="form-control" name="Name" placeholder="@item.Name" value="@item.Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Category">Категория:</label>
-                                            <input type="text" class="form-control" name="Category" placeholder="@item.Category" value="@item.Category">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Amount">Колличество:</label>
-                                            <input type="text" class="form-control" name="Amount" placeholder="Колличесво шт, г" value="@item.Amount">
-                                        </div>
-                                        <div class="btn-toolbar m-4" role="toolbar">
-                                            <div class="btn-group me-2" role="group">
-                                                <button class="btn btn-success">Изменить</button>
-                                            </div>
-                                            <div class="btn-group me-2" role="group">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                        <div class="form-group">
+                            <label for="Amount">Количество:</label>
+                            <input class="form-control" name="Amount" placeholder="Количество шт">
+                        </div>
+                        <div class="btn-toolbar m-4" role="toolbar">
+                            <div class="btn-group me-2" role="group">
+                                <button class="btn btn-success">Добавить</button>
                             </div>
-                            <!--Delete offCanvasRight-->
-                            <button class="btn btn-danger"
-                                    data-bs-toggle="offcanvas"
-                                    data-bs-target="#@offcanvasRightDeleteID"
-                                    aria-controls="@offcanvasRightDeleteID">
-                                Delete
-                            </button>
-                            <div class="offcanvas offcanvas-end" tabindex="-1"
-                                 id="@offcanvasRightDeleteID"
-                                 aria-labelledby="@offcanvasRightDeleteID">
-                                <div class="offcanvas-header">
-                                    <h5 id="@offcanvasRightDeleteID">Вы уверенны в удалении товара со склада?</h5>
-                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <div class="btn-group me-2" role="group">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @if (!Model.Products.Any())
+            {
+                    <h1 class="text-light">Не добавленны объекты</h1>
+            }
+            else
+            {
+                foreach (var item in Model.Products)
+                {
+                    var offcanvasRightDeleteID = "offcanvasRightDelete" + item.Id;
+                    var offCanvasRightEditID = "offCanvasRightEdit" + item.Id;
+
+                    <!--Product Card-->
+                    <div class="card m-2">
+                        <!--Product Card Header-->
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5>@item.Name</h5>
+                            <div class="btn-group" role="group">
+                                <!--Edit offCanvasRight Button-->
+                                <button class="btn btn-success"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#@offCanvasRightEditID"
+                                        aria-controls="@offCanvasRightEditID">
+                                    Изменить
+                                </button>
+                                <!--Edit offCanvasRight-->
+                                <div class="offcanvas offcanvas-end @offCanvasRightEditID" tabindex="-1"
+                                     id="@offCanvasRightEditID"
+                                     aria-labelledby="@offCanvasRightEditID">
+                                    <style type="text/css">
+                                        .@offcanvasRightDeleteID {
+                                            background-color: #212529;
+                                            color: white;
+                                        }
+                                        .@offCanvasRightEditID {
+                                            background-color: #212529;
+                                            color: white;
+                                        }
+                                    </style>
+                                    <!--Edit offCanvasRight Header-->
+                                    <div class="offcanvas-header">
+                                        <h1 id="@offCanvasRightEditID">@item.Name</h1>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <!--Edit offCanvasRight Body-->
+                                    <div class="offcanvas-body">
+                                        <form asp-page-handler="Update" asp-route-id="@item.Id" method="post">
+                                            <div class="form-group">
+                                                <label for="Name">Название:</label>
+                                                <input type="text" class="form-control" name="Name" placeholder="@item.Name" value="@item.Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Category">Категория:</label>
+                                                <input type="text" class="form-control" name="Category" placeholder="@item.Category" value="@item.Category">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Amount">Колличество:</label>
+                                                <input type="text" class="form-control" name="Amount" placeholder="Колличесво шт, г" value="@item.Amount">
+                                            </div>
+                                            <div class="btn-toolbar m-4" role="toolbar">
+                                                <div class="btn-group me-2" role="group">
+                                                    <button class="btn btn-success">Изменить</button>
+                                                </div>
+                                                <div class="btn-group me-2" role="group">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="offcanvas-body">
-                                    <p class="card-text d-flex">
-                                        @item.Name Остаток: @item.Amount
-                                    </p>
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <div class="btn-group me-2" role="group">
-                                            <form asp-page-handler="Delete" asp-route-id="@item.Id" method="post">
-                                                <button class="btn btn-danger">Да</button>
-                                            </form>
-                                        </div>
-                                        <div class="btn-group me-2" role="group">
-                                            <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" aria-label="Close">Нет</button>
+                                <!--Delete offCanvasRight Button-->
+                                <button class="btn btn-danger"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#@offcanvasRightDeleteID"
+                                        aria-controls="@offcanvasRightDeleteID">
+                                    Удалить
+                                </button>
+                                <!--Delete offCanvasRight-->
+                                <div class="offcanvas offcanvas-end @offcanvasRightDeleteID" tabindex="-1"
+                                     id="@offcanvasRightDeleteID"
+                                     aria-labelledby="@offcanvasRightDeleteID">
+                                    <!--Delete offCanvasRight Header-->
+                                    <div class="offcanvas-header">
+                                        <h5 id="@offcanvasRightDeleteID">Вы уверенны в удалении товара со склада?</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <!--Delete offCanvasRight Body-->
+                                    <div class="offcanvas-body">
+                                        <p class="card-text d-flex">
+                                            @item.Name Остаток: @item.Amount
+                                        </p>
+                                        <div class="btn-toolbar" role="toolbar">
+                                            <div class="btn-group me-2" role="group">
+                                                <form asp-page-handler="Delete" asp-route-id="@item.Id" method="post">
+                                                    <button class="btn btn-danger">Да</button>
+                                                </form>
+                                            </div>
+                                            <div class="btn-group me-2" role="group">
+                                                <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" aria-label="Close">Нет</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div><!--Product Card Body-->
+                        <div class="card-body">
+                            <p class="card-text d-flex">
+                                Остаток: @item.Amount
+                            </p>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text d-flex">
-                            Остаток: @item.Amount
-                        </p>
-                    </div>
-                </div>
+                }
             }
-        }
         </div>
     </div>
 </div>

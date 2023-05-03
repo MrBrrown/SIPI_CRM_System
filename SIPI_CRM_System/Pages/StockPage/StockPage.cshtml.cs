@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SIPI_CRM_System.Models;
-using SIPI_CRM_System.Services.ProductRep;
+using SIPI_CRM_System.Services.StockPage;
 
 namespace SIPI_CRM_System.Pages;
 
 public class StockPageModel : PageModel
 {
-    private readonly IProductRepository _repository;
+    private static string redirectUserString = ""; //Необоходимо задавать на каждой станице в методе  OnGet(), по нему происходит сохранение действующего пользователя
+    private readonly IStockPageRepository _context;
     
     [BindProperty]
     public List<string> CategoryCheck { get; set; }
@@ -16,15 +17,15 @@ public class StockPageModel : PageModel
 
     public List<string> Categories { get; set; }
 
-    public StockPageModel(IProductRepository repository)
+    public StockPageModel(IStockPageRepository context)
     {
-        _repository = repository;
+        _context = context;
     }
     
     public IActionResult OnPostUpdateCategories()
     {
-        Products = _repository.GetProductsByCategories(CategoryCheck).OrderBy(x => x.Name);
-        Categories = _repository.GetAllCategories();
+        Products = _context.GetProductsByCategories(CategoryCheck).OrderBy(x => x.Name);
+        Categories = _context.GetAllCategories();
         return Page();
     }
     
@@ -38,35 +39,44 @@ public class StockPageModel : PageModel
             Category = Request.Form["Category"]
         };
 
-        _repository.Update(product);
+        _context.Update(product);
 
-        return RedirectToPage();
+        return Redirect("/StockPage/StockPage" + redirectUserString);
     }
 
     public IActionResult OnPostAdd()
     {
+        Products = _context.GetProducts();
+
         Product product = new Product()
         {
-            Id = _repository.GetLastProductId() + 1,
+            Id = Products.Any()? Products.OrderBy(x => x.Id).Last().Id + 1: 1,
             Name = Request.Form["Name"],
             Amount = int.Parse(Request.Form["Amount"]),
             Category = Request.Form["Category"]
         };
 
-        _repository.AddProduct(product);
+        _context.AddProduct(product);
 
-        return RedirectToPage();
+        return Redirect("/StockPage/StockPage" + redirectUserString);
     }
 
     public IActionResult OnPostDelete(int id)
     {
-        _repository.RemoveProductById(id);
-        return RedirectToPage();
+        _context.RemoveProductById(id);
+        return Redirect("/StockPage/StockPage" + redirectUserString);
+    }
+
+    public IActionResult OnPostExit()
+    {
+        return Redirect("/Index");
     }
 
     public void OnGet()
     {
-        Products = _repository.GetProducts();
-        Categories = _repository.GetAllCategories();
+        Products = _context.GetProducts();
+        Categories = _context.GetAllCategories();
+
+        redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
     }
 }

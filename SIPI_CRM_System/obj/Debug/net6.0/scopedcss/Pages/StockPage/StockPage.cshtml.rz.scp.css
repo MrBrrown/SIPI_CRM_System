@@ -1,0 +1,15 @@
+.menu-offcanvas[b-5pi2o0rw7p] {
+    background-color: #212529
+}
+
+.nav-item-divider[b-5pi2o0rw7p] {
+    height: 1px;
+    margin: 1rem 0;
+    overflow: hidden;
+    background-color: rgba(236, 238, 239, 0.3);
+}
+
+.add-offcanvas[b-5pi2o0rw7p] {
+    background-color: #212529;
+    color: white;
+}

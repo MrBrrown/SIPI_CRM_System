@@ -1,11 +1,10 @@
 /* _content/SIPI_CRM_System/Pages/Index.cshtml.rz.scp.css */
-.gradient-custom[b-ttoydduy6b] {
+.gradient-custom[b-ck5xepj1lm] {
     background: radial-gradient(circle, rgba(110,77,59,1) 0%, rgba(0,0,0,1) 98%);
 }
-
 /* _content/SIPI_CRM_System/Pages/MainPage/MainPage.cshtml.rz.scp.css */
 .new-order-offcanvas[b-708837tbp7] {
-    background-color: #212529
+    background-color: #212529;
 }
 
 .delete-offcanvas[b-708837tbp7] {
@@ -167,6 +166,22 @@ button.accept-policy[b-hbg7exjqvb] {
   line-height: 60px;
 }
 
+/* _content/SIPI_CRM_System/Pages/StockPage/StockPage.cshtml.rz.scp.css */
+.menu-offcanvas[b-5pi2o0rw7p] {
+    background-color: #212529
+}
+
+.nav-item-divider[b-5pi2o0rw7p] {
+    height: 1px;
+    margin: 1rem 0;
+    overflow: hidden;
+    background-color: rgba(236, 238, 239, 0.3);
+}
+
+.add-offcanvas[b-5pi2o0rw7p] {
+    background-color: #212529;
+    color: white;
+}
 /* _content/SIPI_CRM_System/Pages/UserPage/UserPage.cshtml.rz.scp.css */
 .menu-offcanvas[b-1rjssg8h57] {
     background-color: #212529

@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
 
-namespace SIPI_CRM_System.Services.ProductRep;
+namespace SIPI_CRM_System.Services.StockPage;
 
-public class DbProductRepository : IProductRepository
+public class DataBaseStockPageRepository : IStockPageRepository 
 {
     private readonly CRMdbContext _context;
 
-    public DbProductRepository(CRMdbContext context)
+    public DataBaseStockPageRepository(CRMdbContext context)
     {
         _context = context;
     }
@@ -42,11 +42,6 @@ public class DbProductRepository : IProductRepository
     {
         var product = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         return product;
-    }
-
-    public int GetLastProductId()
-    {
-        return _context.Products.OrderBy(x => x.Id).Last().Id;
     }
 
     public void AddProduct(Product product)
