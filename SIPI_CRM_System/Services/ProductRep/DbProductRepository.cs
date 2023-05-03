@@ -46,13 +46,15 @@ public class DbProductRepository : IProductRepository
 
     public int GetLastProductId()
     {
-        return _context.Products.Last().Id;
+        return _context.Products.OrderBy(x => x.Id).Last().Id;
     }
 
     public void AddProduct(Product product)
     {
         if (!_context.Products.Any(x => x.Name.Equals(product.Name)))
             _context.Products.Add(product);
+        
+        _context.SaveChanges();
     }
 
     public void RemoveProductById(int id)
@@ -60,6 +62,8 @@ public class DbProductRepository : IProductRepository
         var productToRemove = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         if (productToRemove != null)
             _context.Products.Remove(productToRemove);
+        
+        _context.SaveChanges();
     }
 
     public void Update(Product product)
@@ -70,9 +74,11 @@ public class DbProductRepository : IProductRepository
                 x.Name = product.Name;
                 x.Amount = product.Amount;
                 x.Category = product.Category; });
+        
+        _context.SaveChanges();
     }
 
-    public IEnumerable<Product> SetCheck(List<string> categoryCheck)
+    public IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck)
     {
         List<Product> products = new List<Product>();
         

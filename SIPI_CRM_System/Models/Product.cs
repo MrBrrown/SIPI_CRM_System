@@ -18,6 +18,5 @@ namespace SIPI_CRM_System.Models
         public DateTime DeliveryDateTime { get; set; }
 
         public virtual ICollection<ProductDish> ProductDishes { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

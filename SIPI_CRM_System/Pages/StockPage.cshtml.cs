@@ -23,8 +23,9 @@ public class StockPageModel : PageModel
     
     public IActionResult OnPostUpdateCategories()
     {
-        Products = _repository.SetCheck(CategoryCheck).OrderBy(x => x.Name);
-        return RedirectToPage();
+        Products = _repository.GetProductsByCategories(CategoryCheck).OrderBy(x => x.Name);
+        Categories = _repository.GetAllCategories();
+        return Page();
     }
     
     public IActionResult OnPostUpdate(int id)
@@ -65,6 +66,7 @@ public class StockPageModel : PageModel
 
     public void OnGet()
     {
+        Products = _repository.GetProducts();
         Categories = _repository.GetAllCategories();
     }
 }

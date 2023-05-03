@@ -11,5 +11,5 @@ public interface IProductRepository
     void AddProduct(Product product);
     void RemoveProductById(int id);
     void Update(Product product);
-    IEnumerable<Product> SetCheck(List<string> categoryCheck);
+    IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck);
 }
