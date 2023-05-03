@@ -239,7 +239,11 @@ namespace SIPI_CRM_System.Models
 
                 entity.Property(e => e.Category).HasMaxLength(45);
 
-                entity.Property(e => e.Name).HasMaxLength(45);
+                entity.Property(e => e.Amount);
+                
+                entity.Property(e => e.LifeTime);
+                
+                entity.Property(e => e.DeliveryDateTime);
             });
 
             modelBuilder.Entity<ProductDish>(entity =>

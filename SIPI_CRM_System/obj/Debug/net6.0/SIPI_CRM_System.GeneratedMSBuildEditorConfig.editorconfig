@@ -9,45 +9,53 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SIPI_CRM_System
 build_property.RootNamespace = SIPI_CRM_System
-build_property.ProjectDir = /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/
+build_property.ProjectDir = C:\Users\maks_\RiderProjects\SIPI_CRM_System\SIPI_CRM_System\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System
+build_property.MSBuildProjectDirectory = C:\Users\maks_\RiderProjects\SIPI_CRM_System\SIPI_CRM_System
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_LoginLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19Mb2dpbkxheW91dC5jc2h0bWw=
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/GoodsPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR29vZHNQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/StockPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvY2tQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-ck5xepj1lm
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/MainPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFpblBhZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-19zk1pc1cz
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19BZG1pbkxheW91dC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = b-e4vqascbyo
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ttoydduy6b
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_EmployeeLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19FbXBsb3llZUxheW91dC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = b-fcxgst3h2b
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/MainPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFpblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-u0vwivw1nd
 
-[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-bq0frcww7h
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-1djsmqhesl
+
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_EmployeeLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9FbXBsb3llZUxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-vphys856y5
+
+[C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-hbg7exjqvb
