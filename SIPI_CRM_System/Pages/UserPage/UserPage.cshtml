@@ -4,10 +4,7 @@
     string login = Request.Query["login"];
     string isAdmin = Request.Query["isadmin"];
 
-    @if (Request.Query["isadmin"] == "True")
-        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
-    else
-        Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 

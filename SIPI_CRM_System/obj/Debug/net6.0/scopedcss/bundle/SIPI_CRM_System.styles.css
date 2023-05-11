@@ -27,8 +27,8 @@
     overflow: hidden;
     background-color: rgba(236, 238, 239, 0.3);
 }
-/* _content/SIPI_CRM_System/Pages/Shared/_AdminLayout.cshtml.rz.scp.css */
-.menu-button[b-e4vqascbyo] {
+/* _content/SIPI_CRM_System/Pages/Shared/_Layout.cshtml.rz.scp.css */
+.menu-button[b-bq0frcww7h] {
     background-color: #996806;
     border-radius: 12px;
     border: 2px solid #875d0a;
@@ -39,17 +39,17 @@
     text-decoration: none;
 }
 
-.menu-button:hover[b-e4vqascbyo] {
+.menu-button:hover[b-bq0frcww7h] {
     background: linear-gradient(to bottom, #a87309 5%, #996806 100%);
     background-color: #a87309;
 }
 
-.menu-button:active[b-e4vqascbyo] {
+.menu-button:active[b-bq0frcww7h] {
     position: relative;
     top: 1px;
 }
 
-.exit-button[b-e4vqascbyo] {
+.exit-button[b-bq0frcww7h] {
     background-color: #696967;
     border-radius: 12px;
     border: 2px solid #575757;
@@ -60,112 +60,21 @@
     text-decoration: none;
 }
 
-.exit-button:hover[b-e4vqascbyo] {
-    background-color: #6c7c7c;
-}
+    .exit-button:hover[b-bq0frcww7h] {
+        background-color: #6c7c7c;
+    }
 
-.exit-button:active[b-e4vqascbyo] {
-    position: relative;
-    top: 1px;
-}
+    .exit-button:active[b-bq0frcww7h] {
+        position: relative;
+        top: 1px;
+    }
 
-.gradient-color[b-e4vqascbyo] {
+.gradient-color[b-bq0frcww7h] {
     background: radial-gradient(circle, rgba(110,77,59,1) 0%, rgba(0,0,0,1) 98%);
     background-repeat: repeat-y;
     min-height: 100vh;
     background-attachment: fixed;
 }
-/* _content/SIPI_CRM_System/Pages/Shared/_EmployeeLayout.cshtml.rz.scp.css */
-.menu-button[b-vphys856y5] {
-    background-color: #996806;
-    border-radius: 12px;
-    border: 2px solid #875d0a;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Verdana;
-    text-decoration: none;
-}
-
-    .menu-button:hover[b-vphys856y5] {
-        background: linear-gradient(to bottom, #a87309 5%, #996806 100%);
-        background-color: #a87309;
-    }
-
-    .menu-button:active[b-vphys856y5] {
-        position: relative;
-        top: 1px;
-    }
-
-.exit-button[b-vphys856y5] {
-    background-color: #696967;
-    border-radius: 12px;
-    border: 2px solid #575757;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Verdana;
-    text-decoration: none;
-}
-
-    .exit-button:hover[b-vphys856y5] {
-        background-color: #6c7c7c;
-    }
-
-    .exit-button:active[b-vphys856y5] {
-        position: relative;
-        top: 1px;
-    }
-/* _content/SIPI_CRM_System/Pages/Shared/_Layout.cshtml.rz.scp.css */
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand[b-hbg7exjqvb] {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-a[b-hbg7exjqvb] {
-  color: #0077cc;
-}
-
-.btn-primary[b-hbg7exjqvb] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active[b-hbg7exjqvb], .nav-pills .show > .nav-link[b-hbg7exjqvb] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.border-top[b-hbg7exjqvb] {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom[b-hbg7exjqvb] {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow[b-hbg7exjqvb] {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy[b-hbg7exjqvb] {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-.footer[b-hbg7exjqvb] {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
-}
-
 /* _content/SIPI_CRM_System/Pages/StockPage/StockPage.cshtml.rz.scp.css */
 .menu-offcanvas[b-5pi2o0rw7p] {
     background-color: #212529

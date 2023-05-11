@@ -3,6 +3,7 @@ using SIPI_CRM_System.Models;
 using SIPI_CRM_System.Services.LoginPageRep;
 using SIPI_CRM_System.Services.MainPageRep;
 using SIPI_CRM_System.Services.StockPage;
+using SIPI_CRM_System.Services.UserPageRep;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ILoginPageRepository, DataBaseLoginPageRepository>();
 builder.Services.AddScoped<IMainPageRepository, DataBaseMainPageRepository>();
+builder.Services.AddScoped<IStockPageRepository, DataBaseStockPageRepository>();
 builder.Services.AddScoped<IStockPageRepository, DataBaseStockPageRepository>();
 
 var app = builder.Build();

@@ -1,49 +1,47 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿.menu-button {
+    background-color: #996806;
+    border-radius: 12px;
+    border: 2px solid #875d0a;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Verdana;
+    text-decoration: none;
 }
 
-a {
-  color: #0077cc;
+.menu-button:hover {
+    background: linear-gradient(to bottom, #a87309 5%, #996806 100%);
+    background-color: #a87309;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.menu-button:active {
+    position: relative;
+    top: 1px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.exit-button {
+    background-color: #696967;
+    border-radius: 12px;
+    border: 2px solid #575757;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Verdana;
+    text-decoration: none;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
+    .exit-button:hover {
+        background-color: #6c7c7c;
+    }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+    .exit-button:active {
+        position: relative;
+        top: 1px;
+    }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.gradient-color {
+    background: radial-gradient(circle, rgba(110,77,59,1) 0%, rgba(0,0,0,1) 98%);
+    background-repeat: repeat-y;
+    min-height: 100vh;
+    background-attachment: fixed;
 }
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
-}
-
