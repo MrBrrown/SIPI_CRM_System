@@ -16,7 +16,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ILoginPageRepository, DataBaseLoginPageRepository>();
 builder.Services.AddScoped<IMainPageRepository, DataBaseMainPageRepository>();
 builder.Services.AddScoped<IStockPageRepository, DataBaseStockPageRepository>();
-builder.Services.AddScoped<IStockPageRepository, DataBaseStockPageRepository>();
+builder.Services.AddScoped<IUserPageRepository, DataBaseUserPageRepository>();
 
 var app = builder.Build();
 

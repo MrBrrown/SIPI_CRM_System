@@ -1,8 +1,10 @@
 ﻿@page
 @model SIPI_CRM_System.Pages.UserPage.UserPageModel
 @{
-    string login = Request.Query["login"];
+    string id = Request.Query["id"];
     string isAdmin = Request.Query["isadmin"];
+
+    ViewData["Title"] = "User Page";
 
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
@@ -24,7 +26,7 @@
             <!--User Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/UserPage/UserPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Личный кабинет
             </a>
@@ -36,7 +38,7 @@
             <!--Main Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/MainPage/MainPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Dashboard
             </a>
@@ -48,7 +50,7 @@
             <!--Stock Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/MainPage/MainPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Склад
             </a>
@@ -60,7 +62,7 @@
             <!--Menu Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/MainPage/MainPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Меню
             </a>
@@ -74,7 +76,7 @@
                 <div class="nav-item-divider"></div>
                 <a class="navbar-brand" asp-area=""
                    asp-page="/MainPage/MainPage"
-                   asp-route-login="@login"
+                   asp-route-id="@id"
                    asp-route-isadmin="@isAdmin">
                     Панель администатора
                 </a>
@@ -86,4 +88,95 @@
         </nav>
     </div>
 </div>
+<div class="container profile-page">
+    <div class="row center">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="card profile-header">
+                <div class="body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="profile-image float-md-right"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""> </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <h4 class="m-t-0 m-b-0"><strong>@Model.employee.Name</strong></h4>
+                            <span class="job_post">@Model.employee.Position.Name</span>
+                            @if (Model.employee.IsAdmin)
+                            {
+                                <p>Права доступа: Администратор</p>
+                            }
+                            else
+                            {
+                                <p>Права доступа: Пользователь</p>
+                            }
+                            <div>
+                                <button class="btn btn-primary btn-round offcanvas-edit-button"
+                                        type="button"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#offcanvasBottom"
+                                        aria-controls="offcanvasBottom">
+                                    Изменить данные
+                                </button>
 
+                                <div class="offcanvas offcanvas-end offcanvas-edit text-light" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 class="offcanvas-title" id="offcanvasBottomLabel">Изменить данные</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <form asp-page-handler="Update" asp-route-id="@Model.employee.Id" method="post">
+                                            <label for="Name">Имя:</label><br>
+                                            <input type="text" id="Name" name="Name" placeholder="@Model.employee.Name" value="@Model.employee.Name">
+                                            <hr>
+
+                                            <label for="login">Логин:</label><br>
+                                            <input type="text" id="login" name="login" placeholder="@Model.employee.Login" value="@Model.employee.Login">
+
+                                            <hr>
+
+                                            <label for="Password">Пароль:</label><br>
+                                            <input type="password" id="Password" name="Password"><br>
+
+                                            <label for="ConfirmPassword">Подтвердите пароль:</label><br>
+                                            <input type="password" id="ConfirmPassword" name="ConfirmPassword">
+
+                                            <hr>
+
+                                            @if (Model.employee.IsAdmin)
+                                            {
+                                                <label for="Position">Должность:</label><br>
+                                                <select id="Position" name="Position">
+                                                    <option selected disabled value="@Model.employee.Position.Id">@Model.employee.Position.Name</option>
+                                                    @foreach (var position in Model.positions)
+                                                    {
+                                                        if (position.Id != Model.employee.Position.Id)
+                                                        {
+                                                            <option value="@position.Id">@Model.employee.Position.Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                                <hr>
+                                            }
+                                            <button class="btn-success" type="submit">Подтвердить</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Request.Query["loginduplicate"] == "True")
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            Пользователь с таким логином уже существует!
+                        </div>
+                    }
+                    @if (Request.Query["passwordvalidate"] == "True")
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            Пароли не совпадают!
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -56,7 +56,6 @@ namespace SIPI_CRM_System.Services.MainPageRep
             };
 
             _context.Orders.Add(order);
-            //await _context.SaveChangesAsync();
 
             foreach(var order_dish in dailyOrder.DailyOrderDishes)
             {

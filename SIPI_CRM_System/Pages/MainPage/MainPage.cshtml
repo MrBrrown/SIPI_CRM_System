@@ -1,8 +1,10 @@
 ﻿@page
 @model SIPI_CRM_System.Pages.MainPageModel
 @{
-    string login = Request.Query["login"];
+    string id = Request.Query["id"];
     string isAdmin = Request.Query["isadmin"];
+
+    ViewData["Title"] = "Dashboard";
 
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
@@ -24,7 +26,7 @@
             <!--User Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/UserPage/UserPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Личный кабинет
             </a>
@@ -36,7 +38,7 @@
             <!--Main Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/MainPage/MainPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Dashboard
             </a>
@@ -48,7 +50,7 @@
             <!--Stock Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/StockPage/StockPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Склад
             </a>
@@ -60,7 +62,7 @@
             <!--Menu Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/MainPage/MainPage"
-               asp-route-login="@login"
+               asp-route-id="@id"
                asp-route-isadmin="@isAdmin">
                 Меню
             </a>
@@ -74,7 +76,7 @@
                 <div class="nav-item-divider"></div>
                 <a class="navbar-brand" asp-area=""
                    asp-page="/MainPage/MainPage"
-                   asp-route-login="@login"
+                   asp-route-id="@id"
                    asp-route-isadmin="@isAdmin">
                     Панель администатора
                 </a>
