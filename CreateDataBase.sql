@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Product` (
   `ID` INT NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
   `Category` VARCHAR(45) NOT NULL,
-  `Amount` INT NOT NULL,
+  `Amount` DECIMAL(9,2) NOT NULL,
   `LifeTime` INT NOT NULL,
   `DeliveryDateTime` DATETIME NOT NULL,
   PRIMARY KEY (`ID`))
@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Dish` (
   `ID` INT NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
   `Category` VARCHAR(45) NOT NULL,
+  `SubCategory` VARCHAR(45) NULL,
   `Mass` DECIMAL(6,3) NULL,
   `Price` DECIMAL(9,2) NOT NULL,
   PRIMARY KEY (`ID`))
@@ -132,7 +133,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRMdb`.`Product_Dish` (
   `ID` INT NOT NULL,
-  `Amount` DECIMAL(6,3) NOT NULL,
+  `Amount` DECIMAL(9,2) NOT NULL,
   `Product_ID` INT NOT NULL,
   `Dish_ID` INT NOT NULL,
   PRIMARY KEY (`ID`),

@@ -1,37 +1,20 @@
 ﻿<Properties StartupConfiguration="{E4C41CC0-9C81-4A9C-9916-149DD23785CA}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml">
-    <Files>
-      <File FileName="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml" Line="26" Column="11" />
-      <File FileName="SIPI_CRM_System/Pages/Shared/_Layout.cshtml" Line="1" Column="1" />
-      <File FileName="SIPI_CRM_System/Pages/Index.cshtml" Line="1" Column="1" />
-      <File FileName="SIPI_CRM_System/Pages/Shared/_LoginLayout.cshtml" Line="1" Column="1" />
-      <File FileName="SIPI_CRM_System/Pages/Shared/_Layout.cshtml.css" Line="17" Column="17" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SIPI_CRM_System" expanded="True">
-            <Node name="SIPI_CRM_System">
-              <Node name="Pages">
-                <Node name="MainPage" expanded="True">
-                  <Node name="MainPage.cshtml" expanded="True" selected="True" />
-                </Node>
-                <Node name="Shared" expanded="True">
-                  <Node name="_Layout.cshtml" expanded="True" />
-                </Node>
-                <Node name="Index.cshtml" expanded="True" />
-              </Node>
-            </Node>
+            <Node name="SIPI_CRM_System" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

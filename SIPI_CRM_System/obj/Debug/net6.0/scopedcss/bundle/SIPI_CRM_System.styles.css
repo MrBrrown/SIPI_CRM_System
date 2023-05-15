@@ -27,6 +27,12 @@
     overflow: hidden;
     background-color: rgba(236, 238, 239, 0.3);
 }
+
+.green-border[b-708837tbp7] {
+    border-color: green;
+    background-color: gray;
+    border-radius: 25px;
+}
 /* _content/SIPI_CRM_System/Pages/Shared/_Layout.cshtml.rz.scp.css */
 .menu-button[b-bq0frcww7h] {
     background-color: #996806;
@@ -136,7 +142,9 @@ a[b-1rjssg8h57] {
     }
 
 .profile-page .profile-header[b-1rjssg8h57] {
-    position: relative
+    position: relative;
+    background-color: #996806;
+    border-radius: 25px;
 }
 
     .profile-page .profile-header .profile-image img[b-1rjssg8h57] {

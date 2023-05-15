@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SIPI_CRM_System.Models;
@@ -50,9 +51,9 @@ public class StockPageModel : PageModel
 
         Product product = new Product()
         {
-            Id = Products.Any()? Products.OrderBy(x => x.Id).Last().Id + 1: 1,
+            Id = Products.Any() ? Products.OrderBy(x => x.Id).Last().Id + 1 : 1,
             Name = Request.Form["Name"],
-            Amount = int.Parse(Request.Form["Amount"]),
+            Amount = Convert.ToDecimal(Request.Form["Amount"], new CultureInfo("en-US")),
             Category = Request.Form["Category"]
         };
 

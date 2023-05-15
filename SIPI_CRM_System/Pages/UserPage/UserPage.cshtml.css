@@ -42,7 +42,9 @@ a {
     }
 
 .profile-page .profile-header {
-    position: relative
+    position: relative;
+    background-color: #996806;
+    border-radius: 25px;
 }
 
     .profile-page .profile-header .profile-image img {

@@ -22,3 +22,9 @@
     overflow: hidden;
     background-color: rgba(236, 238, 239, 0.3);
 }
+
+.green-border {
+    border-color: green;
+    background-color: gray;
+    border-radius: 25px;
+}
