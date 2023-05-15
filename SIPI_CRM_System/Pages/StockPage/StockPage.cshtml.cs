@@ -2,7 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SIPI_CRM_System.Models;
-using SIPI_CRM_System.Services.StockPage;
+using SIPI_CRM_System.Services.StockPageRep;
 
 namespace SIPI_CRM_System.Pages;
 

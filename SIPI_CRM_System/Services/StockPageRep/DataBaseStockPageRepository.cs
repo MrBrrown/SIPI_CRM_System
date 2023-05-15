@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
 
-namespace SIPI_CRM_System.Services.StockPage;
+namespace SIPI_CRM_System.Services.StockPageRep;
 
 public class DataBaseStockPageRepository : IStockPageRepository 
 {

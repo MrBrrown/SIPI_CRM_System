@@ -15,6 +15,7 @@
     <None Remove="Pages\StockPage\" />
     <None Remove="Services\UserPageRep\" />
     <None Remove="Pages\MenuPage\" />
+    <None Remove="Services\MenuPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -25,6 +26,7 @@
     <Folder Include="Pages\StockPage\" />
     <Folder Include="Services\UserPageRep\" />
     <Folder Include="Pages\MenuPage\" />
+    <Folder Include="Services\MenuPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
