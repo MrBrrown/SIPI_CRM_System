@@ -1,13 +1,8 @@
 ﻿<Properties StartupConfiguration="{E4C41CC0-9C81-4A9C-9916-149DD23785CA}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml" Line="97" Column="78" />
+      <File FileName="SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml.cs" />
+      <File FileName="SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml" Line="135" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,5 +20,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

@@ -26,15 +26,17 @@ namespace SIPI_CRM_System.Services.MenuPageRep
             {
                 if (item.SubCategory == null)
                 {
-                    continue;
+                    item.SubCategory = "Уникальные блюда";
+                    _context.Dishes.Update(item);
                 }
-
-                dishSubCategories.Add(item.SubCategory);
+                    dishSubCategories.Add(item.SubCategory);
             }
 
             var returnList = dishSubCategories.ToList();
 
             returnList.Sort();
+
+            _context.SaveChanges();
 
             return returnList;
         }

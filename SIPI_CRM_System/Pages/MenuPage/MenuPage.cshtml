@@ -89,80 +89,66 @@
     </div>
 </div>
 
-<div>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Button with data-bs-target
-    </button>
-
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-                Button with data-bs-target
-            </button>
-        </div>
-        <div class="collapse" id="collapseExample2">
-            <div class="card card-body">
-                <p>Text</p>
+<div class="container">
+    <h1 class="text-center text-light">Меню</h1>
+    <div class="row m-2">
+        <!--Main Card-->
+        <div class="card">
+            <div class="card-body">
+                <!--Category List-->
+                @foreach (var category in Model.dishCategories)
+                {
+                    var collapseId = "collapse" + category.Replace(" ", "");
+                    <!--Category Collapse Control Button-->
+                    <button class="btn btn-primary" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#@collapseId"
+                            aria-expanded="false"
+                            aria-controls="collapseId">
+                        @category
+                    </button>
+                }
+                <!--Category Collapse List-->
+                @foreach (var category in Model.dishCategories)
+                {
+                    var collapseId = "collapse" + category.Replace(" ", "");
+                    <!--Category Collapse-->
+                    <div class="collapse" id="@collapseId">
+                        <div class="row m-2">
+                            <!--Sub Category List-->
+                            @foreach (var sub in Model.dishSubCategories[category])
+                            {
+                                var subId = "collapseSub" + category.Replace(" ", "") + sub.Replace(" ", "");
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <!--Sub Category Collapse Control Button-->
+                                            <button class="btn btn-primary" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#@subId"
+                                                    aria-expanded="false"
+                                                    aria-controls="@subId">
+                                                @sub
+                                            </button>
+                                            <!--Sub Category Collapse -->
+                                            <div class="collapse" id="@subId">
+                                                @foreach (var dish in Model.dishes.Where(x => x.Category == category).Where(x => x.SubCategory == sub))
+                                                {
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <p>@dish.Name @dish.Price</p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-</div>
-
-<div class="container">
-    <h1 class="text-center text-light">Меню</h1>
-    @for (int i = 0; i < 2; i++)
-    {
-        <div class="row m-2">
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="product1.jpg" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 1</h5>
-                        <p class="card-text">Description of product 1.</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="product2.jpg" class="card-img-top" alt="Product 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <p class="card-text">Description of product 2.</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="product3.jpg" class="card-img-top" alt="Product 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 3</h5>
-                        <p class="card-text">Description of product 3.</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="product5.jpg" class="card-img-top" alt="Product 5">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 5</h5>
-                        <p class="card-text">Description of product 5.</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="product6.jpg" class="card-img-top" alt="Product 6">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 6</h5>
-                        <p class="card-text">Description of product 6.</p>
-                        <a href="#" class="btn btn-primary">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
 </div>
