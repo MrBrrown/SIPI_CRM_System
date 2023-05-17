@@ -21,6 +21,8 @@ public class IndexModel : PageModel
         if (_context.CheckAuthorization(Login, Password))
         {
             var employee = _context.GetEmployee(Login);
+            return Redirect("/StockPage/StockPage?login=" + Login+"&isadmin="+employee.IsAdmin.ToString());
+            
             return Redirect("/MainPage/MainPage?login=" + Login+"&isadmin="+employee.IsAdmin.ToString());
         }
         else

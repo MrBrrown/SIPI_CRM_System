@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.4",
           "Microsoft.EntityFrameworkCore.Design": "6.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.4",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.4",
           "MySql.EntityFrameworkCore": "6.0.4",
           "bootstrap": "5.2.3"

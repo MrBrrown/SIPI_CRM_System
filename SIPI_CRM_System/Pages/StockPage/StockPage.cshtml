@@ -95,7 +95,7 @@
 
 <div class="container text-center">
     <div class="row">
-        <div class="col-sm-2 text-light">
+        <div class="col-sm-2 text-black">
             @if (!Model.Categories.Any())
             {
                 <h1 class="text-light">Не добавленны объекты</h1>
@@ -122,7 +122,7 @@
             }
         </div>
         <div class="col-sm-10">
-            <h1 class="title m-2 text-light">Продукты</h1>
+            <h1 class="title m-2 text-black">Продукты</h1>
             <!--Add offCanvasRight-->
             <div class="d-grid">
                 <button class="btn btn-primary m-2"
@@ -268,11 +268,49 @@
                                 </div>
                             </div>
                         </div><!--Product Card Body-->
-                        <div class="card-body">
-                            <p class="card-text d-flex">
-                                Остаток: @item.Amount
-                            </p>
+                        <div class="card-body bg-info p-2 text-dark bg-opacity-10">
+                            <div class="d-flex align-items-start flex-column">
+                                <span class="fs-5 p-1"><b>Остаток: </b><mark>@item.Amount</mark></span>
+                                <span class="fs-5 p-1"><b>Доставлен: </b><mark>@item.DeliveryDateTime</mark></span>
+                                <span class="fs-5 p-1"><b>Годен до: </b><mark>
+                                    @{ 
+                                        @item.DeliveryDateTime.AddHours(item.LifeTime)
+                                    }
+                                </mark></span>
+                            </div>
                         </div>
+                            <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
+                                <span id="timer-@item.Id"></span>
+                                <script>
+                                    let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
+                                    let lifeTime_@item.Id = @item.LifeTime * 3600000;
+                                    let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
+                                    // Update the countdown every second
+                                    let Timer_@item.Id = setInterval(function() {
+                                        let now = new Date().getTime();
+                                        let distance = expirationDate_@item.Id - now;
+                                        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                        if (distance < 0) {
+                                            clearInterval(Timer_@item.Id);
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Не годен';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#ff8080';
+                                        }
+                                        else if (distance > lifeTime_@item.Id)
+                                        {
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Не доставлен';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#87cefa';                                            
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Срок годности кончается через ' + days + 'д ' + hours + 'ч ' + minutes + 'м ' + seconds + 'с ';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#20c997';   
+                                        }
+                                    }, 1000);
+                                </script> 
+                            </div>                        
                     </div>
                 }
             }

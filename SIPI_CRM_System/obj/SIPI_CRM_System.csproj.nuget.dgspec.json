@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/SIPI_CRM_System.csproj": {}
+    "C:\\Users\\maks_\\RiderProjects\\SIPI_CRM_System\\SIPI_CRM_System\\SIPI_CRM_System.csproj": {}
   },
   "projects": {
-    "/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/SIPI_CRM_System.csproj": {
+    "C:\\Users\\maks_\\RiderProjects\\SIPI_CRM_System\\SIPI_CRM_System\\SIPI_CRM_System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/SIPI_CRM_System.csproj",
+        "projectUniqueName": "C:\\Users\\maks_\\RiderProjects\\SIPI_CRM_System\\SIPI_CRM_System\\SIPI_CRM_System.csproj",
         "projectName": "SIPI_CRM_System",
-        "projectPath": "/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/SIPI_CRM_System.csproj",
-        "packagesPath": "/Users/artemgusev/.nuget/packages/",
-        "outputPath": "/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/",
+        "projectPath": "C:\\Users\\maks_\\RiderProjects\\SIPI_CRM_System\\SIPI_CRM_System\\SIPI_CRM_System.csproj",
+        "packagesPath": "C:\\Users\\maks_\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maks_\\RiderProjects\\SIPI_CRM_System\\SIPI_CRM_System\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/artemgusev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\maks_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,6 +52,10 @@
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[6.0.4, )"
             },
@@ -83,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

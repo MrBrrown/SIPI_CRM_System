@@ -79,4 +79,9 @@ public class StockPageModel : PageModel
 
         redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
     }
+
+    public void UpdateLifeTime()
+    {
+        
+    }
 }
