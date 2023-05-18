@@ -25,17 +25,17 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public List<string> GetAllCategories()
     {
-        List<string> categories = new List<string>();
+        HashSet<String> productsCategories = new();
 
         foreach (var product in _context.Products)
         {
-            if (!categories.Any(x => x.Equals(product.Category)))
-            {
-                categories.Add(product.Category);
-            }
+            productsCategories.Add(product.Category);
         }
 
-        return categories;
+        var productCategoriesList = productsCategories.ToList();
+        productCategoriesList.Sort();
+
+        return productCategoriesList;
     }
 
     public Product GetProductById(int id)

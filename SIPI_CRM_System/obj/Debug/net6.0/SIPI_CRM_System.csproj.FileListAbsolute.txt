@@ -61,3 +61,4 @@
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/StockPage/StockPage.cshtml.rz.scp.css
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/MenuPage/MenuPage.cshtml.rz.scp.css
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/EditPages/DishEditPage/DishEditPage.cshtml.rz.scp.css

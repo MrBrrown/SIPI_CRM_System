@@ -34,7 +34,7 @@ namespace SIPI_CRM_System.Pages.MenuPage
 
             foreach (var item in dishCategories)
             {
-                var subCategories = _context.GetDishSubCategoryList(item);
+                var subCategories = _context.GetDishSubCategoryList(item); 
 
                 dishSubCategories.Add(item, subCategories);
             }

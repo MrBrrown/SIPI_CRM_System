@@ -115,6 +115,21 @@
                     <!--Category Collapse-->
                     <div class="collapse" id="@collapseId">
                         <div class="row m-2">
+                            <div class="col-2 text-center">
+                                <p>@category</p>
+                            </div>
+                            <div class="col-2">
+                                <!--Close Button-->
+                                <button class="btn btn-primary" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#@collapseId"
+                                        aria-expanded="false"
+                                        aria-controls="collapseId">
+                                    Закрыть
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row m-2">
                             <!--Sub Category List-->
                             @foreach (var sub in Model.dishSubCategories[category])
                             {
@@ -134,9 +149,40 @@
                                             <div class="collapse" id="@subId">
                                                 @foreach (var dish in Model.dishes.Where(x => x.Category == category).Where(x => x.SubCategory == sub))
                                                 {
+                                                    var dishOffcanvasId = "offcanvas" + dish.Id.ToString();
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <p>@dish.Name @dish.Price</p>
+                                                            <p>@dish.Name</p>
+                                                            <p>Цена: @dish.Price</p>
+
+                                                            <button class="btn btn-primary"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#@dishOffcanvasId"
+                                                                    aria-controls="@dishOffcanvasId">
+                                                                Посмотреть состав
+                                                            </button>
+                                                            <div class="offcanvas offcanvas-end edit-dish-offcanvas"
+                                                                 tabindex="-1"
+                                                                 id="@dishOffcanvasId"
+                                                                 aria-labelledby="@dishOffcanvasId">
+
+                                                                <div class="offcanvas-header text-light">
+                                                                    <h5 id="@dishOffcanvasId">Состав блюда @dish.Name:</h5>
+                                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                                </div>
+                                                                <!--Offcanvas body-->
+                                                                <div class="offcanvas-body">
+                                                                    <a  class="nav-link"                                                                                 asp-area=""
+                                                                        asp-page="/EditPages/DishEditPage/DishEditPage"
+                                                                        asp-route-id="@id"
+                                                                        asp-route-isadmin="@isAdmin"
+                                                                        asp-route-dishid="@dish.Id">
+                                                                        <button class="btn btn-primary">
+                                                                            Изменить
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 }

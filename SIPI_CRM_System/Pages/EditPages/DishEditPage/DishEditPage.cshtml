@@ -1,0 +1,72 @@
+﻿@page
+@model SIPI_CRM_System.Pages.EditPages.DishEditPage.DishEditPageModel
+@{
+    ViewData["Title"] = "Dish Edit Page";
+    Layout = "~/Pages/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container ml-1 mr-1 mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-center">Product Name - 500g</h2>
+            <div class="scroll">
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <p class="card-text">Quantity: 20</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 text-center">
+                <div class="col-md-6">
+                    <button class="btn btn-success">Обновить блюдо</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger">Выйти</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2 class="text-center">Список продуктов</h2>
+            <div class="scroll">
+                @foreach (var category in Model.productsCategories)
+                {
+                    var collapseId = "collapse" + category.Replace(" ", "");
+                    <!--Category Collapse Control Button-->
+                    <button class="btn btn-primary" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#@collapseId"
+                            aria-expanded="false"
+                            aria-controls="collapseId">
+                        @category
+                    </button>
+                }
+                @foreach (var category in Model.productsCategories)
+                {
+                    var collapseId = "collapse" + category.Replace(" ", "");
+                    <div class="collapse" id="@collapseId">
+                        <div class="row m-2">
+                            <div class="col-2 text-center">
+                                <p>@category</p>
+                            </div>
+                            <div class="col-2">
+                                <!--Close Button-->
+                                <button class="btn btn-primary" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#@collapseId"
+                                        aria-expanded="false"
+                                        aria-controls="collapseId">
+                                    Закрыть
+                                </button>
+                            </div>
+                        </div>
+                        @foreach (var dish in Model.products
+                                .Where(x => x.Category == category))
+                        {
+                            <p>@dish.Name</p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

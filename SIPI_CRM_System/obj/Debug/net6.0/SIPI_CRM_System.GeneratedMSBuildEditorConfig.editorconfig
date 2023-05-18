@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/EditPages/DishEditPage/DishEditPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRWRpdFBhZ2VzL0Rpc2hFZGl0UGFnZS9EaXNoRWRpdFBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-83pwj3b17m
+
 [/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ck5xepj1lm

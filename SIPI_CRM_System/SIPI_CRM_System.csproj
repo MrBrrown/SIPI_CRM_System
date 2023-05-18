@@ -16,6 +16,10 @@
     <None Remove="Services\UserPageRep\" />
     <None Remove="Pages\MenuPage\" />
     <None Remove="Services\MenuPageRep\" />
+    <None Remove="Pages\EditPages\" />
+    <None Remove="Pages\EditPages\DishEditPage\" />
+    <None Remove="Pages\EditPages\OrderEditPage\" />
+    <None Remove="Services\DishEditPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -27,6 +31,10 @@
     <Folder Include="Services\UserPageRep\" />
     <Folder Include="Pages\MenuPage\" />
     <Folder Include="Services\MenuPageRep\" />
+    <Folder Include="Pages\EditPages\" />
+    <Folder Include="Pages\EditPages\DishEditPage\" />
+    <Folder Include="Pages\EditPages\OrderEditPage\" />
+    <Folder Include="Services\DishEditPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
