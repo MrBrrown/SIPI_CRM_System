@@ -9,9 +9,13 @@ public class StockPageModel : PageModel
 {
     private static string redirectUserString = ""; //Необоходимо задавать на каждой станице в методе  OnGet(), по нему происходит сохранение действующего пользователя
     private readonly IStockPageRepository _context;
-    
+
     [BindProperty]
     public List<string> CategoryCheck { get; set; }
+
+    [BindProperty] public string? DeliveryDateSortLabel { get; set; } = "■";
+    [BindProperty] public string FitnessSortLabel { get; set; } = "■";
+    [BindProperty] public string NameSortLabel { get; set; } = "■";
     
     public IEnumerable<Product> Products { get; set; }
 
@@ -19,7 +23,7 @@ public class StockPageModel : PageModel
 
     public StockPageModel(IStockPageRepository context)
     {
-        _context = context;
+        _context = context; 
     }
     
     public IActionResult OnPostUpdateCategories()
@@ -50,7 +54,7 @@ public class StockPageModel : PageModel
 
         Product product = new Product()
         {
-            Id = Products.Any()? Products.OrderBy(x => x.Id).Last().Id + 1: 1,
+            Id = Products.Any() ? Products.OrderBy(x => x.Id).Last().Id + 1 : 1,
             Name = Request.Form["Name"],
             Amount = int.Parse(Request.Form["Amount"]),
             Category = Request.Form["Category"]
@@ -72,16 +76,82 @@ public class StockPageModel : PageModel
         return Redirect("/Index");
     }
 
+    public IActionResult OnPostUpdateProductsOrderByDeliveryDate(string deliveryDateSortLabel)
+    {
+        switch (deliveryDateSortLabel)
+        {
+            case "■":
+                DeliveryDateSortLabel = "▲";
+                Products = _context.GetProducts().OrderBy(x => x.DeliveryDateTime);
+                break;
+            case "▲":
+                DeliveryDateSortLabel = "▼";
+                Products = _context.GetProducts().OrderByDescending(x => x.DeliveryDateTime);
+                break;
+            case "▼":
+                DeliveryDateSortLabel = "■";
+                Products = _context.GetProducts();
+                break;
+        }
+        
+        Categories = _context.GetAllCategories();
+        
+        return Page();
+    }
+    
+    public IActionResult OnPostUpdateProductsOrderByName(string nameSortLabel)
+    {
+        switch (nameSortLabel)
+        {
+            case "■":
+                NameSortLabel = "▲";
+                Products = _context.GetProducts().OrderBy(x => x.Name);
+                break;
+            case "▲":
+                NameSortLabel = "▼";
+                Products = _context.GetProducts().OrderByDescending(x => x.Name);
+                break;
+            case "▼":
+                NameSortLabel = "■";
+                Products = _context.GetProducts();
+                break;
+        }
+        
+        Categories = _context.GetAllCategories();
+        
+        return Page();
+    }
+    
+    public IActionResult OnPostUpdateProductsOrderByFitness(string fitnessSortLabel)
+    {
+        switch (fitnessSortLabel)
+        {
+            case "■":
+                FitnessSortLabel = "▲";
+                Products = _context.GetProducts().OrderBy(x => (x.DeliveryDateTime - DateTime.Now).Hours + x.LifeTime);
+                break;
+            case "▲":
+                FitnessSortLabel = "▼";
+                Products = _context.GetProducts().OrderByDescending(x => (x.DeliveryDateTime - DateTime.Now).Hours + x.LifeTime);
+                break;
+            case "▼":
+                FitnessSortLabel = "■";
+                Products = _context.GetProducts();
+                break;
+        }
+        
+        Categories = _context.GetAllCategories();
+        
+        return Page();
+    }
+
     public void OnGet()
     {
         Products = _context.GetProducts();
         Categories = _context.GetAllCategories();
-
+        DeliveryDateSortLabel = "■";
+        FitnessSortLabel = "■";
+        NameSortLabel = "■";
         redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
-    }
-
-    public void UpdateLifeTime()
-    {
-        
     }
 }

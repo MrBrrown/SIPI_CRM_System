@@ -11,6 +11,11 @@ builder.Services.AddDbContext<CRMdbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("CRMdb")));
 
 builder.Services.AddRazorPages();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
 
 builder.Services.AddScoped<ILoginPageRepository, DataBaseLoginPageRepository>();
 builder.Services.AddScoped<IMainPageRepository, DataBaseMainPageRepository>();
@@ -33,6 +38,7 @@ using (var scope = app.Services.CreateScope())
     context.Database.EnsureCreated();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
