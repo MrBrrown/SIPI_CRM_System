@@ -23,6 +23,7 @@
     <Folder Include="Pages\StockPage\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.0-preview1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

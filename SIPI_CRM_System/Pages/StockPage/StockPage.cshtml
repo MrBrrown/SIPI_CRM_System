@@ -91,10 +91,8 @@
     </div>
 </div>
 
-
-
-<div class="container text-center">
-    <div class="row">
+<div class="container-fluid text-center">
+    <div class="row justify-content-center">
         <div class="col-sm-2 text-black">
             @if (!Model.Categories.Any())
             {
@@ -102,7 +100,7 @@
             }
             else
             {
-                <h1 class="mt-5 text-black">Категории</h1>
+                <h1 class="mt-5 mb-3 text-black">Категории</h1>
                 <form asp-page-handler="UpdateCategories"
                       asp-route-login="@login"
                       asp-route-isadmin="@isAdmin"
@@ -110,18 +108,45 @@
                     @foreach (var item in Model.Categories)
                     {
                         var CategotyID = item + "Id";
-                        <div class="form-check checkbox-lg p-1">
-                            <input name="CategoryCheck" class="form-check-input" type="checkbox" value="@item" id="@CategotyID">
+                        <div class="form-check checkbox-lg">
+                            <input name="CategoryCheck" class="form-check-input mx-2" type="checkbox" value="@item" id="@CategotyID">
                             <label class="form-check-label" for="@CategotyID">
                                 @item
                             </label>
                         </div>
                     }
-                    <button class="btn btn-primary m-2 btn-lg">Обновить</button>
+                    <button class="btn btn-primary m-3 btn-lg">Обновить</button>
                 </form>
             }
+            <h1 class="title mt-3">Добавление файла</h1>
+            <p class="bg-success"><b>Excel</b></p>
+            <form asp-route-login="@login"
+                  asp-route-isadmin="@isAdmin"
+                  method="post"
+                  enctype="multipart/form-data">
+                <input class="btn-dark" type="file" name="formFile">
+                <button class="btn-light" asp-page-handler="AddByDocument" type="submit">Загрузить файл</button>
+            </form>
+            @if (Request.Query["loadException"] == "True")
+            {
+                <div class="alert alert-danger mt-1" role="alert">
+                    Файл не выбран
+                </div>
+            }
+            else if (Request.Query["incorrectExtension"] == "True")
+            {
+                <div class="alert alert-danger mt-1" role="alert">
+                    Загрузите файл с расширением .xlsx
+                </div>
+            }
+            else if (Request.Query["fileProcessingException"] == "True")
+            {
+                <div class="alert alert-danger mt-1" role="alert">
+                    Ошибка обработки файла
+                </div>
+            }
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <h1 class="title m-2 text-black">Продукты</h1>
             <!--Add offCanvasRight-->
             <div class="d-grid">
@@ -196,7 +221,7 @@
             </div>
             @if (!Model.Products.Any())
             {
-                    <h1 class="text-light">Не добавленны объекты</h1>
+                <h1 class="text-light">Не добавленны объекты</h1>
             }
             else
             {
@@ -309,9 +334,9 @@
                                 </mark></span>
                             </div>
                         </div>
-                            <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
-                                <span id="timer-@item.Id"></span>
-                                <script>
+                        <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
+                            <span id="timer-@item.Id"></span>
+                            <script>
                                     let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
                                     let lifeTime_@item.Id = @item.LifeTime * 3600000;
                                     let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
@@ -340,7 +365,7 @@
                                         }
                                     }, 1000);
                                 </script> 
-                            </div>                        
+                        </div>                        
                     </div>
                 }
             }

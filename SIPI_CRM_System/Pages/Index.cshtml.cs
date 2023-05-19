@@ -22,8 +22,6 @@ public class IndexModel : PageModel
         {
             var employee = _context.GetEmployee(Login);
             return Redirect("/StockPage/StockPage?login=" + Login+"&isadmin="+employee.IsAdmin.ToString());
-            
-            return Redirect("/MainPage/MainPage?login=" + Login+"&isadmin="+employee.IsAdmin.ToString());
         }
         else
             return Redirect("/Index?invalid=True");

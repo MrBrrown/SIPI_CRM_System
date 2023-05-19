@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using SIPI_CRM_System.Models;
 using SIPI_CRM_System.Services.LoginPageRep;
 using SIPI_CRM_System.Services.MainPageRep;
@@ -20,6 +21,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<ILoginPageRepository, DataBaseLoginPageRepository>();
 builder.Services.AddScoped<IMainPageRepository, DataBaseMainPageRepository>();
 builder.Services.AddScoped<IStockPageRepository, DataBaseStockPageRepository>();
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var app = builder.Build();
 
