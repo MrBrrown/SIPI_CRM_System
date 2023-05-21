@@ -9,11 +9,17 @@ namespace SIPI_CRM_System.Services.DishEditPageRep
 
 		IEnumerable<Product> GetProducts();
 
+		IEnumerable<ProductDish> GetProductDishes();
+
         List<String> GetProductsCategoriesList();
 
         void UpdateDish(Dish dish);
 
-		void DeleteDish(Dish dish);
+        void UpdateProductDishes(int productDishesId, decimal amount);
+
+        void DeleteDish(Dish dish);
+
+		void AddProductDish(ProductDish productDish);
 	}
 }
 

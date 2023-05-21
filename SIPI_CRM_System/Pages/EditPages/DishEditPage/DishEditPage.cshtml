@@ -3,69 +3,119 @@
 @{
     ViewData["Title"] = "Dish Edit Page";
     Layout = "~/Pages/Shared/_LoginLayout.cshtml";
+
+    var dishId = Request.Query["dishId"];
 }
 
 <div class="container ml-1 mr-1 mt-4">
     <div class="row">
         <div class="col-md-4">
-            <h2 class="text-center">Product Name - 500g</h2>
-            <div class="scroll">
-                <div class="card mb-1">
+            <!--Dish Header-->
+            <h3 class="text-center">@Model.dish.Name - @Model.dish.Mass гр</h3>
+            <!--Update/Delete Form-->
+            <form asp-page-handler="Update" asp-route-dishId="@dishId">
+                <div class="card mb-2">
                     <div class="card-body">
-                        <p class="card-text">Quantity: 20</p>
+                        <div class="input-group">
+                            <!--Dish Change Field-->
+                            <input type="text" class="form-control" value="@Model.dish.Name" name="DishName">
+                            <input type="text" class="form-control" value="@Model.dish.Mass" name="DishMass">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-4 text-center">
-                <div class="col-md-6">
-                    <button class="btn btn-success">Обновить блюдо</button>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-danger">Выйти</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <h2 class="text-center">Список продуктов</h2>
-            <div class="scroll">
-                @foreach (var category in Model.productsCategories)
-                {
-                    var collapseId = "collapse" + category.Replace(" ", "");
-                    <!--Category Collapse Control Button-->
-                    <button class="btn btn-primary" type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#@collapseId"
-                            aria-expanded="false"
-                            aria-controls="collapseId">
-                        @category
-                    </button>
-                }
-                @foreach (var category in Model.productsCategories)
-                {
-                    var collapseId = "collapse" + category.Replace(" ", "");
-                    <div class="collapse" id="@collapseId">
-                        <div class="row m-2">
-                            <div class="col-2 text-center">
-                                <p>@category</p>
-                            </div>
-                            <div class="col-2">
-                                <!--Close Button-->
-                                <button class="btn btn-primary" type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#@collapseId"
-                                        aria-expanded="false"
-                                        aria-controls="collapseId">
-                                    Закрыть
-                                </button>
+                <!--Dish Products-->
+                <h4 class="text-center">Состав:</h4>
+                <div class="scroll-card">
+                    @foreach (var productDishes in Model.dish.ProductDishes)
+                    {
+                        var productAmount = "productDishesAmount" + productDishes.Id.ToString();
+                        <div class="card mb-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <p>@productDishes.Product.Name</p>
+                                    </div>
+                                    <div class="col-5">
+                                        <!--Product Amount in Dish-->
+                                        <input type="text" class="form-control" value="@productDishes.Amount" name="@productAmount" />
+                                    </div>
+                                    <div class="col-2">
+                                        <p>гр/шт</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        @foreach (var dish in Model.products
-                                .Where(x => x.Category == category))
-                        {
-                            <p>@dish.Name</p>
-                        }
+                    }
+                </div>
+                <div class="row mt-4 text-center">
+                    <div class="col-md-6 d-grid">
+                        <!--Udpate Button-->
+                        <button class="btn btn-success" asp-page-handler="Update" asp-route-dishId="@dishId">Обновить блюдо</button>
                     </div>
-                }
+                    <div class="col-md-6 d-grid">
+                        <!--Exit Button-->
+                        <button class="btn btn-danger" asp-page-handler="Exit">Выйти</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <!--Products List-->
+            <h2 class="text-center">Список продуктов</h2>
+            <div class="card">
+                <div class="card-body">
+                    @foreach (var category in Model.productsCategories)
+                    {
+                        var collapseId = "collapse" + category.Replace(" ", "");
+                        <!--Category Collapse Control Button-->
+                        <button class="btn btn-primary me-2 mb-2" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#@collapseId"
+                                aria-expanded="false"
+                                aria-controls="collapseId">
+                            @category
+                        </button>
+                    }
+                    @foreach (var category in Model.productsCategories)
+                    {
+                        <!--Category Collapse-->
+                        var collapseId = "collapse" + category.Replace(" ", "");
+                        <div class="collapse" id="@collapseId">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex bd-highlight">
+                                        <div class="p-2 w-100 bd-highlight">
+                                            <h5>@category</h5>
+                                        </div>
+                                        <div class="p-2 flex-shrink-1 bd-highlight">
+                                            <!--Close Button-->
+                                            <button class="btn-close btn-close float-right" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#@collapseId"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseId">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!--Products List of Buttons-->
+                                        @foreach (var product in Model.products
+                                            .Where(x => x.Category == category))
+                                        {
+                                            <div class="col-3 mb-2">
+                                                <form class="d-grid" asp-page-handler="AddProductDish" asp-route-productId="@product.Id" asp-route-dishId="@dishId">
+                                                    <button class="btn btn-dark">@product.Name</button>
+                                                </form>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
