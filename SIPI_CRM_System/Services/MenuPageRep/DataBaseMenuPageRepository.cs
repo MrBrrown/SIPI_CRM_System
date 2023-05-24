@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
 using SIPI_CRM_System.Services;
 
@@ -15,7 +16,7 @@ namespace SIPI_CRM_System.Services.MenuPageRep
 
         public IEnumerable<Dish> GetDishes()
         {
-            return _context.Dishes;
+            return _context.Dishes.Include(x => x.ProductDishes).ThenInclude(x => x.Product);
         }
 
         public List<string> GetDishSubCategoryList(string category)
@@ -55,6 +56,14 @@ namespace SIPI_CRM_System.Services.MenuPageRep
             returnList.Sort();
 
             return returnList;
+        }
+
+        public async void DeleteDish(int dishId)
+        {
+            var dish = _context.Dishes.Find(dishId);
+            _context.Dishes.Remove(dish);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

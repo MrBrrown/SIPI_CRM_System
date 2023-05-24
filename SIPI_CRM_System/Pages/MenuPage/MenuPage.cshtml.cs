@@ -28,6 +28,12 @@ namespace SIPI_CRM_System.Pages.MenuPage
             return Redirect("/Index");
         }
 
+        public IActionResult OnPostDelete(int dishId)
+        {
+            _context.DeleteDish(dishId);
+            return Redirect("/MenuPage/MenuPage" + redirectUserString);
+        }
+
         public void OnGet()
         {
             dishCategories = _context.GetDishCategoryList();

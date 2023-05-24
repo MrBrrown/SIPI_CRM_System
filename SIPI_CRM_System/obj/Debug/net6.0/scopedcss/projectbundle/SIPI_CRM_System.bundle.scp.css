@@ -54,6 +54,15 @@
 .edit-dish-offcanvas[b-fv1vnllla0] {
     background-color: #212529
 }
+
+.delete-dish-offcanvas[b-fv1vnllla0] {
+    background-color: #212529
+}
+
+.close-red[b-fv1vnllla0] {
+    background-color: red;
+    color: #fff7cc;
+}
 /* _content/SIPI_CRM_System/Pages/Shared/_Layout.cshtml.rz.scp.css */
 .menu-button[b-bq0frcww7h] {
     background-color: #996806;

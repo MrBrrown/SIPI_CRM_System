@@ -12,3 +12,12 @@
 .edit-dish-offcanvas[b-fv1vnllla0] {
     background-color: #212529
 }
+
+.delete-dish-offcanvas[b-fv1vnllla0] {
+    background-color: #212529
+}
+
+.close-red[b-fv1vnllla0] {
+    background-color: red;
+    color: #fff7cc;
+}

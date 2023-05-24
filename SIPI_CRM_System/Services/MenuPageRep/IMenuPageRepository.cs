@@ -10,6 +10,8 @@ namespace SIPI_CRM_System.Services.MenuPageRep
         List<string> GetDishCategoryList();
 
 		List<string> GetDishSubCategoryList(string category);
+
+		void DeleteDish(int dishId);
 	}
 }
 

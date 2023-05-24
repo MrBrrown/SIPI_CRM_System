@@ -30,15 +30,22 @@ namespace SIPI_CRM_System.Pages.EditPages.DishEditPage
 
         public IActionResult OnPostAddProductDish(int productId, int dishId)
         {
-            var productDish = new ProductDish
+            productDishes = _context.GetProductDishes();
+            if (productDishes
+                .Where(x => x.DishId == dishId)
+                .Where(x => x.ProductId == productId)
+                .FirstOrDefault() == default)
             {
-                Id = _context.GetProductDishes().Any() ? _context.GetProductDishes().Last().Id + 1 : 1,
-                ProductId = productId,
-                DishId = dishId,
-                Amount = 0
-            };
+                var productDish = new ProductDish
+                {
+                    Id = _context.GetProductDishes().Any() ? _context.GetProductDishes().Last().Id + 1 : 1,
+                    ProductId = productId,
+                    DishId = dishId,
+                    Amount = 0
+                };
 
-            _context.AddProductDish(productDish);
+                _context.AddProductDish(productDish);
+            }
 
             return Redirect("/EditPages/DishEditPage/DishEditPage" + redirectUserString + "&dishId=" + dishId.ToString());
         }

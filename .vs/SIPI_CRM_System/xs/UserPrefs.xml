@@ -2,60 +2,29 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Services/DishEditPageRep/DataBaseDishEditPageRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/EditPages/DishEditPage/DishEditPage.cshtml.cs">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/EditPages/DishEditPage/DishEditPage.cshtml" Line="71" Column="117" />
-      <File FileName="SIPI_CRM_System/Pages/EditPages/DishEditPage/DishEditPage.cshtml.cs" Line="29" Column="1" />
-      <File FileName="SIPI_CRM_System/Services/DishEditPageRep/DataBaseDishEditPageRepository.cs" Line="17" Column="53" />
-      <File FileName="SIPI_CRM_System/Models/ProductDish.cs" Line="11" Column="40" />
-      <File FileName="SIPI_CRM_System/Services/DishEditPageRep/IDishEditPageRepository.cs" Line="20" Column="48" />
+      <File FileName="SIPI_CRM_System/Services/DishEditPageRep/DataBaseDishEditPageRepository.cs" Line="68" Column="41" />
+      <File FileName="SIPI_CRM_System/Pages/EditPages/DishEditPage/DishEditPage.cshtml.cs" Line="33" Column="57" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SIPI_CRM_System" expanded="True">
             <Node name="SIPI_CRM_System">
-              <Node name="Models" expanded="True" />
               <Node name="Pages" expanded="True">
-                <Node name="EditPages" expanded="True">
-                  <Node name="DishEditPage" expanded="True">
-                    <Node name="DishEditPage.cshtml" expanded="True" />
+                <Node name="EditPages">
+                  <Node name="DishEditPage">
+                    <Node name="DishEditPage.cshtml" expanded="True">
+                      <Node name="DishEditPage.cshtml.cs" selected="True" />
+                    </Node>
                   </Node>
                 </Node>
-                <Node name="MenuPage" expanded="True">
-                  <Node name="MenuPage.cshtml" expanded="True" />
-                </Node>
+                <Node name="MainPage" expanded="True" />
+                <Node name="MenuPage" expanded="True" />
               </Node>
               <Node name="Services" expanded="True">
-                <Node name="DishEditPageRep" expanded="True">
-                  <Node name="DataBaseDishEditPageRepository.cs" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="SIPI_CRM_System" expanded="True">
-            <Node name="SIPI_CRM_System">
-              <Node name="Models" expanded="True" />
-              <Node name="Pages" expanded="True">
-                <Node name="EditPages" expanded="True">
-                  <Node name="DishEditPage" expanded="True">
-                    <Node name="DishEditPage.cshtml" expanded="True" />
-                  </Node>
-                </Node>
-                <Node name="MenuPage" expanded="True">
-                  <Node name="MenuPage.cshtml" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="Services" expanded="True">
-                <Node name="DishEditPageRep" expanded="True">
-                  <Node name="DataBaseDishEditPageRepository.cs" selected="True" />
-                </Node>
+                <Node name="DishEditPageRep" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -65,4 +34,6 @@
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
