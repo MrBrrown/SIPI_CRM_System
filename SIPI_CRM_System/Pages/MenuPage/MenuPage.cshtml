@@ -92,163 +92,165 @@
 <div class="container">
     <h1 class="text-center text-light">Меню</h1>
     <div class="row m-2">
-        <!--Main Card-->
-        <div class="card">
-            <div class="card-body">
-                <!--Category List-->
-                @foreach (var category in Model.dishCategories)
-                {
-                    var collapseId = "collapse" + category.Replace(" ", "");
-                    <!--Category Collapse Control Button-->
-                    <button class="btn btn-primary" type="button"
+        <!--Left Column of Categories-->
+        <div class="col-2">
+            <!--Category List-->
+            @foreach (var category in Model.dishCategories)
+            {
+                var collapseId = "collapse" + category.Replace(" ", "");
+                <!--Category Collapse Control Button-->
+                <div class="col-md-12 d-grid text-center mb-2 category-button">
+                    <button class="btn text-light" type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#@collapseId"
                             aria-expanded="false"
                             aria-controls="collapseId">
                         @category
                     </button>
-                }
-                <!--Category Collapse List-->
-                @foreach (var category in Model.dishCategories)
-                {
-                    var collapseId = "collapse" + category.Replace(" ", "");
-                    <!--Category Collapse-->
-                    <div class="collapse" id="@collapseId">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="d-flex bd-highlight">
-                                    <div class="p-2 w-100 bd-highlight">
-                                        <h5>@category</h5>
-                                    </div>
-                                    <div class="p-2 flex-shrink-1 bd-highlight">
-                                        <!--Close Button-->
-                                        <button 
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#@collapseId"
-                                                aria-expanded="false"
-                                                aria-controls="collapseId">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-10">
+            <!--Category Collapse List-->
+            @foreach (var category in Model.dishCategories)
+            {
+                var collapseId = "collapse" + category.Replace(" ", "");
+                <!--Category Collapse-->
+                <div class="collapse" id="@collapseId">
+                    <div class="card mb-2 collapse-card">
+                        <div class="card-header">
+                            <div class="d-flex bd-highlight">
+                                <div class="p-2 w-100 bd-highlight text-light">
+                                    <h5>@category</h5>
+                                </div>
+                                <div class="p-2 flex-shrink-1 bd-highlight">
+                                    <!--Close Button-->
+                                    <button class="close-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#@collapseId"
+                                            aria-expanded="false"
+                                            aria-controls="collapseId">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <!--Sub Category List-->
-                                    @foreach (var sub in Model.dishSubCategories[category])
-                                    {
-                                        var subId = "collapseSub" + category.Replace(" ", "") + sub.Replace(" ", "");
-                                        <!--Sub Category Collapse Control Button-->
-                                        <button class="btn btn-primary mb-2" type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#@subId"
-                                                aria-expanded="false"
-                                                aria-controls="@subId">
-                                            @sub
-                                        </button>
-                                        <!--Sub Category Collapse -->
-                                        <div class="collapse" id="@subId">
-                                            @foreach (var dish in Model.dishes.Where(x => x.Category == category).Where(x => x.SubCategory == sub))
-                                            {
-                                                var dishOffcanvasId = "offcanvas" + dish.Id.ToString();
-                                                var dishOffcanvasDeleteId = "offcanvasDelete" + dish.Id.ToString();
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!--Sub Category List-->
+                                @foreach (var sub in Model.dishSubCategories[category])
+                                {
+                                    var subId = "collapseSub" + category.Replace(" ", "") + sub.Replace(" ", "");
+                                    <!--Sub Category Collapse Control Button-->
+                                    <button class="btn sub-category-button text-light mb-2 " type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#@subId"
+                                            aria-expanded="false"
+                                            aria-controls="@subId">
+                                        @sub
+                                    </button>
+                                    <!--Sub Category Collapse -->
+                                    <div class="collapse" id="@subId">
+                                        @foreach (var dish in Model.dishes.Where(x => x.Category == category).Where(x => x.SubCategory == sub))
+                                        {
+                                            var dishOffcanvasId = "offcanvas" + dish.Id.ToString();
+                                            var dishOffcanvasDeleteId = "offcanvasDelete" + dish.Id.ToString();
 
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="d-flex bd-highlight">
-                                                            <div class="p-2 w-100 bd-highlight">
-                                                                <p>@dish.Name</p>
-                                                                <p>Цена: @dish.Price</p>
+                                            <div class="card mb-1 sub-collapse-card text-light">
+                                                <div class="card-body">
+                                                    <div class="d-flex bd-highlight">
+                                                        <div class="p-2 w-100 bd-highlight">
+                                                            <p>@dish.Name</p>
+                                                            <p>Цена: @dish.Price</p>
 
-                                                                <button class="btn btn-primary"
-                                                                        data-bs-toggle="offcanvas"
-                                                                        data-bs-target="#@dishOffcanvasId"
-                                                                        aria-controls="@dishOffcanvasId">
-                                                                    Посмотреть состав
-                                                                </button>
-                                                            </div>
-                                                            <!--Delete Button-->
-                                                            <div class="p-2 flex-shrink-1 bd-highlight">
-                                                                <button class="btn-close close-red float-right"
-                                                                        data-bs-toggle="offcanvas"
-                                                                        data-bs-target="#@dishOffcanvasDeleteId"
-                                                                        aria-controls="@dishOffcanvasDeleteId">
-                                                                </button>
-                                                            </div>
-                                                            <!--Delete Dish Offcanvas-->
-                                                            <div class="offcanvas offcanvas-end delete-dish-offcanvas"
-                                                                 tabindex="-1"
-                                                                 id="@dishOffcanvasDeleteId"
-                                                                 aria-labelledby="@dishOffcanvasDeleteId">
-                                                                <!--Offcanvas Header-->
-                                                                <div class="offcanvas-header text-light">
-                                                                    <h5 id="@dishOffcanvasDeleteId">@dish.Name:</h5>
-                                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                                                </div>
-                                                                <!--Offcanvas body-->
-                                                                <div class="offcanvas-body text-light">
-                                                                    <p>Подтвердите удаление блюда</p>
-                                                                    <div class="btn-toolbar" role="toolbar">
-                                                                        <div class="btn-group me-2" role="group">
-                                                                            <form method="post">
-                                                                                <button class="btn btn-success" asp-page-handler="Delete" asp-route-dishid="@dish.Id">Подтвердить</button>
-                                                                            </form>
-                                                                        </div>
-                                                                        <div class="btn-group me-2" role="group">
-                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <button class="btn btn-primary"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#@dishOffcanvasId"
+                                                                    aria-controls="@dishOffcanvasId">
+                                                                Посмотреть состав
+                                                            </button>
                                                         </div>
-                                                        <!--List of Products Offcanvas-->
-                                                        <div class="offcanvas offcanvas-end edit-dish-offcanvas"
-                                                             tabindex="-1"
-                                                             id="@dishOffcanvasId"
-                                                             aria-labelledby="@dishOffcanvasId">
+                                                        <!--Delete Button-->
+                                                        <div class="p-2 flex-shrink-1 bd-highlight">
+                                                            <button class="btn-close close-red float-right"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#@dishOffcanvasDeleteId"
+                                                                    aria-controls="@dishOffcanvasDeleteId">
+                                                            </button>
+                                                        </div>
+                                                        <!--Delete Dish Offcanvas-->
+                                                        <div class="offcanvas offcanvas-end delete-dish-offcanvas"
+                                                                tabindex="-1"
+                                                                id="@dishOffcanvasDeleteId"
+                                                                aria-labelledby="@dishOffcanvasDeleteId">
                                                             <!--Offcanvas Header-->
                                                             <div class="offcanvas-header text-light">
-                                                                <h5 id="@dishOffcanvasId">@dish.Name:</h5>
+                                                                <h5 id="@dishOffcanvasDeleteId">@dish.Name:</h5>
                                                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                                             </div>
                                                             <!--Offcanvas body-->
                                                             <div class="offcanvas-body text-light">
-                                                                @foreach (var productsInDish in dish.ProductDishes)
-                                                                {
-                                                                    <div class="row">
-                                                                        <div class="col-8">
-                                                                            <p>@productsInDish.Product.Name</p>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <p>@productsInDish.Amount</p>
-                                                                        </div>
-                                                                        <div class="nav-item-divider"></div>
+                                                                <p>Подтвердите удаление блюда</p>
+                                                                <div class="btn-toolbar" role="toolbar">
+                                                                    <div class="btn-group me-2" role="group">
+                                                                        <form method="post">
+                                                                            <button class="btn btn-success" asp-page-handler="Delete" asp-route-dishid="@dish.Id">Подтвердить</button>
+                                                                        </form>
                                                                     </div>
-                                                                }
-                                                                <a class="nav-link" asp-area=""
-                                                                   asp-page="/EditPages/DishEditPage/DishEditPage"
-                                                                   asp-route-id="@id"
-                                                                   asp-route-isadmin="@isAdmin"
-                                                                   asp-route-dishid="@dish.Id">
-                                                                    <button class="btn btn-primary">
-                                                                        Изменить
-                                                                    </button>
-                                                                </a>
+                                                                    <div class="btn-group me-2" role="group">
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--List of Products Offcanvas-->
+                                                    <div class="offcanvas offcanvas-end edit-dish-offcanvas"
+                                                            tabindex="-1"
+                                                            id="@dishOffcanvasId"
+                                                            aria-labelledby="@dishOffcanvasId">
+                                                        <!--Offcanvas Header-->
+                                                        <div class="offcanvas-header text-light">
+                                                            <h5 id="@dishOffcanvasId">@dish.Name:</h5>
+                                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                        </div>
+                                                        <!--Offcanvas body-->
+                                                        <div class="offcanvas-body text-light">
+                                                            @foreach (var productsInDish in dish.ProductDishes)
+                                                            {
+                                                                <div class="row">
+                                                                    <div class="col-8">
+                                                                        <p>@productsInDish.Product.Name</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <p>@productsInDish.Amount</p>
+                                                                    </div>
+                                                                    <div class="nav-item-divider"></div>
+                                                                </div>
+                                                            }
+                                                            <a class="nav-link" asp-area=""
+                                                                asp-page="/EditPages/DishEditPage/DishEditPage"
+                                                                asp-route-id="@id"
+                                                                asp-route-isadmin="@isAdmin"
+                                                                asp-route-dishid="@dish.Id">
+                                                                <button class="btn btn-primary">
+                                                                    Изменить
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            }
-                                        </div>
-                                    }
-                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
     </div>
 </div>

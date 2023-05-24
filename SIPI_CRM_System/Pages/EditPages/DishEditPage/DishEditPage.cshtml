@@ -35,12 +35,15 @@
                                     <div class="col-5">
                                         <p>@productDishes.Product.Name</p>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-4">
                                         <!--Product Amount in Dish-->
                                         <input type="text" class="form-control" value="@productDishes.Amount" name="@productAmount" />
                                     </div>
                                     <div class="col-2">
                                         <p>гр/шт</p>
+                                    </div>
+                                    <div class="col-1">
+                                        <button class="btn-close btn-sm float-right" asp-page-handler="DeleteProductDish" asp-route-dishId="@dishId" asp-route-productDishId="@productDishes.Id"></button>
                                     </div>
                                 </div>
                             </div>

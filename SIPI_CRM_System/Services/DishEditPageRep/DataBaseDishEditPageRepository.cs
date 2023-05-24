@@ -19,9 +19,11 @@ namespace SIPI_CRM_System.Services.DishEditPageRep
             await _context.SaveChangesAsync();
         }
 
-        public void DeleteDish(Dish dish)
+        public async void DeleteProductDish(int productDishId)
         {
-            throw new NotImplementedException();
+            var tmp = _context.ProductDishes.Find(productDishId);
+            _context.ProductDishes.Remove(tmp);
+            await _context.SaveChangesAsync();
         }
 
         public Dish GetDish(int id)

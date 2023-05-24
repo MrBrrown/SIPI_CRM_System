@@ -19,5 +19,28 @@
 
 .close-red {
     background-color: red;
-    color: #fff7cc;
+}
+
+.close-button {
+    background-color: #696967;
+    border: 0;
+}
+
+.collapse-card {
+    background-color: #212529;
+    border-radius: 20px;
+}
+
+.sub-collapse-card {
+    background-color: #2c3238;
+}
+
+.category-button {
+    background-color: #996806;
+    border-radius: 20px;
+}
+
+.sub-category-button {
+    background-color: #755107;
+    border-radius: 12px;
 }

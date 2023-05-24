@@ -17,7 +17,7 @@ namespace SIPI_CRM_System.Services.DishEditPageRep
 
         void UpdateProductDishes(int productDishesId, decimal amount);
 
-        void DeleteDish(Dish dish);
+        void DeleteProductDish(int id);
 
 		void AddProductDish(ProductDish productDish);
 	}

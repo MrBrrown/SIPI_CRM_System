@@ -19,5 +19,28 @@
 
 .close-red[b-fv1vnllla0] {
     background-color: red;
-    color: #fff7cc;
+}
+
+.close-button[b-fv1vnllla0] {
+    background-color: #696967;
+    border: 0;
+}
+
+.collapse-card[b-fv1vnllla0] {
+    background-color: #212529;
+    border-radius: 20px;
+}
+
+.sub-collapse-card[b-fv1vnllla0] {
+    background-color: #2c3238;
+}
+
+.category-button[b-fv1vnllla0] {
+    background-color: #996806;
+    border-radius: 20px;
+}
+
+.sub-category-button[b-fv1vnllla0] {
+    background-color: #755107;
+    border-radius: 12px;
 }
