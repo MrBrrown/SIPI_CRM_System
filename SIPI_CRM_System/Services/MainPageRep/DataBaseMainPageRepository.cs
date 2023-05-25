@@ -88,6 +88,25 @@ namespace SIPI_CRM_System.Services.MainPageRep
 
             await _context.SaveChangesAsync();
         }
+
+        public bool CheckPassword(int id, string password)
+        {
+            if (_context.Employees.Find(id).Password == password)
+                return true;
+            else
+                return false;
+        }
+
+        public async void CloseWorkDay()
+        {
+            foreach (var dailyOrder in _context.DailyOrders)
+            {
+                if (!dailyOrder.IsReserved)
+                    _context.DailyOrders.Remove(dailyOrder);
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

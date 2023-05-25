@@ -65,6 +65,13 @@ namespace SIPI_CRM_System.Services.MenuPageRep
 
             await _context.SaveChangesAsync();
         }
+
+        public async void AddDish(Dish dish)
+        {
+            _context.Dishes.Add(dish);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

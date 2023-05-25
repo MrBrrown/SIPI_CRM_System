@@ -94,6 +94,67 @@
     <div class="row m-2">
         <!--Left Column of Categories-->
         <div class="col-2">
+            <!--Add New Dish Button-->
+            <div class="col-md-12 d-grid text-center mb-2 new-dish-button">
+                <button class="btn text-light" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#newDishOffcanvas"
+                        aria-expanded="false"
+                        aria-controls="newDishOffcanvas">
+                    Новая позиция
+                </button>
+
+                <!--Add New Dish Offcanvas-->
+                <div class="offcanvas offcanvas-end edit-dish-offcanvas"
+                     tabindex="-1"
+                     id="newDishOffcanvas"
+                     aria-labelledby="newDishOffcanvas">
+                    <!--Offcanvas Header-->
+                    <div class="offcanvas-header text-light">
+                        <h1 id="">Добавить блюдо:</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <!--Offcanvas body-->
+                    <div class="offcanvas-body text-light">
+                        <form asp-page-handler="AddDish" method="post">
+                            <div class="form-group">
+                                <label for="Name">Название:</label>
+                                <input type="text" class="form-control" name="Name" placeholder="Имя" required>
+                            </div>
+                            <div class="nav-item-divider"></div>
+                            <div class="form-group">
+                                <label for="Category">Категория:</label>
+                                <input class="form-control" name="Category" placeholder="Категория" required>
+                            </div>
+                            <div class="nav-item-divider"></div>
+                            <div class="form-group">
+                                <label for="SubCategory">Подкатегория:</label>
+                                <input class="form-control" name="SubCategory" placeholder="Подкатегория">
+                            </div>
+                            <div class="nav-item-divider"></div>
+                            <div class="form-group">
+                                <label for="Mass">Масса:</label>
+                                <input class="form-control" name="Mass" placeholder="Масса">
+                            </div>
+                            <div class="nav-item-divider"></div>
+                            <div class="form-group">
+                                <label for="Price">Цена:</label>
+                                <input class="form-control" name="Price" placeholder="Цена" required>
+                            </div>
+                            <div class="nav-item-divider"></div>
+                            <div class="row mt-3">
+                                <div class="col-6 d-grid">
+                                    <button type="submit" class="btn btn-success">Добавить</button>
+                                </div>
+                                <div class="col-6 d-grid">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
             <!--Category List-->
             @foreach (var category in Model.dishCategories)
             {
@@ -104,7 +165,7 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#@collapseId"
                             aria-expanded="false"
-                            aria-controls="collapseId">
+                            aria-controls="@collapseId">
                         @category
                     </button>
                 </div>

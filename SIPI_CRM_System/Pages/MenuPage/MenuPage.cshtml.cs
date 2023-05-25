@@ -34,6 +34,23 @@ namespace SIPI_CRM_System.Pages.MenuPage
             return Redirect("/MenuPage/MenuPage" + redirectUserString);
         }
 
+        public IActionResult OnPostAddDish()
+        {
+            var dish = new Dish()
+            {
+                Id = _context.GetDishes().Any() ? _context.GetDishes().OrderBy(x => x.Id).Last().Id + 1 : 1,
+                Name = Request.Form["Name"],
+                Category = Request.Form["Category"],
+                SubCategory = Request.Form["SubCategory"],
+                Mass = decimal.Parse(Request.Form["Mass"]),
+                Price = decimal.Parse(Request.Form["Price"])
+            };
+
+            _context.AddDish(dish);
+
+            return Redirect("/MenuPage/MenuPage" + redirectUserString);
+        }
+
         public void OnGet()
         {
             dishCategories = _context.GetDishCategoryList();

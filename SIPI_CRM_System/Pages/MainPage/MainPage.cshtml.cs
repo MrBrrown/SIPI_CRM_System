@@ -74,12 +74,20 @@ namespace SIPI_CRM_System.Pages
 
         public IActionResult OnPostCloseWorkDay(int id)
         {
-            return Redirect("/MainPage/MainPage" + redirectUserString);
+            if (_context.CheckPassword(id, Request.Form["Password"]))
+            {
+                _context.CloseWorkDay();
+                return Redirect("/MainPage/MainPage" + redirectUserString);
+            }
+            else
+            {
+                return Redirect("/MainPage/MainPage" + redirectUserString + "&invalidpassword=True");
+            }
         }
 
         public void OnGet()
         {
-            dailyOrders = _context.GetDayliOrders().Where(x => x.OrderDateTime.ToShortDateString() == DateTime.Now.ToShortDateString())
+            dailyOrders = _context.GetDayliOrders()
                 .OrderByDescending(x => x.IsReserved)
                 .ThenBy(x => x.IsDone)
                 .ThenByDescending(x => x.OrderDateTime);

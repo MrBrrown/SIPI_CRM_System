@@ -92,6 +92,13 @@
 
 <section>
     <div>.</div>
+    @if (Request.Query["invalidpassword"] == "True")
+    {
+        <div class="alert alert-danger mb-2" role="alert">
+            Неверный пароль для закрытия смены! Повторите попытку!
+        </div>
+    }
+
     <div class="row mb-2">
         <div class="col-6 text-light text-center">
             @{
@@ -112,6 +119,10 @@
                 if (count > 0)
                 {
                     <p>Средний чек - @(sum/count)</p>
+                }
+                else
+                {
+                    <p>Средний чек - 0</p>
                 }
             }
         </div>
@@ -307,7 +318,7 @@
         }
 
         <!--Close Work Day Button-->
-        <button class="btn-danger mb-3"
+        <button class="btn btn-danger mb-3"
                 type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#closeWorkDayOffcanvas"
@@ -327,19 +338,17 @@
             <!--Offacnvas body-->
             <div class="offcanvas-body m-3">
                 <p class="mb-3 text-light">Подтвердите закрытие смены вводом пароля:</p>
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group me-2" role="group">
-                        <form asp-page-handler="CloseWorkDay" asp-route-id="@id" method="post">
-                            <div class="form-outline form-white mb-4">
-                                <input type="password" name="Password" class="form-control form-control-lg" placeholder="Password" />
-                            </div>
+                <form asp-page-handler="CloseWorkDay" asp-route-id="@id" method="post">
+                    <input class="d-grid" type="password" name="Password" placeholder="Пароль" />
+                    <div class="row mt-3">
+                        <div class="col-6 d-grid">
                             <button type="submit" class="btn btn-success">Подтвердить</button>
-                        </form>
+                        </div>
+                        <div class="col-6 d-grid">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                        </div>
                     </div>
-                    <div class="btn-group me-2" role="group">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

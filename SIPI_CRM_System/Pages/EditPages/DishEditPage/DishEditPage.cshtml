@@ -18,8 +18,17 @@
                     <div class="card-body">
                         <div class="input-group">
                             <!--Dish Change Field-->
-                            <input type="text" class="form-control" value="@Model.dish.Name" name="DishName">
+                            <input type="text" class="form-control" value="@Model.dish.Name" name="DishName" required>
                             <input type="text" class="form-control" value="@Model.dish.Mass" name="DishMass">
+                        </div>
+                        <div class="input-group">
+                            <!--Dish Change Field-->
+                            <input type="text" class="form-control" value="@Model.dish.Category" name="Category" required>
+                            <input type="text" class="form-control" value="@Model.dish.SubCategory" name="SubCategory">
+                        </div>
+                        <div class="input-group">
+                            <!--Dish Change Field-->
+                            <input type="text" class="form-control" value="@Model.dish.Price" name="Price" required>
                         </div>
                     </div>
                 </div>

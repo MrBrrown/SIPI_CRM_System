@@ -54,13 +54,22 @@ namespace SIPI_CRM_System.Pages.EditPages.DishEditPage
         {
             var dishName = Request.Form["DishName"];
             var dishMass = decimal.Parse(Request.Form["DishMass"]);
+            var dishCategory = Request.Form["Category"];
+            var dishSubCategory = Request.Form["SubCategory"];
+            var dishPrice = decimal.Parse(Request.Form["Price"]);
 
             var updDish = _context.GetDish(dishId);
 
-            if (dishName != updDish.Name || dishMass != updDish.Mass)
+            if (dishName != updDish.Name || dishMass != updDish.Mass ||
+                dishCategory != updDish.Category || dishSubCategory != updDish.SubCategory ||
+                dishPrice != updDish.Price)
             {
                 updDish.Name = dishName;
                 updDish.Mass = dishMass;
+                updDish.Category = dishCategory;
+                updDish.SubCategory = dishSubCategory;
+                updDish.Price = dishPrice;
+
                 _context.UpdateDish(updDish);
             }
 

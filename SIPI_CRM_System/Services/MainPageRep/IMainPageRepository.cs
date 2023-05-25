@@ -15,7 +15,11 @@ namespace SIPI_CRM_System.Services.MainPageRep
 
 		DailyOrder GetDailyOrderById(int id);
 
-		void SetOrderStatusDone(int id);
+		bool CheckPassword(int id, string password);
+
+		void CloseWorkDay();
+
+        void SetOrderStatusDone(int id);
 
 		void DeleteDailyOrder(int id);
 
