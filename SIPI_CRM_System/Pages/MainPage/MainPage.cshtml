@@ -72,7 +72,7 @@
             </button>
             <!--Admin Page-->
             @if (isAdmin == "True")
-            {
+                {
                 <div class="nav-item-divider"></div>
                 <a class="navbar-brand" asp-area=""
                    asp-page="/MainPage/MainPage"
@@ -84,13 +84,38 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            }
+                }
         </nav>
     </div>
 </div>
 
 
 <section>
+    <div>.</div>
+    <div class="row mb-2">
+        <div class="col-6 text-light text-center">
+            @{
+                decimal? sum = 0;
+                foreach (var order in Model.dailyOrders.Where(x => x.IsDone))
+                {
+                    if (order.Price != null)
+                    {
+                        sum += order.Price;
+                    }
+                }
+                <p>Выручка - @sum</p>
+            }
+        </div>
+        <div class="col-6 text-light text-center">
+            @{
+                var count = Model.dailyOrders.Where(x => x.IsDone).Count();
+                if (count > 0)
+                {
+                    <p>Средний чек - @(sum/count)</p>
+                }
+            }
+        </div>
+    </div>
     <div class="d-grid">
         <!--New Order Buttton-->
         <button class="btn btn-primary text-light new-order-button"
@@ -147,7 +172,7 @@
                 var deleteOffcanvasId = "delete-offcanvas-" + item.Id.ToString();
                 var reserveActivateOffcanvasId = "reserve-activate-offcanvas-" + item.Id.ToString();
 
-                <div class="card m-2 @cardId">
+                <div class="card mb-1 @cardId">
                     <!--Card color-->
                     @if (item.IsReserved)
                     {
@@ -274,11 +299,48 @@
                             <button class="btn btn-primary w-100">Обновить заказ</button>
                         </div>
                         <div class="col-md-5">
-                            <p class="text-center">Сумма заказа</p>
+                            <p class="text-center">@item.Price</p>
                         </div>
                     </div>
                 </div>
             }
         }
+
+        <!--Close Work Day Button-->
+        <button class="btn-danger mb-3"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#closeWorkDayOffcanvas"
+                aria-controls="closeWorkDayOffcanvas">
+            Закрыть смену
+        </button>
+        <!--Close Work Day Offcanvas right-->
+        <div class="offcanvas offcanvas-end close-work-day-offcanvas"
+             tabindex="-1"
+             id="closeWorkDayOffcanvas"
+             aria-labelledby="closeWorkDayOffcanvas">
+            <!--Offacnvas header-->
+            <div class="offcanvas-header text-light">
+                <h5 class="offcanvas-title" id="closeWorkDayOffcanvas">Уверены что хотите закрыть смену?</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <!--Offacnvas body-->
+            <div class="offcanvas-body m-3">
+                <p class="mb-3 text-light">Подтвердите закрытие смены вводом пароля:</p>
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group me-2" role="group">
+                        <form asp-page-handler="CloseWorkDay" asp-route-id="@id" method="post">
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" name="Password" class="form-control form-control-lg" placeholder="Password" />
+                            </div>
+                            <button type="submit" class="btn btn-success">Подтвердить</button>
+                        </form>
+                    </div>
+                    <div class="btn-group me-2" role="group">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

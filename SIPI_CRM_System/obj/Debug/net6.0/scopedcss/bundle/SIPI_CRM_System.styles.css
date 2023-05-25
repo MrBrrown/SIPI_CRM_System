@@ -17,14 +17,16 @@
     background-color: #212529;
 }
 
-.date-control[b-708837tbp7] {
-    margin-block: auto;
+.menu-offcanvas[b-708837tbp7] {
+    background-color: #212529;
 }
 
+.close-work-day-offcanvas[b-708837tbp7] {
+    background-color: #212529;
+}
 
-
-.menu-offcanvas[b-708837tbp7] {
-    background-color: #212529
+.date-control[b-708837tbp7] {
+    margin-block: auto;
 }
 
 .nav-item-divider[b-708837tbp7] {
@@ -39,6 +41,8 @@
     background-color: gray;
     border-radius: 25px;
 }
+
+
 /* _content/SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml.rz.scp.css */
 .menu-offcanvas[b-fv1vnllla0] {
     background-color: #212529

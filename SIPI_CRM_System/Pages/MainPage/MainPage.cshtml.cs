@@ -72,6 +72,11 @@ namespace SIPI_CRM_System.Pages
             return Redirect("/Index");
         }
 
+        public IActionResult OnPostCloseWorkDay(int id)
+        {
+            return Redirect("/MainPage/MainPage" + redirectUserString);
+        }
+
         public void OnGet()
         {
             dailyOrders = _context.GetDayliOrders().Where(x => x.OrderDateTime.ToShortDateString() == DateTime.Now.ToShortDateString())
