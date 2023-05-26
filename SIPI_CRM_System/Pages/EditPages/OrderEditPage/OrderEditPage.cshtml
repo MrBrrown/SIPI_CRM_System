@@ -33,7 +33,7 @@
                                         <p>шт</p>
                                     </div>
                                     <div class="col-1">
-                                        <button class="btn-close btn-sm float-right"></button>
+                                        <button class="btn-close btn-sm float-right" asp-page-handler="DeleteOrderDish" asp-route-dailyOrderDishId="@dailyOrderDishes.Id" asp-route-orderId="@orderId"></button>
                                     </div>
                                 </div>
                             </div>
@@ -105,8 +105,8 @@
                                                         var dishOffcanvasDeleteId = "offcanvasDelete" + dish.Id.ToString();
 
                                                         <div class="col-3 mb-2">
-                                                            <form class="d-grid">
-                                                                <button class="btn btn-dark">@dish.Name @dish.Price</button>
+                                                            <form class="d-grid" asp-page-handler="AddDishToOrder" asp-route-dishId="@dish.Id" asp-route-orderId="@orderId">
+                                                                <button class="btn dish-btn text-light">@dish.Name @dish.Price</button>
                                                             </form>
                                                         </div>
                                                     }

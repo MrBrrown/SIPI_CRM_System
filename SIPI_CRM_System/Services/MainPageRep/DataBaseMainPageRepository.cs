@@ -21,7 +21,7 @@ namespace SIPI_CRM_System.Services.MainPageRep
 
         public IEnumerable<DailyOrder> GetDayliOrders()
         {
-            return _context.DailyOrders.Include(x => x.DailyOrderDishes);
+            return _context.DailyOrders.Include(x => x.DailyOrderDishes).ThenInclude(x => x.Dish);
         }
 
         public IEnumerable<Dish> GetDishes()

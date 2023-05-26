@@ -175,7 +175,7 @@
         <!--Daily Orders Cards-->
         @if (Model.dailyOrders.Any())
         {
-            @foreach (var item in Model.dailyOrders.ToList())
+            @foreach (var item in Model.dailyOrders)
             {
                 var cardId = "card-" + item.Id.ToString();
                 var cardBodyId = "card-body-" + item.Id.ToString();
@@ -316,21 +316,10 @@
                                 </a>
                                 <div class="d-flex justify-content-right">
                                     <ul>
-                                        <li>
-                                            Gthdjt
-                                        </li>
-                                        <li>
-                                            Gthdjt
-                                        </li>
-                                        <li>
-                                            Gthdjt
-                                        </li>
-                                        <li>
-                                            Gthdjt
-                                        </li>
-                                        <li>
-                                            Gthdjt
-                                        </li>
+                                        @foreach (var orderDish in item.DailyOrderDishes)
+                                        {
+                                            <li>@orderDish.Dish.Name @orderDish.Amount</li>
+                                        }
                                     </ul>
                                 </div>
                             </div>

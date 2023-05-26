@@ -9,9 +9,15 @@ namespace SIPI_CRM_System.Services.OrderEditPageRep
 
         IEnumerable<Dish> GetDishes();
 
+        IEnumerable<DailyOrderDish> GetDailyOrderDishes();
+
         List<string> GetDishCategoryList();
 
         List<string> GetDishSubCategoryList(string category);
+
+        void DeleteDailyOrderDish(int id);
+
+        void AddDailyOrderDish(DailyOrderDish dailyOrderDish);
     }
 }
 

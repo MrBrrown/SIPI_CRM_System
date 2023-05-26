@@ -88,7 +88,7 @@ namespace SIPI_CRM_System.Pages.EditPages.DishEditPage
             return Redirect("/MenuPage/MenuPage" + redirectUserString);
         }
 
-        public IActionResult OnPostDeleteProductDish(int dishId,int productDishId)
+        public IActionResult OnPostDeleteProductDish(int dishId, int productDishId)
         {
             _context.DeleteProductDish(productDishId);
             return Redirect("/EditPages/DishEditPage/DishEditPage" + redirectUserString + "&dishId=" + dishId.ToString());

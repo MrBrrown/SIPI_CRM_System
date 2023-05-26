@@ -64,6 +64,27 @@ namespace SIPI_CRM_System.Services.OrderEditPageRep
                 .Include(x => x.DailyOrderDishes)
                 .FirstOrDefault(x => x.Id == id);
         }
+
+        public IEnumerable<DailyOrderDish> GetDailyOrderDishes()
+        {
+            return _context.DailyOrderDishes;
+        }
+
+        public async void AddDailyOrderDish(DailyOrderDish dailyOrderDish)
+        {
+            _context.DailyOrderDishes.Add(dailyOrderDish);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async void DeleteDailyOrderDish(int id)
+        {
+            var orderDish = _context.DailyOrderDishes.Find(id);
+
+            _context.DailyOrderDishes.Remove(orderDish);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

@@ -16,7 +16,10 @@ namespace SIPI_CRM_System.Pages.EditPages.OrderEditPage
         private static string redirectUserString = ""; //Необоходимо задавать на каждой станице в методе  OnGet(), по нему происходит сохранение действующего пользователя
 
         public DailyOrder dailyOrder;
+
+        public IEnumerable<DailyOrderDish> dailyOrderDishes;
         public IEnumerable<Dish> dishes;
+
         public List<string> dishCategories = new();
         public Dictionary<string, List<string>> dishSubCategories = new();
 
@@ -28,6 +31,40 @@ namespace SIPI_CRM_System.Pages.EditPages.OrderEditPage
         public IActionResult OnPostExit()
         {
             return Redirect("/MainPage/MainPage" + redirectUserString);
+        }
+
+        public IActionResult OnPostAddDishToOrder(int dishId, int orderId)
+        {
+            dailyOrderDishes = _context.GetDailyOrderDishes();
+
+            if (dailyOrderDishes
+                .Where(x => x.DishId == dishId)
+                .Where(x => x.DailyOrderId == orderId)
+                .FirstOrDefault() == default)
+            {
+                var dailyOrderDish = new DailyOrderDish()
+                {
+                    Id = _context.GetDailyOrderDishes().Any() ? _context.GetDailyOrderDishes().Last().Id + 1 : 1,
+                    DishId = dishId,
+                    DailyOrderId = orderId,
+                    Amount = 0
+                };
+
+                _context.AddDailyOrderDish(dailyOrderDish);
+            }
+
+            return Redirect("/EditPages/OrderEditPage/OrderEditPage" + redirectUserString + "&orderId=" + orderId.ToString());
+        }
+
+        public IActionResult OnPostDeleteOrderDish(int dailyOrderDishId, int orderId)
+        {
+            _context.DeleteDailyOrderDish(dailyOrderDishId);
+            return Redirect("/EditPages/OrderEditPage/OrderEditPage" + redirectUserString + "&orderId=" + orderId.ToString());
+        }
+
+        public IActionResult OnPostUpdate()
+        {
+            return Redirect("");
         }
 
         public void OnGet()
@@ -42,6 +79,8 @@ namespace SIPI_CRM_System.Pages.EditPages.OrderEditPage
             }
 
             dishes = _context.GetDishes();
+
+            dailyOrderDishes = _context.GetDailyOrderDishes();
 
             dailyOrder = _context.GetDailyOrder(int.Parse(Request.Query["orderId"]));
 
