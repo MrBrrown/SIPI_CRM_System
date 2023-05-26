@@ -41,8 +41,7 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public void AddProduct(Product product)
     {
-        if (!_context.Products.Any(x => x.Name.Equals(product.Name)))
-            _context.Products.Add(product);
+        _context.Products.Add(product);
         
         _context.SaveChanges();
     }
@@ -52,7 +51,10 @@ public class DataBaseStockPageRepository : IStockPageRepository
         var productToRemove = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         if (productToRemove != null)
             _context.Products.Remove(productToRemove);
-        
+        // ??????????????
+        // delete product_dish
+        // delete product
+        // if exist one more we override id in product_dish
         _context.SaveChanges();
     }
 
@@ -65,6 +67,14 @@ public class DataBaseStockPageRepository : IStockPageRepository
                 x.Amount = product.Amount;
                 x.Category = product.Category; });
         
+        _context.SaveChanges();
+    }
+
+    // while think
+    public void CheckRemains()
+    {
+        IEnumerable<Product> products = _context.Products.Where(x => x.Amount <= 0);
+        _context.Products.RemoveRange(products);
         _context.SaveChanges();
     }
 

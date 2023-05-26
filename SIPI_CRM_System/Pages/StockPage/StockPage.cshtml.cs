@@ -66,18 +66,27 @@ public class StockPageModel : PageModel
     public IActionResult OnPostAdd()
     {
         Products = _repository.GetProducts();
-        
-        Product product = new Product()
+
+        try
         {
-            Id = Products.Any() ? Products.OrderBy(x => x.Id).Last().Id + 1 : 1,
-            Name = Request.Form["Name"],
-            Amount = int.Parse(Request.Form["Amount"]),
-            Category = Request.Form["Category"]
-        };
+            Product product = new Product()
+            {
+                Id = Products.Any() ? Products.OrderBy(x => x.Id).Last().Id + 1 : 1,
+                Name = Request.Form["Name"],
+                Amount = int.Parse(Request.Form["Amount"]),
+                Category = Request.Form["Category"],
+                LifeTime = int.Parse(Request.Form["LifeTime"]),
+                DeliveryDateTime = DateTime.Parse(Request.Form["DeliveryDateTime"])
+            };
 
-        _repository.AddProduct(product);
+            _repository.AddProduct(product);
 
-        return Redirect("/StockPage/StockPage" + redirectUserString);
+            return Redirect("/StockPage/StockPage" + redirectUserString);
+        }
+        catch (Exception e)
+        {
+            return Redirect("/StockPage/StockPage" + redirectUserString + "&incorrectFormat=True");
+        }
     }
 
     public IActionResult OnPostResetCategories()
@@ -89,6 +98,9 @@ public class StockPageModel : PageModel
             // shit shit shit shit happens
             "Fictitious category" };
 
+        var emptyList = new List<string>(); 
+        Response.Cookies.Delete("CategoryCheck");
+        Response.Cookies.Append("CategoryCheck", JsonConvert.SerializeObject(emptyList));
         return Page();
     }
     
@@ -283,7 +295,7 @@ public class StockPageModel : PageModel
     public void OnGet(int? pageIndex)
     {
         Categories = _repository.GetAllCategories();
-
+        //check products remains
         var categoryCheckCookie = Request.Cookies["CategoryCheck"];
         
         CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)

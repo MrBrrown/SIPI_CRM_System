@@ -117,7 +117,12 @@
                         </div>
                     }
                     <button class="btn btn-primary m-3 btn-lg">Обновить</button>
-                    <button class="btn btn-secondary btn-sm" asp-page-handler="ResetCategories">Сбросить</button>
+                    <button class="btn btn-secondary btn-sm" 
+                            asp-page-handler="ResetCategories"
+                            asp-route-login="@login"
+                            asp-route-isadmin="@isAdmin">
+                        Сбросить
+                    </button>
                 </form>
             }
             <div class="card-body" style="background-color: #20c997">
@@ -159,6 +164,14 @@
                         aria-controls="offCanvasRightAdd">
                     Добавить новый продукт
                 </button>
+                <div class="card-footer">
+                    @if (Request.Query["incorrectFormat"] == "True")
+                    {
+                        <div class="alert alert-danger mb-4" role="alert">
+                            Неправильный формат данных
+                        </div>
+                    }
+                </div>
             </div>
             <span class="title m-2 text-black d-flex justify-content-end p-1">
                 <span class="mb-1" style="font-size: 20px">Сортировать по:</span>
@@ -199,7 +212,10 @@
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <form asp-page-handler="Add" method="post">
+                    <form asp-page-handler="Add" 
+                          method="post"
+                          asp-route-login="@login"
+                          asp-route-isadmin="@isAdmin">
                         <div class="form-group">
                             <label for="Name">Название:</label>
                             <input type="text" class="form-control" name="Name" placeholder="Имя">
@@ -211,6 +227,14 @@
                         <div class="form-group">
                             <label for="Amount">Количество:</label>
                             <input class="form-control" name="Amount" placeholder="Количество шт">
+                        </div>
+                        <div class="form-group">
+                            <label for="LifeTime">Срок годности:</label>
+                            <input class="form-control" name="LifeTime" placeholder="Часов">
+                        </div>
+                        <div class="form-group">
+                            <label for="DeliveryDateTime">Дата доставки:</label>
+                            <input class="form-control" name="DeliveryDateTime" placeholder="0001-01-01 00:00:00">
                         </div>
                         <div class="btn-toolbar m-4" role="toolbar">
                             <div class="btn-group me-2" role="group">
@@ -268,7 +292,10 @@
                                     </div>
                                     <!--Edit offCanvasRight Body-->
                                     <div class="offcanvas-body">
-                                        <form asp-page-handler="Update" asp-route-id="@item.Id" method="post">
+                                        <form asp-page-handler="Update" asp-route-id="@item.Id"
+                                              asp-route-login="@login"
+                                              asp-route-isadmin="@isAdmin"
+                                              method="post">
                                             <div class="form-group">
                                                 <label for="Name">Название:</label>
                                                 <input type="text" class="form-control" name="Name" placeholder="@item.Name" value="@item.Name">
@@ -385,7 +412,7 @@
                class="btn btn-primary @prevDisabled">
                 Previous
             </a>
-            @for (int i = 1; i < Model.PaginatedProducts.TotalPages; i++)
+            @for (int i = 1; i < Model.PaginatedProducts.TotalPages + 1; i++)
             {
                 var pageIndex = i;
                 var isCurrent = Model.PaginatedProducts.PageIndex == i ? "disabled" : "";
