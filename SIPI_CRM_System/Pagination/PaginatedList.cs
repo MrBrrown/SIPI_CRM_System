@@ -28,4 +28,10 @@ public class PaginatedList<T> : List<T>
             .Take(pageSize).ToList();
         return new PaginatedList<T>(items, count, pageIndex, pageSize);
     }
+    
+    public static PaginatedList<T> Create(List<T> source)
+    {
+        var count = source.Count;
+        return new PaginatedList<T>(source, count, 1, count);
+    }
 }

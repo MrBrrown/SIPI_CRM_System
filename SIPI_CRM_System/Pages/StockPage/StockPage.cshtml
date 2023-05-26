@@ -104,7 +104,6 @@
                 <form asp-page-handler="UpdateCategories"
                       asp-route-login="@login"
                       asp-route-isadmin="@isAdmin"
-                      asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                       method="post">
                     @foreach (var item in Model.Categories)
                     {
@@ -165,7 +164,6 @@
                 <form class="bg-light mx-2"
                     asp-route-login="@login"
                     asp-route-isadmin="@isAdmin"
-                    asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                     asp-page-handler="UpdateProductsOrderByDeliveryDate" method="post"
                     asp-route-deliveryDateSortLabel="@Model.DeliveryDateSortLabel">
                     <label>Дата доставки</label>                    
@@ -175,7 +173,6 @@
                 <form class="bg-light mx-2"
                     asp-route-login="@login"
                     asp-route-isadmin="@isAdmin"
-                    asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                     asp-page-handler="UpdateProductsOrderByFitness" method="post"
                     asp-route-fitnessSortLabel="@Model.FitnessSortLabel">
                     <label>Годность</label>                    
@@ -185,7 +182,6 @@
                 <form class="bg-light mx-2"
                     asp-route-login="@login"
                     asp-route-isadmin="@isAdmin"
-                    asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                     asp-page-handler="UpdateProductsOrderByName" method="post"
                     asp-route-nameSortLabel="@Model.NameSortLabel">
                     <label>Имя</label>                    

@@ -44,6 +44,7 @@ public class StockPageModel : PageModel
             _repository.GetProductsByCategories(CategoryCheck).ToList(), 1, _pageSize);
         Categories = _repository.GetAllCategories();
         SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
+        SelectedCategories.Add("Fictitious category");
         return Page();
     }
     
@@ -159,91 +160,109 @@ public class StockPageModel : PageModel
         return Redirect("/Index");
     }
 
-    public IActionResult OnPostUpdateProductsOrderByDeliveryDate(string deliveryDateSortLabel, int pageIndex)
+    public IActionResult OnPostUpdateProductsOrderByDeliveryDate(string deliveryDateSortLabel)
     {
+        var categoryCheckCookie = Request.Cookies["CategoryCheck"];
+        
+        CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)
+            ? new List<string>()
+            : JsonConvert.DeserializeObject<List<string>>(categoryCheckCookie);
+        Categories = _repository.GetAllCategories();
+        SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
+        SelectedCategories.Add("Fictitious category");
+        
         switch (deliveryDateSortLabel)
         {
             case "■":
                 DeliveryDateSortLabel = "▼";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().OrderByDescending(x => x.DeliveryDateTime).ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).OrderByDescending(x => x.DeliveryDateTime).ToList());
                 break;
             case "▼":
                 DeliveryDateSortLabel = "▲";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().OrderBy(x => x.DeliveryDateTime).ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).OrderBy(x => x.DeliveryDateTime).ToList());
                 break;
             case "▲":
                 DeliveryDateSortLabel = "■";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).ToList());
                 break;
         }
-        
-        Categories = _repository.GetAllCategories();
-        
+
         return Page();
     }
     
-    public IActionResult OnPostUpdateProductsOrderByName(string nameSortLabel, int pageIndex)
+    public IActionResult OnPostUpdateProductsOrderByName(string nameSortLabel)
     {
+        var categoryCheckCookie = Request.Cookies["CategoryCheck"];
+        
+        CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)
+            ? new List<string>()
+            : JsonConvert.DeserializeObject<List<string>>(categoryCheckCookie);
+        Categories = _repository.GetAllCategories();
+        SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
+        SelectedCategories.Add("Fictitious category");
+        
         switch (nameSortLabel)
         {
             case "■":
                 NameSortLabel = "▼";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().OrderByDescending(x => x.Name).ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).OrderByDescending(x => x.Name).ToList());
                 break;
             case "▼":
                 NameSortLabel = "▲";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().OrderBy(x => x.Name).ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).OrderBy(x => x.Name).ToList());
                 break;
             case "▲":
                 NameSortLabel = "■";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).ToList());
                 break;
         }
-        
-        Categories = _repository.GetAllCategories();
-        
+
         return Page();
     }
     
-    public IActionResult OnPostUpdateProductsOrderByFitness(string fitnessSortLabel, int pageIndex)
+    public IActionResult OnPostUpdateProductsOrderByFitness(string fitnessSortLabel)
     {
+        var categoryCheckCookie = Request.Cookies["CategoryCheck"];
+        
+        CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)
+            ? new List<string>()
+            : JsonConvert.DeserializeObject<List<string>>(categoryCheckCookie);
+        Categories = _repository.GetAllCategories();
+        SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
+        SelectedCategories.Add("Fictitious category");
+
         switch (fitnessSortLabel)
         {
             case "■":
                 FitnessSortLabel = "▼";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().OrderByDescending(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now).ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).OrderByDescending(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now).ToList());
                 break;
             case "▼":
                 FitnessSortLabel = "▲";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().OrderBy(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now).ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).OrderBy(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now).ToList());
                 break;
             case "▲":
                 FitnessSortLabel = "■";
                 PaginatedProducts = PaginatedList<Product>.Create(
-                    _repository.GetProducts().ToList(), pageIndex, _pageSize);
+                    _repository.GetProductsByCategories(CategoryCheck).ToList());
                 break;
         }
-        
-        Categories = _repository.GetAllCategories();
-        
+
         return Page();
     }
 
     public void OnGet(int? pageIndex)
     {
         Categories = _repository.GetAllCategories();
-        DeliveryDateSortLabel = "■";
-        FitnessSortLabel = "■";
-        NameSortLabel = "■";
-        
+
         var categoryCheckCookie = Request.Cookies["CategoryCheck"];
         
         CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)
@@ -251,8 +270,8 @@ public class StockPageModel : PageModel
             : JsonConvert.DeserializeObject<List<string>>(categoryCheckCookie);
         
         SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
-        // shit shit shit shit
-        //SelectedCategories.Add("Fictitious category");
+        // shit shit shit shit happens
+        SelectedCategories.Add("Fictitious category");
         
         PaginatedProducts = PaginatedList<Product>.Create(
             _repository.GetProductsByCategories(CategoryCheck).ToList(), pageIndex ?? 1, _pageSize);
