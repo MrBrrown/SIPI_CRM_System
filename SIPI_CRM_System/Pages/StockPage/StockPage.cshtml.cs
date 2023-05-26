@@ -7,6 +7,7 @@ using OfficeOpenXml.FormulaParsing.Exceptions;
 using SIPI_CRM_System.Models;
 using SIPI_CRM_System.Pagination;
 using SIPI_CRM_System.Services.StockPage;
+using SIPI_CRM_System.Services.StockPageRep;
 
 namespace SIPI_CRM_System.Pages;
 
@@ -316,7 +317,7 @@ public class StockPageModel : PageModel
         PaginatedProducts = PaginatedList<Product>.Create(
             _repository.GetProductsByCategories(CategoryCheck).ToList(), pageIndex ?? 1, _pageSize);
         
-        redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"];
+        redirectUserString = "?id=" + Request.Query["id"] + "&isadmin=" + Request.Query["isadmin"];
     }
 
     public IActionResult UpdateProductFit(Product product)

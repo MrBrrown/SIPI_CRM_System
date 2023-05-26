@@ -1,4 +1,5 @@
 using SIPI_CRM_System.Services.StockPage;
+using SIPI_CRM_System.Services.StockPageRep;
 
 namespace SIPI_CRM_System.Services;
 

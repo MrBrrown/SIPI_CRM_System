@@ -2,101 +2,100 @@
 @model SIPI_CRM_System.Pages.AdminPanelPage.AdminPanelPage
 
 @{
-    string login = Request.Query["login"];
+    string id = Request.Query["id"];
     string isAdmin = Request.Query["isadmin"];
 
-    @if (Request.Query["isadmin"] == "True")
-        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
-    else
-        Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
+    ViewData["Title"] = "Admin Panel";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="d-grid">
-    <div class="offcanvas offcanvas-start menu-offcanvas"
-         tabindex="-1"
-         id="offcanvasMenu"
-         aria-labelledby="offcanvasMenu">
-        <!--Offcanvas header-->
-        <div class="offcanvas-header text-light">
-            <h5 class="offcanvas-title" id="offcanvasMenu">Главное меню</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <!--Offcanvas body-->
-        <div class="offcanvas-body">
-            <nav class="dashboard-nav-list">
-                <!--User Page-->
-                <a class="navbar-brand" asp-area=""
-                   asp-page="/UserPage/UserPage"
-                   asp-route-login="@login"
-                   asp-route-isadmin="@isAdmin">
-                    Личный кабинет
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="nav-item-divider"></div>
-                <!--Main Page-->
-                <a class="navbar-brand" asp-area=""
-                   asp-page="/MainPage/MainPage"
-                   asp-route-login="@login"
-                   asp-route-isadmin="@isAdmin">
-                    Dashboard
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="nav-item-divider"></div>
-                <!--Stock Page-->
-                <a class="navbar-brand" asp-area=""
-                   asp-page="/StockPage/StockPage"
-                   asp-route-login="@login"
-                   asp-route-isadmin="@isAdmin">
-                    Склад
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="nav-item-divider"></div>
-                <!--Menu Page-->
-                <a class="navbar-brand" asp-area=""
-                   asp-page="/MainPage/MainPage"
-                   asp-route-login="@login"
-                   asp-route-isadmin="@isAdmin">
-                    Меню
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!--Admin Page-->
-                @if (isAdmin == "True")
-                {
-                    <div class="nav-item-divider"></div>
-                    <a class="navbar-brand" asp-area=""
-                       asp-page="/AdminPanelPage/AdminPanelPage"
-                       asp-route-login="@login"
-                       asp-route-isadmin="@isAdmin">
-                        Панель администатора
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                }
-            </nav>
-        </div>
+<!--Menu Button Offcanvas left-->
+<div class="offcanvas offcanvas-start menu-offcanvas"
+     tabindex="-1"
+     id="offcanvasMenu"
+     aria-labelledby="offcanvasMenu">
+    <!--Offcanvas header-->
+    <div class="offcanvas-header text-light">
+        <h5 class="offcanvas-title" id="offcanvasMenu">Главное меню</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-      
+    <!--Offcanvas body-->
+    <div class="offcanvas-body">
+        <nav class="dashboard-nav-list">
+            <!--User Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/UserPage/UserPage"
+               asp-route-id="@id"
+               asp-route-isadmin="@isAdmin">
+                Личный кабинет
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Main Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MainPage/MainPage"
+               asp-route-id="@id"
+               asp-route-isadmin="@isAdmin">
+                Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Stock Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/StockPage/StockPage"
+               asp-route-id="@id"
+               asp-route-isadmin="@isAdmin">
+                Склад
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-divider"></div>
+            <!--Menu Page-->
+            <a class="navbar-brand" asp-area=""
+               asp-page="/MenuPage/MenuPage"
+               asp-route-id="@id"
+               asp-route-isadmin="@isAdmin">
+                Меню
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Admin Page-->
+            @if (isAdmin == "True")
+            {
+                <div class="nav-item-divider"></div>
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/AdminPanelPage/AdminPanelPage"
+                   asp-route-id="@id"
+                   asp-route-isadmin="@isAdmin">
+                    Панель администатора
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            }
+        </nav>
+    </div>
+</div>
+
+<div class="d-grid">
     <button class="btn btn-primary m-2 btn-lg"
             data-bs-toggle="offcanvas"
             data-bs-target="#offCanvasRightAddTable"
             aria-controls="offCanvasRightAddTable">
         Добавить стол
     </button>
-    <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+    <div class="offcanvas offcanvas-end add-offcanvas panel-offcanvas" tabindex="-1"
          id="offCanvasRightAddTable"
          aria-labelledby="offCanvasRightAddTable">
         <div class="offcanvas-header">
@@ -104,9 +103,9 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form asp-page-handler="AddTable" 
+            <form asp-page-handler="AddTable"
                   method="post"
-                  asp-route-login="@login"
+                  asp-route-id="@id"
                   asp-route-isadmin="@isAdmin">
                 <div class="form-group">
                     <label for="Places">Количество мест:</label>
@@ -123,14 +122,14 @@
             </form>
         </div>
     </div>
-      
+
     <button class="btn btn-primary m-2 btn-lg"
             data-bs-toggle="offcanvas"
             data-bs-target="#offCanvasRightAddPosition"
             aria-controls="offCanvasRightAddPosition">
         Добавить должность
     </button>
-    
+
     <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
          id="offCanvasRightAddPosition"
          aria-labelledby="offCanvasRightAddPosition">
@@ -139,9 +138,9 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form asp-page-handler="AddPosition" 
+            <form asp-page-handler="AddPosition"
                   method="post"
-                  asp-route-login="@login"
+                  asp-route-id="@id"
                   asp-route-isadmin="@isAdmin">
                 <div class="form-group">
                     <label for="Name">Название:</label>
@@ -165,7 +164,7 @@
             aria-controls="offCanvasRightAddEmployee">
         Добавить пользователя
     </button>
-    
+
     <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
          id="offCanvasRightAddEmployee"
          aria-labelledby="offCanvasRightAddEmployee">
@@ -174,9 +173,9 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form asp-page-handler="AddEmployee" 
+            <form asp-page-handler="AddEmployee"
                   method="post"
-                  asp-route-login="@login"
+                  asp-route-id="@id"
                   asp-route-isadmin="@isAdmin">
                 <div class="form-group">
                     <label for="Name">Имя:</label>
@@ -208,14 +207,14 @@
                 </div>
             </form>
         </div>
-    </div>    
+    </div>
     <button class="btn btn-primary m-2 btn-lg"
             data-bs-toggle="offcanvas"
             data-bs-target="#offCanvasRightUpdateRights"
             aria-controls="offCanvasRightUpdateRights">
         Выдать права
     </button>
-    
+
     <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
          id="offCanvasRightUpdateRights"
          aria-labelledby="offCanvasRightUpdateRights">
@@ -224,9 +223,9 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form asp-page-handler="UpdateRights" 
+            <form asp-page-handler="UpdateRights"
                   method="post"
-                  asp-route-login="@login"
+                  asp-route-id="@id"
                   asp-route-isadmin="@isAdmin">
                 <div class="form-group">
                     <label for="Login">Логин:</label>
@@ -242,7 +241,7 @@
                 </div>
             </form>
         </div>
-    </div>  
+    </div>
 
     <button class="btn btn-primary m-2 btn-lg"
             data-bs-toggle="offcanvas"
@@ -258,9 +257,9 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form asp-page-handler="DeleteEmployee" 
+            <form asp-page-handler="DeleteEmployee"
                   method="post"
-                  asp-route-login="@login"
+                  asp-route-id="@id"
                   asp-route-isadmin="@isAdmin">
                 <div class="form-group">
                     <label for="Login">Логин:</label>
@@ -276,16 +275,12 @@
                 </div>
             </form>
         </div>
-    </div>  
-
-    <div class="card">
-        <div class="card-header text-center">
-            @if (Request.Query["incorrectFormat"] == "True")
-            {
-                <div class="alert alert-danger mb-4" role="alert">
-                    Неправильный формат данных
-                </div>
-            }
-        </div>
     </div>
+
+    @if (Request.Query["incorrectFormat"] == "True")
+    {
+        <div class="alert alert-danger mb-4" role="alert">
+            Неправильный формат данных
+        </div>
+    }
 </div>

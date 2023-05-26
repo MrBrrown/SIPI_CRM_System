@@ -1,0 +1,41 @@
+.new-order-offcanvas[b-j752z9p5mp] {
+    background-color: #212529;
+}
+
+.delete-offcanvas[b-j752z9p5mp] {
+    background-color: #212529;
+}
+
+.menu-offcanvas[b-j752z9p5mp] {
+    background-color: #212529;
+}
+
+.close-work-day-offcanvas[b-j752z9p5mp] {
+    background-color: #212529;
+}
+
+.date-control[b-j752z9p5mp] {
+    margin-block: auto;
+}
+
+.nav-item-divider[b-j752z9p5mp] {
+    height: 1px;
+    margin: 1rem 0;
+    overflow: hidden;
+    background-color: rgba(236, 238, 239, 0.3);
+}
+
+.dish-list[b-j752z9p5mp] {
+    border: 3px solid #b9b9a9;
+    background-color: #eeedd8;
+    border-radius: 25px;
+}
+
+.add-dish-button[b-j752z9p5mp] {
+    border-radius: 25px;
+}
+
+.add-offcanvas[b-j752z9p5mp] {
+    background-color: #212529;
+    color: white;
+}

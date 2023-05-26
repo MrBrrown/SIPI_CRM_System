@@ -7,6 +7,8 @@ using SIPI_CRM_System.Services.UserPageRep;
 using SIPI_CRM_System.Services.MenuPageRep;
 using SIPI_CRM_System.Services.DishEditPageRep;
 using SIPI_CRM_System.Services.OrderEditPageRep;
+using SIPI_CRM_System.Services.StockPage;
+using SIPI_CRM_System.Services.AdminPanelRep;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,7 @@ builder.Services.AddScoped<IUserPageRepository, DataBaseUserPageRepository>();
 builder.Services.AddScoped<IMenuPageRepository, DataBaseMenuPageRepository>();
 builder.Services.AddScoped<IDishEditPageRepository, DataBaseDishEditPageRepository>();
 builder.Services.AddScoped<IOrderEditPageRepository, DataBaseOrderEditPageRepository>();
+builder.Services.AddScoped<IAdminPanelRepository, DataBaseAdminPanelRepository>();
 
 var app = builder.Build();
 

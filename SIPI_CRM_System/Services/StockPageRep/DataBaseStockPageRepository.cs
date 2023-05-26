@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
 using SIPI_CRM_System.Pagination;
+using SIPI_CRM_System.Services.StockPageRep;
 
 namespace SIPI_CRM_System.Services.StockPage;
 

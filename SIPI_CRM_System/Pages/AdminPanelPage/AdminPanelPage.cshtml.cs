@@ -133,6 +133,6 @@ public class AdminPanelPage : PageModel
     
     public void OnGet()
     {
-        redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"];
+        redirectUserString = "?id=" + Request.Query["id"] + "&isadmin=" + Request.Query["isadmin"];
     }
 }

@@ -134,6 +134,14 @@ C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/ru
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/Newtonsoft.Json.dll
-/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
-/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
-/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/EPPlus.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/EPPlus.Interfaces.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/EPPlus.System.Drawing.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/Microsoft.IO.RecyclableMemoryStream.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/System.Security.Cryptography.Pkcs.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll
+/Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/AdminPanelPage/AdminPanelPage.cshtml.rz.scp.css
