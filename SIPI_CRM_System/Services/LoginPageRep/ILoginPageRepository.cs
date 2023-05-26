@@ -10,4 +10,3 @@ namespace SIPI_CRM_System.Services.LoginPageRep
 		Employee GetEmployee(string login);
 	}
 }
-

@@ -2,6 +2,7 @@
 using OfficeOpenXml;
 using SIPI_CRM_System.Models;
 using SIPI_CRM_System.Services;
+using SIPI_CRM_System.Services.AdminPanelRep;
 using SIPI_CRM_System.Services.LoginPageRep;
 using SIPI_CRM_System.Services.MainPageRep;
 using SIPI_CRM_System.Services.StockPage;
@@ -22,6 +23,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<ILoginPageRepository, DataBaseLoginPageRepository>();
 builder.Services.AddScoped<IMainPageRepository, DataBaseMainPageRepository>();
 builder.Services.AddScoped<IStockPageRepository, DataBaseStockPageRepository>();
+builder.Services.AddScoped<IAdminPanelRepository, DataBaseAdminPanelRepository>();
 builder.Services.AddHostedService<ProductFitnessControlService>();
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
