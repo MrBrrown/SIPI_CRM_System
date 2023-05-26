@@ -2,12 +2,13 @@
 @model SIPI_CRM_System.Pages.StockPageModel
 
 @{
-    string id = Request.Query["id"];
+    string login = Request.Query["login"];
     string isAdmin = Request.Query["isadmin"];
 
-    ViewData["Title"] = "Stock Page";
-
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+    @if (Request.Query["isadmin"] == "True")
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    else
+        Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
 }
 
 
@@ -19,7 +20,7 @@
     <!--Offcanvas header-->
     <div class="offcanvas-header text-light">
         <h5 class="offcanvas-title" id="offcanvasMenu">Главное меню</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <!--Offcanvas body-->
     <div class="offcanvas-body">
@@ -27,7 +28,7 @@
             <!--User Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/UserPage/UserPage"
-               asp-route-id="@id"
+               asp-route-login="@login"
                asp-route-isadmin="@isAdmin">
                 Личный кабинет
             </a>
@@ -39,7 +40,7 @@
             <!--Main Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/MainPage/MainPage"
-               asp-route-id="@id"
+               asp-route-login="@login"
                asp-route-isadmin="@isAdmin">
                 Dashboard
             </a>
@@ -51,7 +52,7 @@
             <!--Stock Page-->
             <a class="navbar-brand" asp-area=""
                asp-page="/StockPage/StockPage"
-               asp-route-id="@id"
+               asp-route-login="@login"
                asp-route-isadmin="@isAdmin">
                 Склад
             </a>
@@ -62,8 +63,8 @@
             <div class="nav-item-divider"></div>
             <!--Menu Page-->
             <a class="navbar-brand" asp-area=""
-               asp-page="/MenuPage/MenuPage"
-               asp-route-id="@id"
+               asp-page="/MainPage/MainPage"
+               asp-route-login="@login"
                asp-route-isadmin="@isAdmin">
                 Меню
             </a>
@@ -76,8 +77,8 @@
             {
                 <div class="nav-item-divider"></div>
                 <a class="navbar-brand" asp-area=""
-                   asp-page="/MainPage/MainPage"
-                   asp-route-id="@id"
+                   asp-page="/AdminPanelPage/AdminPanelPage"
+                   asp-route-login="@login"
                    asp-route-isadmin="@isAdmin">
                     Панель администатора
                 </a>
@@ -90,56 +91,131 @@
     </div>
 </div>
 
-
-
-<div class="container text-center">
-    <div class="row">
-        <div class="col-sm-2 text-light">
+<div class="container-fluid text-center">
+    <div class="row justify-content-center">
+        <div class="col-sm-2 text-black">
             @if (!Model.Categories.Any())
             {
                 <h1 class="text-light">Не добавленны объекты</h1>
             }
             else
             {
-                <h1>Категории</h1>
+                <h1 class="mt-5 mb-3 text-black">Категории</h1>
                 <form asp-page-handler="UpdateCategories"
-                      asp-route-id="@id"
+                      asp-route-login="@login"
                       asp-route-isadmin="@isAdmin"
                       method="post">
                     @foreach (var item in Model.Categories)
                     {
                         var CategotyID = item + "Id";
-                        <div class="form-check">
-                            <input name="CategoryCheck" class="form-check-input" type="checkbox" value="@item" id="@CategotyID">
+                        <div class="form-check checkbox-lg">
+                            <input name="CategoryCheck" class="form-check-input mx-2" type="checkbox" value="@item" id="@CategotyID" 
+                                   @(Model.SelectedCategories.Contains(item) ? "checked" : "")>
                             <label class="form-check-label" for="@CategotyID">
                                 @item
                             </label>
                         </div>
                     }
-                    <button class="btn btn-primary m-2">Обновить выбор</button>
+                    <button class="btn btn-primary m-3 btn-lg">Обновить</button>
+                    <button class="btn btn-secondary btn-sm" 
+                            asp-page-handler="ResetCategories"
+                            asp-route-login="@login"
+                            asp-route-isadmin="@isAdmin">
+                        Сбросить
+                    </button>
                 </form>
             }
+            <div class="card-body" style="background-color: #20c997">
+                <h2 class="title">Добавление файла</h2>
+                <form asp-route-login="@login"
+                      asp-route-isadmin="@isAdmin"
+                      method="post"
+                      enctype="multipart/form-data">
+                    <input class="btn-dark" type="file" name="formFile">
+                    <button class="btn-light" asp-page-handler="AddByDocument" type="submit">Загрузить файл</button>
+                </form>
+                @if (Request.Query["loadException"] == "True")
+                {
+                    <div class="alert alert-danger mt-1" role="alert">
+                        Файл не выбран
+                    </div>
+                }
+                else if (Request.Query["incorrectExtension"] == "True")
+                {
+                    <div class="alert alert-danger mt-1" role="alert">
+                        Загрузите файл с расширением .xlsx
+                    </div>
+                }
+                else if (Request.Query["fileProcessingException"] == "True")
+                {
+                    <div class="alert alert-danger mt-1" role="alert">
+                        Ошибка обработки файла
+                    </div>
+                }
+            </div>
         </div>
-        <div class="col-sm-10">
-            <h1 class="title m-2 text-light">Продукты</h1>
+        <div class="col-sm-9">
+            <h1 class="title m-2 text-black">Продукты</h1>
             <!--Add offCanvasRight-->
             <div class="d-grid">
-                <button class="btn btn-primary m-2"
+                <button class="btn btn-primary m-2 btn-lg"
                         data-bs-toggle="offcanvas"
                         data-bs-target="#offCanvasRightAdd"
                         aria-controls="offCanvasRightAdd">
-                    Добавить продукт
+                    Добавить новый продукт
                 </button>
+                <div class="card-footer">
+                    @if (Request.Query["incorrectFormat"] == "True")
+                    {
+                        <div class="alert alert-danger mb-4" role="alert">
+                            Неправильный формат данных
+                        </div>
+                    }
+                </div>
             </div>
+            <span class="title m-2 text-black d-flex justify-content-end p-1">
+                <span class="mb-1" style="font-size: 20px">Сортировать по:</span>
+                <form class="bg-light mx-2"
+                    asp-route-login="@login"
+                    asp-route-isadmin="@isAdmin"
+                    asp-page-handler="UpdateProductsOrderByDeliveryDate" method="post"
+                    asp-route-deliveryDateSortLabel="@Model.DeliveryDateSortLabel">
+                    <label>Дата доставки</label>                    
+                    <input type="submit" value="@Model.DeliveryDateSortLabel" 
+                           class="btn btn-outline-dark btn-sm"/>
+                </form>
+                <form class="bg-light mx-2"
+                    asp-route-login="@login"
+                    asp-route-isadmin="@isAdmin"
+                    asp-page-handler="UpdateProductsOrderByFitness" method="post"
+                    asp-route-fitnessSortLabel="@Model.FitnessSortLabel">
+                    <label>Годность</label>                    
+                    <input type="submit" value="@Model.FitnessSortLabel" 
+                           class="btn btn-outline-dark btn-sm"/>
+                </form>
+                <form class="bg-light mx-2"
+                      asp-route-login="@login"
+                      asp-route-isadmin="@isAdmin"
+                      asp-page-handler="UpdateProductsOrderByName" method="post"
+                      asp-route-nameSortLabel="@Model.NameSortLabel">
+                    <label>Имя</label>                    
+                    <input type="submit" value="@Model.NameSortLabel" 
+                           class="btn btn-outline-dark btn-sm"/>
+                    <button class="btn btn-secondary mx-1 btn-sm" asp-page-handler="ResetSorting">Сбросить</button>
+                </form>
+            </span>
             <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
                  id="offCanvasRightAdd"
                  aria-labelledby="offCanvasRightAdd">
                 <div class="offcanvas-header">
-                    <h1 id="offCanvasRightAdd">Добавить продукт:</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h1 id="offCanvasRightAdd">Добавить новый продукт:</h1>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <form asp-page-handler="Add" method="post">
+                    <form asp-page-handler="Add" 
+                          method="post"
+                          asp-route-login="@login"
+                          asp-route-isadmin="@isAdmin">
                         <div class="form-group">
                             <label for="Name">Название:</label>
                             <input type="text" class="form-control" name="Name" placeholder="Имя">
@@ -152,6 +228,14 @@
                             <label for="Amount">Количество:</label>
                             <input class="form-control" name="Amount" placeholder="Количество шт">
                         </div>
+                        <div class="form-group">
+                            <label for="LifeTime">Срок годности:</label>
+                            <input class="form-control" name="LifeTime" placeholder="Часов">
+                        </div>
+                        <div class="form-group">
+                            <label for="DeliveryDateTime">Дата доставки:</label>
+                            <input class="form-control" name="DeliveryDateTime" placeholder="0001-01-01 00:00:00">
+                        </div>
                         <div class="btn-toolbar m-4" role="toolbar">
                             <div class="btn-group me-2" role="group">
                                 <button class="btn btn-success">Добавить</button>
@@ -163,13 +247,13 @@
                     </form>
                 </div>
             </div>
-            @if (!Model.Products.Any())
+            @if (!Model.PaginatedProducts.Any())
             {
-                    <h1 class="text-light">Не добавленны объекты</h1>
+                <h1 class="text-light">Не добавлены объекты</h1>
             }
             else
             {
-                foreach (var item in Model.Products)
+                foreach (var item in Model.PaginatedProducts)
                 {
                     var offcanvasRightDeleteID = "offcanvasRightDelete" + item.Id;
                     var offCanvasRightEditID = "offCanvasRightEdit" + item.Id;
@@ -204,11 +288,14 @@
                                     <!--Edit offCanvasRight Header-->
                                     <div class="offcanvas-header">
                                         <h1 id="@offCanvasRightEditID">@item.Name</h1>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <!--Edit offCanvasRight Body-->
                                     <div class="offcanvas-body">
-                                        <form asp-page-handler="Update" asp-route-id="@item.Id" method="post">
+                                        <form asp-page-handler="Update" asp-route-id="@item.Id"
+                                              asp-route-login="@login"
+                                              asp-route-isadmin="@isAdmin"
+                                              method="post">
                                             <div class="form-group">
                                                 <label for="Name">Название:</label>
                                                 <input type="text" class="form-control" name="Name" placeholder="@item.Name" value="@item.Name">
@@ -218,8 +305,8 @@
                                                 <input type="text" class="form-control" name="Category" placeholder="@item.Category" value="@item.Category">
                                             </div>
                                             <div class="form-group">
-                                                <label for="Amount">Колличество:</label>
-                                                <input type="text" class="form-control" name="Amount" placeholder="Колличесво шт, г" value="@item.Amount">
+                                                <label for="Amount">Количество:</label>
+                                                <input type="text" class="form-control" name="Amount" placeholder="Количество шт, г" value="@item.Amount">
                                             </div>
                                             <div class="btn-toolbar m-4" role="toolbar">
                                                 <div class="btn-group me-2" role="group">
@@ -246,7 +333,7 @@
                                     <!--Delete offCanvasRight Header-->
                                     <div class="offcanvas-header">
                                         <h5 id="@offcanvasRightDeleteID">Вы уверенны в удалении товара со склада?</h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <!--Delete offCanvasRight Body-->
                                     <div class="offcanvas-body">
@@ -267,14 +354,92 @@
                                 </div>
                             </div>
                         </div><!--Product Card Body-->
-                        <div class="card-body">
-                            <p class="card-text d-flex">
-                                Остаток: @item.Amount
-                            </p>
+                        <div class="card-body bg-info p-2 text-dark bg-opacity-10">
+                            <div class="d-flex align-items-start flex-column">
+                                <span class="fs-5 p-1"><b>Остаток: </b><mark>@item.Amount</mark></span>
+                                <span class="fs-5 p-1"><b>Дата доставки: </b><mark>@item.DeliveryDateTime</mark></span>
+                                <span class="fs-5 p-1"><b>Годен до: </b><mark>
+                                    @{ 
+                                        @item.DeliveryDateTime.AddHours(item.LifeTime)
+                                    }
+                                </mark></span>
+                            </div>
                         </div>
+                        @if (item.IsFit == false)
+                        {
+                            <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #ff8080">
+                                Не годен
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
+                                <span id="timer-@item.Id"></span>
+                                <script>
+                                    let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
+                                    let lifeTime_@item.Id = @item.LifeTime * 3600000;
+                                    let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
+                                    // Update the countdown every second
+                                    let Timer_@item.Id = setInterval(function() {
+                                        let now = new Date().getTime();
+                                        let distance = expirationDate_@item.Id - now;
+                                        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                        if (distance < 0) {
+                                            clearInterval(Timer_@item.Id);
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Не годен';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#ff8080';
+                                        }
+                                        else if (distance > lifeTime_@item.Id)
+                                        {
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Не доставлен';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#87cefa';                                            
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Срок годности кончается через ' + days + 'д ' + hours + 'ч ' + minutes + 'м ' + seconds + 'с ';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#20c997';   
+                                        }
+                                    }, 1000);
+                                </script> 
+                            </div>       
+                        }
                     </div>
                 }
             }
+            @{
+                var prevDisabled = !Model.PaginatedProducts.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.PaginatedProducts.HasNextPage ? "disabled" : "";
+            }
+                
+            <a asp-page="./StockPage"
+               asp-route-pageIndex="@(Model.PaginatedProducts.PageIndex - 1)"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin"
+               class="btn btn-primary @prevDisabled">
+                Previous
+            </a>
+            @for (int i = 1; i < Model.PaginatedProducts.TotalPages + 1; i++)
+            {
+                var pageIndex = i;
+                var isCurrent = Model.PaginatedProducts.PageIndex == i ? "disabled" : "";
+                <a asp-page="./StockPage"
+                   asp-route-pageIndex="@pageIndex"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin"
+                   class="btn btn-secondary @isCurrent">
+                    @pageIndex
+                </a>
+            }
+            <a asp-page="./StockPage"
+               asp-route-pageIndex="@(Model.PaginatedProducts.PageIndex + 1)"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin"
+               class="btn btn-primary @nextDisabled">
+                Next
+            </a>
         </div>
     </div>
 </div>

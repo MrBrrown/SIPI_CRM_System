@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
+using SIPI_CRM_System.Pagination;
 
-namespace SIPI_CRM_System.Services.StockPageRep;
+namespace SIPI_CRM_System.Services.StockPage;
 
 public class DataBaseStockPageRepository : IStockPageRepository 
 {
@@ -14,31 +15,25 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public IEnumerable<Product> GetProducts()
     {
-        List<Product> products = new List<Product>();
-        foreach (var product in _context.Products)
-        {
-            products.Add(product);
-        }
-
-        return products;
+        return _context.Products.Where(x => x.Amount > 0).ToList();
     }
 
     public List<string> GetAllCategories()
     {
-        HashSet<String> productsCategories = new();
+        var categories = new List<string>();
 
-        foreach (var product in _context.Products)
+        foreach (var product in _context.Products.Where(x => x.Amount > 0).ToList())
         {
-            productsCategories.Add(product.Category);
+            if (!categories.Any(x => x.Equals(product.Category)))
+            {
+                categories.Add(product.Category);
+            }
         }
 
-        var productCategoriesList = productsCategories.ToList();
-        productCategoriesList.Sort();
-
-        return productCategoriesList;
+        return categories;
     }
 
-    public Product GetProductById(int id)
+    public Product? GetProductById(int id)
     {
         var product = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         return product;
@@ -46,17 +41,18 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public void AddProduct(Product product)
     {
-        if (!_context.Products.Any(x => x.Name.Equals(product.Name)))
-            _context.Products.Add(product);
+        _context.Products.Add(product);
         
         _context.SaveChanges();
     }
 
     public void RemoveProductById(int id)
     {
-        var productToRemove = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
+        /*var productToRemove = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         if (productToRemove != null)
-            _context.Products.Remove(productToRemove);
+            _context.Products.Remove(productToRemove);*/
+        
+        _context.Products.FirstOrDefault(x => x.Id.Equals(id)).Amount = 0;
         
         _context.SaveChanges();
     }
@@ -75,11 +71,11 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck)
     {
-        List<Product> products = new List<Product>();
+        var products = new List<Product>();
         
-        if (categoryCheck.Count() == 0)
+        if (!categoryCheck.Any())
         {
-            foreach (var product in _context.Products)
+            foreach (var product in _context.Products.Where(x => x.Amount > 0).ToList())
             {
                 products.Add(product);
             }
@@ -88,7 +84,7 @@ public class DataBaseStockPageRepository : IStockPageRepository
         {
             foreach (var category in categoryCheck)
             {
-                foreach (var product in _context.Products)
+                foreach (var product in _context.Products.Where(x => x.Amount > 0).ToList())
                 {
                     if (product.Category.Equals(category))
                         products.Add(product);
@@ -97,5 +93,12 @@ public class DataBaseStockPageRepository : IStockPageRepository
         }
 
         return products;
+    }
+    
+    public async Task UpdateProductFitAsync(Product product)
+    {
+        _context.Products.FirstOrDefault(x => x.Id == product.Id).IsFit = false;
+
+        await _context.SaveChangesAsync();
     }
 }

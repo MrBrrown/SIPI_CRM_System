@@ -1,0 +1,291 @@
+@page
+@model SIPI_CRM_System.Pages.AdminPanelPage.AdminPanelPage
+
+@{
+    string login = Request.Query["login"];
+    string isAdmin = Request.Query["isadmin"];
+
+    @if (Request.Query["isadmin"] == "True")
+        Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+    else
+        Layout = "~/Pages/Shared/_EmployeeLayout.cshtml";
+}
+
+<div class="d-grid">
+    <div class="offcanvas offcanvas-start menu-offcanvas"
+         tabindex="-1"
+         id="offcanvasMenu"
+         aria-labelledby="offcanvasMenu">
+        <!--Offcanvas header-->
+        <div class="offcanvas-header text-light">
+            <h5 class="offcanvas-title" id="offcanvasMenu">Главное меню</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <!--Offcanvas body-->
+        <div class="offcanvas-body">
+            <nav class="dashboard-nav-list">
+                <!--User Page-->
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/UserPage/UserPage"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin">
+                    Личный кабинет
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="nav-item-divider"></div>
+                <!--Main Page-->
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/MainPage/MainPage"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin">
+                    Dashboard
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="nav-item-divider"></div>
+                <!--Stock Page-->
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/StockPage/StockPage"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin">
+                    Склад
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="nav-item-divider"></div>
+                <!--Menu Page-->
+                <a class="navbar-brand" asp-area=""
+                   asp-page="/MainPage/MainPage"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin">
+                    Меню
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--Admin Page-->
+                @if (isAdmin == "True")
+                {
+                    <div class="nav-item-divider"></div>
+                    <a class="navbar-brand" asp-area=""
+                       asp-page="/AdminPanelPage/AdminPanelPage"
+                       asp-route-login="@login"
+                       asp-route-isadmin="@isAdmin">
+                        Панель администатора
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                }
+            </nav>
+        </div>
+    </div>
+      
+    <button class="btn btn-primary m-2 btn-lg"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasRightAddTable"
+            aria-controls="offCanvasRightAddTable">
+        Добавить стол
+    </button>
+    <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+         id="offCanvasRightAddTable"
+         aria-labelledby="offCanvasRightAddTable">
+        <div class="offcanvas-header">
+            <h1>Добавить стол:</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form asp-page-handler="AddTable" 
+                  method="post"
+                  asp-route-login="@login"
+                  asp-route-isadmin="@isAdmin">
+                <div class="form-group">
+                    <label for="Places">Количество мест:</label>
+                    <input type="text" class="form-control" name="Places" placeholder="Количество мест">
+                </div>
+                <div class="btn-toolbar m-4" role="toolbar">
+                    <div class="btn-group me-2" role="group">
+                        <button class="btn btn-success">Добавить</button>
+                    </div>
+                    <div class="btn-group me-2" role="group">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+      
+    <button class="btn btn-primary m-2 btn-lg"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasRightAddPosition"
+            aria-controls="offCanvasRightAddPosition">
+        Добавить должность
+    </button>
+    
+    <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+         id="offCanvasRightAddPosition"
+         aria-labelledby="offCanvasRightAddPosition">
+        <div class="offcanvas-header">
+            <h1>Добавить должность:</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form asp-page-handler="AddPosition" 
+                  method="post"
+                  asp-route-login="@login"
+                  asp-route-isadmin="@isAdmin">
+                <div class="form-group">
+                    <label for="Name">Название:</label>
+                    <input type="text" class="form-control" name="Name" placeholder="Позиция">
+                </div>
+                <div class="btn-toolbar m-4" role="toolbar">
+                    <div class="btn-group me-2" role="group">
+                        <button class="btn btn-success">Добавить</button>
+                    </div>
+                    <div class="btn-group me-2" role="group">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button class="btn btn-primary m-2 btn-lg"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasRightAddEmployee"
+            aria-controls="offCanvasRightAddEmployee">
+        Добавить пользователя
+    </button>
+    
+    <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+         id="offCanvasRightAddEmployee"
+         aria-labelledby="offCanvasRightAddEmployee">
+        <div class="offcanvas-header">
+            <h1>Добавить пользователя:</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form asp-page-handler="AddEmployee" 
+                  method="post"
+                  asp-route-login="@login"
+                  asp-route-isadmin="@isAdmin">
+                <div class="form-group">
+                    <label for="Name">Имя:</label>
+                    <input type="text" class="form-control" name="Name" placeholder="Имя">
+                </div>
+                <div class="form-group">
+                    <label for="Login">Логин:</label>
+                    <input type="text" class="form-control" name="Login" placeholder="Логин">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Пароль:</label>
+                    <input type="text" class="form-control" name="Password" placeholder="Пароль">
+                </div>
+                <div class="form-check">
+                    <label for="IsAdmin">Администратор:</label>
+                    <input type="checkbox" class="form-check-input" name="IsAdmin" placeholder="Администратор">
+                </div>
+                <div class="form-group">
+                    <label for="Position">Позиция:</label>
+                    <input type="text" class="form-control" name="Position" placeholder="Позиция">
+                </div>
+                <div class="btn-toolbar m-4" role="toolbar">
+                    <div class="btn-group me-2" role="group">
+                        <button class="btn btn-success">Добавить</button>
+                    </div>
+                    <div class="btn-group me-2" role="group">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>    
+    <button class="btn btn-primary m-2 btn-lg"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasRightUpdateRights"
+            aria-controls="offCanvasRightUpdateRights">
+        Выдать права
+    </button>
+    
+    <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+         id="offCanvasRightUpdateRights"
+         aria-labelledby="offCanvasRightUpdateRights">
+        <div class="offcanvas-header">
+            <h1>Выдать права администратора:</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form asp-page-handler="UpdateRights" 
+                  method="post"
+                  asp-route-login="@login"
+                  asp-route-isadmin="@isAdmin">
+                <div class="form-group">
+                    <label for="Login">Логин:</label>
+                    <input type="text" class="form-control" name="Login" placeholder="Логин">
+                </div>
+                <div class="btn-toolbar m-4" role="toolbar">
+                    <div class="btn-group me-2" role="group">
+                        <button class="btn btn-success">Выдать</button>
+                    </div>
+                    <div class="btn-group me-2" role="group">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>  
+
+    <button class="btn btn-primary m-2 btn-lg"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offCanvasRightDeleteEmployee"
+            aria-controls="offCanvasRightDeleteEmployee">
+        Удалить пользователя
+    </button>
+    <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
+         id="offCanvasRightDeleteEmployee"
+         aria-labelledby="offCanvasDeleteEmployee">
+        <div class="offcanvas-header">
+            <h1>Удалить пользователя:</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form asp-page-handler="DeleteEmployee" 
+                  method="post"
+                  asp-route-login="@login"
+                  asp-route-isadmin="@isAdmin">
+                <div class="form-group">
+                    <label for="Login">Логин:</label>
+                    <input type="text" class="form-control" name="Login" placeholder="Логин">
+                </div>
+                <div class="btn-toolbar m-4" role="toolbar">
+                    <div class="btn-group me-2" role="group">
+                        <button class="btn btn-success">Удалить</button>
+                    </div>
+                    <div class="btn-group me-2" role="group">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas" aria-label="Close">Отменить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>  
+
+    <div class="card">
+        <div class="card-header text-center">
+            @if (Request.Query["incorrectFormat"] == "True")
+            {
+                <div class="alert alert-danger mb-4" role="alert">
+                    Неправильный формат данных
+                </div>
+            }
+        </div>
+    </div>
+</div>
