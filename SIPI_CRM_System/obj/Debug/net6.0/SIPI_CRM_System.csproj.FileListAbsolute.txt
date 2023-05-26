@@ -62,6 +62,7 @@
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/EditPages/DishEditPage/DishEditPage.cshtml.rz.scp.css
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/obj/Debug/net6.0/scopedcss/Pages/EditPages/OrderEditPage/OrderEditPage.cshtml.rz.scp.css
 =======
+>>>>>>> Stashed changes
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/appsettings.Development.json
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/appsettings.json
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/SIPI_CRM_System.staticwebassets.runtime.json
@@ -133,7 +134,6 @@ C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/ru
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll
 C:/Users/maks_/RiderProjects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/Newtonsoft.Json.dll
->>>>>>> Stashed changes
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
 /Users/artemgusev/Projects/SIPI_CRM_System/SIPI_CRM_System/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll

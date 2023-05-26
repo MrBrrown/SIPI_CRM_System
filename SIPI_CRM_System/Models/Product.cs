@@ -16,6 +16,7 @@ namespace SIPI_CRM_System.Models
         public decimal Amount { get; set; }
         public int LifeTime { get; set; }
         public DateTime DeliveryDateTime { get; set; }
+        public bool IsFit { get; set; }
 
         public virtual ICollection<ProductDish> ProductDishes { get; set; }
     }
