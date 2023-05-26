@@ -15,14 +15,14 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public IEnumerable<Product> GetProducts()
     {
-        return _context.Products;
+        return _context.Products.Where(x => x.Amount > 0).ToList();
     }
 
     public List<string> GetAllCategories()
     {
         var categories = new List<string>();
 
-        foreach (var product in _context.Products)
+        foreach (var product in _context.Products.Where(x => x.Amount > 0).ToList())
         {
             if (!categories.Any(x => x.Equals(product.Category)))
             {
@@ -48,13 +48,12 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public void RemoveProductById(int id)
     {
-        var productToRemove = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
+        /*var productToRemove = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         if (productToRemove != null)
-            _context.Products.Remove(productToRemove);
-        // ??????????????
-        // delete product_dish
-        // delete product
-        // if exist one more we override id in product_dish
+            _context.Products.Remove(productToRemove);*/
+        
+        _context.Products.FirstOrDefault(x => x.Id.Equals(id)).Amount = 0;
+        
         _context.SaveChanges();
     }
 
@@ -70,21 +69,13 @@ public class DataBaseStockPageRepository : IStockPageRepository
         _context.SaveChanges();
     }
 
-    // while think
-    public void CheckRemains()
-    {
-        IEnumerable<Product> products = _context.Products.Where(x => x.Amount <= 0);
-        _context.Products.RemoveRange(products);
-        _context.SaveChanges();
-    }
-
     public IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck)
     {
         var products = new List<Product>();
         
         if (!categoryCheck.Any())
         {
-            foreach (var product in _context.Products)
+            foreach (var product in _context.Products.Where(x => x.Amount > 0).ToList())
             {
                 products.Add(product);
             }
@@ -93,7 +84,7 @@ public class DataBaseStockPageRepository : IStockPageRepository
         {
             foreach (var category in categoryCheck)
             {
-                foreach (var product in _context.Products)
+                foreach (var product in _context.Products.Where(x => x.Amount > 0).ToList())
                 {
                     if (product.Category.Equals(category))
                         products.Add(product);
@@ -102,5 +93,12 @@ public class DataBaseStockPageRepository : IStockPageRepository
         }
 
         return products;
+    }
+    
+    public async Task UpdateProductFitAsync(Product product)
+    {
+        _context.Products.FirstOrDefault(x => x.Id == product.Id).IsFit = false;
+
+        await _context.SaveChangesAsync();
     }
 }

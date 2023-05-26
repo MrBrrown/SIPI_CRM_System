@@ -50,17 +50,24 @@ public class StockPageModel : PageModel
     
     public IActionResult OnPostUpdate(int id)
     {
-        Product product = new Product()
+        try
         {
-            Id = id,
-            Name = Request.Form["Name"],
-            Amount = int.Parse(Request.Form["Amount"]),
-            Category = Request.Form["Category"]
-        };
+            Product product = new Product()
+            {
+                Id = id,
+                Name = Request.Form["Name"],
+                Amount = int.Parse(Request.Form["Amount"]),
+                Category = Request.Form["Category"]
+            };
 
-        _repository.Update(product);
+            _repository.Update(product);
 
-        return Redirect("/StockPage/StockPage" + redirectUserString);
+            return Redirect("/StockPage/StockPage" + redirectUserString);
+        }
+        catch (Exception e)
+        {
+            return Redirect("/StockPage/StockPage" + redirectUserString + "&incorrectFormat=True");
+        }
     }
 
     public IActionResult OnPostAdd()
@@ -295,7 +302,7 @@ public class StockPageModel : PageModel
     public void OnGet(int? pageIndex)
     {
         Categories = _repository.GetAllCategories();
-        //check products remains
+
         var categoryCheckCookie = Request.Cookies["CategoryCheck"];
         
         CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)
@@ -310,5 +317,12 @@ public class StockPageModel : PageModel
             _repository.GetProductsByCategories(CategoryCheck).ToList(), pageIndex ?? 1, _pageSize);
         
         redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"];
+    }
+
+    public IActionResult UpdateProductFit(Product product)
+    {
+        _repository.UpdateProductFitAsync(product);
+        
+        return Redirect("/StockPage/StockPage" + redirectUserString);
     }
 }

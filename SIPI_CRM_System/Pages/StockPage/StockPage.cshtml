@@ -365,38 +365,47 @@
                                 </mark></span>
                             </div>
                         </div>
-                        <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
-                            <span id="timer-@item.Id"></span>
-                            <script>
-                                let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
-                                let lifeTime_@item.Id = @item.LifeTime * 3600000;
-                                let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
-                                // Update the countdown every second
-                                let Timer_@item.Id = setInterval(function() {
-                                    let now = new Date().getTime();
-                                    let distance = expirationDate_@item.Id - now;
-                                    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                                    if (distance < 0) {
-                                        clearInterval(Timer_@item.Id);
-                                        document.getElementById('timer-@item.Id').innerHTML = 'Не годен';
-                                        document.getElementById('@item.Id').style.backgroundColor = '#ff8080';
-                                    }
-                                    else if (distance > lifeTime_@item.Id)
-                                    {
-                                        document.getElementById('timer-@item.Id').innerHTML = 'Не доставлен';
-                                        document.getElementById('@item.Id').style.backgroundColor = '#87cefa';                                            
-                                    }
-                                    else
-                                    {
-                                        document.getElementById('timer-@item.Id').innerHTML = 'Срок годности кончается через ' + days + 'д ' + hours + 'ч ' + minutes + 'м ' + seconds + 'с ';
-                                        document.getElementById('@item.Id').style.backgroundColor = '#20c997';   
-                                    }
-                                }, 1000);
-                            </script> 
-                        </div>                        
+                        @if (item.IsFit == false)
+                        {
+                            <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #ff8080">
+                                Не годен
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
+                                <span id="timer-@item.Id"></span>
+                                <script>
+                                    let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
+                                    let lifeTime_@item.Id = @item.LifeTime * 3600000;
+                                    let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
+                                    // Update the countdown every second
+                                    let Timer_@item.Id = setInterval(function() {
+                                        let now = new Date().getTime();
+                                        let distance = expirationDate_@item.Id - now;
+                                        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                        if (distance < 0) {
+                                            clearInterval(Timer_@item.Id);
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Не годен';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#ff8080';
+                                        }
+                                        else if (distance > lifeTime_@item.Id)
+                                        {
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Не доставлен';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#87cefa';                                            
+                                        }
+                                        else
+                                        {
+                                            document.getElementById('timer-@item.Id').innerHTML = 'Срок годности кончается через ' + days + 'д ' + hours + 'ч ' + minutes + 'м ' + seconds + 'с ';
+                                            document.getElementById('@item.Id').style.backgroundColor = '#20c997';   
+                                        }
+                                    }, 1000);
+                                </script> 
+                            </div>       
+                        }
                     </div>
                 }
             }

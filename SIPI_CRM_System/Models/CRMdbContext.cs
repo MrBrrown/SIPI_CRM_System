@@ -236,6 +236,8 @@ namespace SIPI_CRM_System.Models
                 entity.Property(e => e.LifeTime);
                 
                 entity.Property(e => e.DeliveryDateTime);
+                
+                entity.Property(e => e.IsFit);
             });
 
             modelBuilder.Entity<ProductDish>(entity =>

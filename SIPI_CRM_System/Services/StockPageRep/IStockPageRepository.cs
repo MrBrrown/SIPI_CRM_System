@@ -17,5 +17,7 @@ public interface IStockPageRepository
 
     void Update(Product product);
 
+    Task UpdateProductFitAsync(Product product);
+
     IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck);
 }
