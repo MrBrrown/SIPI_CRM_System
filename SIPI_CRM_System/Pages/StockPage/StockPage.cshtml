@@ -104,12 +104,14 @@
                 <form asp-page-handler="UpdateCategories"
                       asp-route-login="@login"
                       asp-route-isadmin="@isAdmin"
+                      asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                       method="post">
                     @foreach (var item in Model.Categories)
                     {
                         var CategotyID = item + "Id";
                         <div class="form-check checkbox-lg">
-                            <input name="CategoryCheck" class="form-check-input mx-2" type="checkbox" value="@item" id="@CategotyID">
+                            <input name="CategoryCheck" class="form-check-input mx-2" type="checkbox" value="@item" id="@CategotyID" 
+                                   @(Model.SelectedCategories.Contains(item) ? "checked" : "")>
                             <label class="form-check-label" for="@CategotyID">
                                 @item
                             </label>
@@ -118,33 +120,34 @@
                     <button class="btn btn-primary m-3 btn-lg">Обновить</button>
                 </form>
             }
-            <h1 class="title mt-3">Добавление файла</h1>
-            <p class="bg-success"><b>Excel</b></p>
-            <form asp-route-login="@login"
-                  asp-route-isadmin="@isAdmin"
-                  method="post"
-                  enctype="multipart/form-data">
-                <input class="btn-dark" type="file" name="formFile">
-                <button class="btn-light" asp-page-handler="AddByDocument" type="submit">Загрузить файл</button>
-            </form>
-            @if (Request.Query["loadException"] == "True")
-            {
-                <div class="alert alert-danger mt-1" role="alert">
-                    Файл не выбран
-                </div>
-            }
-            else if (Request.Query["incorrectExtension"] == "True")
-            {
-                <div class="alert alert-danger mt-1" role="alert">
-                    Загрузите файл с расширением .xlsx
-                </div>
-            }
-            else if (Request.Query["fileProcessingException"] == "True")
-            {
-                <div class="alert alert-danger mt-1" role="alert">
-                    Ошибка обработки файла
-                </div>
-            }
+            <div class="card-body" style="background-color: #20c997">
+                <h2 class="title">Добавление файла</h2>
+                <form asp-route-login="@login"
+                      asp-route-isadmin="@isAdmin"
+                      method="post"
+                      enctype="multipart/form-data">
+                    <input class="btn-dark" type="file" name="formFile">
+                    <button class="btn-light" asp-page-handler="AddByDocument" type="submit">Загрузить файл</button>
+                </form>
+                @if (Request.Query["loadException"] == "True")
+                {
+                    <div class="alert alert-danger mt-1" role="alert">
+                        Файл не выбран
+                    </div>
+                }
+                else if (Request.Query["incorrectExtension"] == "True")
+                {
+                    <div class="alert alert-danger mt-1" role="alert">
+                        Загрузите файл с расширением .xlsx
+                    </div>
+                }
+                else if (Request.Query["fileProcessingException"] == "True")
+                {
+                    <div class="alert alert-danger mt-1" role="alert">
+                        Ошибка обработки файла
+                    </div>
+                }
+            </div>
         </div>
         <div class="col-sm-9">
             <h1 class="title m-2 text-black">Продукты</h1>
@@ -158,10 +161,11 @@
                 </button>
             </div>
             <span class="title m-2 text-black d-flex justify-content-end p-1">
-                <span class="m-1">Сортировать по:</span>
+                <span class="mb-1" style="font-size: 20px">Сортировать по:</span>
                 <form class="bg-light mx-2"
                     asp-route-login="@login"
                     asp-route-isadmin="@isAdmin"
+                    asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                     asp-page-handler="UpdateProductsOrderByDeliveryDate" method="post"
                     asp-route-deliveryDateSortLabel="@Model.DeliveryDateSortLabel">
                     <label>Дата доставки</label>                    
@@ -171,6 +175,7 @@
                 <form class="bg-light mx-2"
                     asp-route-login="@login"
                     asp-route-isadmin="@isAdmin"
+                    asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                     asp-page-handler="UpdateProductsOrderByFitness" method="post"
                     asp-route-fitnessSortLabel="@Model.FitnessSortLabel">
                     <label>Годность</label>                    
@@ -180,6 +185,7 @@
                 <form class="bg-light mx-2"
                     asp-route-login="@login"
                     asp-route-isadmin="@isAdmin"
+                    asp-route-pageIndex="@Model.PaginatedProducts.PageIndex"
                     asp-page-handler="UpdateProductsOrderByName" method="post"
                     asp-route-nameSortLabel="@Model.NameSortLabel">
                     <label>Имя</label>                    
@@ -219,13 +225,13 @@
                     </form>
                 </div>
             </div>
-            @if (!Model.Products.Any())
+            @if (!Model.PaginatedProducts.Any())
             {
-                <h1 class="text-light">Не добавленны объекты</h1>
+                <h1 class="text-light">Не добавлены объекты</h1>
             }
             else
             {
-                foreach (var item in Model.Products)
+                foreach (var item in Model.PaginatedProducts)
                 {
                     var offcanvasRightDeleteID = "offcanvasRightDelete" + item.Id;
                     var offCanvasRightEditID = "offCanvasRightEdit" + item.Id;
@@ -337,38 +343,69 @@
                         <div id="@item.Id" class="card-footer align-content-center text-dark" style="background-color: #20c997">
                             <span id="timer-@item.Id"></span>
                             <script>
-                                    let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
-                                    let lifeTime_@item.Id = @item.LifeTime * 3600000;
-                                    let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
-                                    // Update the countdown every second
-                                    let Timer_@item.Id = setInterval(function() {
-                                        let now = new Date().getTime();
-                                        let distance = expirationDate_@item.Id - now;
-                                        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                                        if (distance < 0) {
-                                            clearInterval(Timer_@item.Id);
-                                            document.getElementById('timer-@item.Id').innerHTML = 'Не годен';
-                                            document.getElementById('@item.Id').style.backgroundColor = '#ff8080';
-                                        }
-                                        else if (distance > lifeTime_@item.Id)
-                                        {
-                                            document.getElementById('timer-@item.Id').innerHTML = 'Не доставлен';
-                                            document.getElementById('@item.Id').style.backgroundColor = '#87cefa';                                            
-                                        }
-                                        else
-                                        {
-                                            document.getElementById('timer-@item.Id').innerHTML = 'Срок годности кончается через ' + days + 'д ' + hours + 'ч ' + minutes + 'м ' + seconds + 'с ';
-                                            document.getElementById('@item.Id').style.backgroundColor = '#20c997';   
-                                        }
-                                    }, 1000);
-                                </script> 
+                                let deliveryDate_@item.Id = new Date("@item.DeliveryDateTime.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
+                                let lifeTime_@item.Id = @item.LifeTime * 3600000;
+                                let expirationDate_@item.Id = deliveryDate_@item.Id + lifeTime_@item.Id;
+                                // Update the countdown every second
+                                let Timer_@item.Id = setInterval(function() {
+                                    let now = new Date().getTime();
+                                    let distance = expirationDate_@item.Id - now;
+                                    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                    if (distance < 0) {
+                                        clearInterval(Timer_@item.Id);
+                                        document.getElementById('timer-@item.Id').innerHTML = 'Не годен';
+                                        document.getElementById('@item.Id').style.backgroundColor = '#ff8080';
+                                    }
+                                    else if (distance > lifeTime_@item.Id)
+                                    {
+                                        document.getElementById('timer-@item.Id').innerHTML = 'Не доставлен';
+                                        document.getElementById('@item.Id').style.backgroundColor = '#87cefa';                                            
+                                    }
+                                    else
+                                    {
+                                        document.getElementById('timer-@item.Id').innerHTML = 'Срок годности кончается через ' + days + 'д ' + hours + 'ч ' + minutes + 'м ' + seconds + 'с ';
+                                        document.getElementById('@item.Id').style.backgroundColor = '#20c997';   
+                                    }
+                                }, 1000);
+                            </script> 
                         </div>                        
                     </div>
                 }
             }
+            @{
+                var prevDisabled = !Model.PaginatedProducts.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.PaginatedProducts.HasNextPage ? "disabled" : "";
+            }
+                
+            <a asp-page="./StockPage"
+               asp-route-pageIndex="@(Model.PaginatedProducts.PageIndex - 1)"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin"
+               class="btn btn-primary @prevDisabled">
+                Previous
+            </a>
+            @for (int i = 1; i < Model.PaginatedProducts.TotalPages; i++)
+            {
+                var pageIndex = i;
+                var isCurrent = Model.PaginatedProducts.PageIndex == i ? "disabled" : "";
+                <a asp-page="./StockPage"
+                   asp-route-pageIndex="@pageIndex"
+                   asp-route-login="@login"
+                   asp-route-isadmin="@isAdmin"
+                   class="btn btn-secondary @isCurrent">
+                    @pageIndex
+                </a>
+            }
+            <a asp-page="./StockPage"
+               asp-route-pageIndex="@(Model.PaginatedProducts.PageIndex + 1)"
+               asp-route-login="@login"
+               asp-route-isadmin="@isAdmin"
+               class="btn btn-primary @nextDisabled">
+                Next
+            </a>
         </div>
     </div>
 </div>

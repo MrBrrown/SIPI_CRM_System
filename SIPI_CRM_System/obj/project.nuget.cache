@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gJR4+b9JqFHF6pVRPpWn+U6xF+800lMWGDkN9zSzfJSFEE2aM9s6pt8lhdaFajGfU4ECkEQD07b+JibE2nBiKw==",
+  "dgSpecHash": "OfMYG249245pUp0wbAe3hq+keG8j47dSZ/d8qK5pALwkXHEWhzz4TEVQFkIor7HAjdH9ctAopN/OfLmeq1PwnQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\maks_\\RiderProjects\\SIPI_CRM_System\\SIPI_CRM_System\\SIPI_CRM_System.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\maks_\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\maks_\\.nuget\\packages\\mysql.data\\8.0.30\\mysql.data.8.0.30.nupkg.sha512",
     "C:\\Users\\maks_\\.nuget\\packages\\mysql.entityframeworkcore\\6.0.4\\mysql.entityframeworkcore.6.0.4.nupkg.sha512",
+    "C:\\Users\\maks_\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\maks_\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\maks_\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\maks_\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",

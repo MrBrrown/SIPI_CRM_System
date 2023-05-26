@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 using OfficeOpenXml;
 using OfficeOpenXml.FormulaParsing.Exceptions;
 using SIPI_CRM_System.Models;
+using SIPI_CRM_System.Pagination;
 using SIPI_CRM_System.Services.StockPage;
 
 namespace SIPI_CRM_System.Pages;
@@ -12,29 +14,36 @@ public class StockPageModel : PageModel
 {
     private static string redirectUserString = ""; //Необоходимо задавать на каждой станице в методе  OnGet(), по нему происходит сохранение действующего пользователя
     private static string fileLoadException = "";
-    private readonly IStockPageRepository _context;
+    private readonly IStockPageRepository _repository;
 
-    [BindProperty] public List<string> CategoryCheck { get; set; }
-
+    [BindProperty(SupportsGet = true)] public List<string> CategoryCheck { get; set; }
     [BindProperty] public string? DeliveryDateSortLabel { get; set; } = "■";
     [BindProperty] public string FitnessSortLabel { get; set; } = "■";
     [BindProperty] public string NameSortLabel { get; set; } = "■";
     
     [BindProperty] public IFormFile FormFile { get; set; }
     
+    public List<string> SelectedCategories { get; set; }
+    public PaginatedList<Product> PaginatedProducts { get; set; }
     public IEnumerable<Product> Products { get; set; }
 
     public List<string> Categories { get; set; }
 
-    public StockPageModel(IStockPageRepository context)
+    private int _pageSize;
+
+    public StockPageModel(IStockPageRepository repository)
     {
-        _context = context; 
+        _repository = repository;
+        _pageSize = 3;
     }
     
     public IActionResult OnPostUpdateCategories()
     {
-        Products = _context.GetProductsByCategories(CategoryCheck).OrderBy(x => x.Name);
-        Categories = _context.GetAllCategories();
+        Response.Cookies.Append("CategoryCheck", JsonConvert.SerializeObject(CategoryCheck));
+        PaginatedProducts = PaginatedList<Product>.Create(
+            _repository.GetProductsByCategories(CategoryCheck).ToList(), 1, _pageSize);
+        Categories = _repository.GetAllCategories();
+        SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
         return Page();
     }
     
@@ -48,15 +57,15 @@ public class StockPageModel : PageModel
             Category = Request.Form["Category"]
         };
 
-        _context.Update(product);
+        _repository.Update(product);
 
         return Redirect("/StockPage/StockPage" + redirectUserString);
     }
 
     public IActionResult OnPostAdd()
     {
-        Products = _context.GetProducts();
-
+        Products = _repository.GetProducts();
+        
         Product product = new Product()
         {
             Id = Products.Any() ? Products.OrderBy(x => x.Id).Last().Id + 1 : 1,
@@ -65,7 +74,7 @@ public class StockPageModel : PageModel
             Category = Request.Form["Category"]
         };
 
-        _context.AddProduct(product);
+        _repository.AddProduct(product);
 
         return Redirect("/StockPage/StockPage" + redirectUserString);
     }    
@@ -90,7 +99,7 @@ public class StockPageModel : PageModel
             return Redirect("/StockPage/StockPage" + redirectUserString + fileLoadException);
         }
 
-        Products = _context.GetProducts();
+        Products = _repository.GetProducts();
 
         try
         {
@@ -104,13 +113,13 @@ public class StockPageModel : PageModel
                     var start = worksheet.Dimension.Start;
                     var end = worksheet.Dimension.End;
 
-                    int idInc = Products.OrderBy(x => x.Id).Last().Id;
+                    int idInc = PaginatedProducts.OrderBy(x => x.Id).Last().Id;
                 
                     for (int row = start.Row + 1; row <= end.Row; row++)
                     {
                         var product = new Product
                         {
-                            Id = Products.Any() ? ++idInc : 1,
+                            Id = PaginatedProducts.Any() ? ++idInc : 1,
                             Name = worksheet.Cells[row, 1].GetValue<string>(),
                             Category = worksheet.Cells[row, 2].GetValue<string>(),
                             Amount = worksheet.Cells[row, 3].GetValue<int>(),
@@ -125,7 +134,7 @@ public class StockPageModel : PageModel
                             throw new ArgumentException("One or more product properties have invalid values.");
                         }
                         
-                        _context.AddProduct(product);
+                        _repository.AddProduct(product);
                     }
                 }
             }
@@ -141,7 +150,7 @@ public class StockPageModel : PageModel
 
     public IActionResult OnPostDelete(int id)
     {
-        _context.RemoveProductById(id);
+        _repository.RemoveProductById(id);
         return Redirect("/StockPage/StockPage" + redirectUserString);
     }
 
@@ -150,82 +159,104 @@ public class StockPageModel : PageModel
         return Redirect("/Index");
     }
 
-    public IActionResult OnPostUpdateProductsOrderByDeliveryDate(string deliveryDateSortLabel)
+    public IActionResult OnPostUpdateProductsOrderByDeliveryDate(string deliveryDateSortLabel, int pageIndex)
     {
         switch (deliveryDateSortLabel)
         {
             case "■":
                 DeliveryDateSortLabel = "▼";
-                Products = _context.GetProducts().OrderByDescending(x => x.DeliveryDateTime);
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().OrderByDescending(x => x.DeliveryDateTime).ToList(), pageIndex, _pageSize);
                 break;
             case "▼":
                 DeliveryDateSortLabel = "▲";
-                Products = _context.GetProducts().OrderBy(x => x.DeliveryDateTime);
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().OrderBy(x => x.DeliveryDateTime).ToList(), pageIndex, _pageSize);
                 break;
             case "▲":
                 DeliveryDateSortLabel = "■";
-                Products = _context.GetProducts();
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().ToList(), pageIndex, _pageSize);
                 break;
         }
         
-        Categories = _context.GetAllCategories();
+        Categories = _repository.GetAllCategories();
         
         return Page();
     }
     
-    public IActionResult OnPostUpdateProductsOrderByName(string nameSortLabel)
+    public IActionResult OnPostUpdateProductsOrderByName(string nameSortLabel, int pageIndex)
     {
         switch (nameSortLabel)
         {
             case "■":
                 NameSortLabel = "▼";
-                Products = _context.GetProducts().OrderByDescending(x => x.Name);
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().OrderByDescending(x => x.Name).ToList(), pageIndex, _pageSize);
                 break;
             case "▼":
                 NameSortLabel = "▲";
-                Products = _context.GetProducts().OrderBy(x => x.Name);
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().OrderBy(x => x.Name).ToList(), pageIndex, _pageSize);
                 break;
             case "▲":
                 NameSortLabel = "■";
-                Products = _context.GetProducts();
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().ToList(), pageIndex, _pageSize);
                 break;
         }
         
-        Categories = _context.GetAllCategories();
+        Categories = _repository.GetAllCategories();
         
         return Page();
     }
     
-    public IActionResult OnPostUpdateProductsOrderByFitness(string fitnessSortLabel)
+    public IActionResult OnPostUpdateProductsOrderByFitness(string fitnessSortLabel, int pageIndex)
     {
         switch (fitnessSortLabel)
         {
             case "■":
                 FitnessSortLabel = "▼";
-                Products = _context.GetProducts().OrderByDescending(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now);
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().OrderByDescending(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now).ToList(), pageIndex, _pageSize);
                 break;
             case "▼":
                 FitnessSortLabel = "▲";
-                Products = _context.GetProducts().OrderBy(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now);
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().OrderBy(x => x.DeliveryDateTime.AddHours(x.LifeTime) - DateTime.Now).ToList(), pageIndex, _pageSize);
                 break;
             case "▲":
                 FitnessSortLabel = "■";
-                Products = _context.GetProducts();
+                PaginatedProducts = PaginatedList<Product>.Create(
+                    _repository.GetProducts().ToList(), pageIndex, _pageSize);
                 break;
         }
         
-        Categories = _context.GetAllCategories();
+        Categories = _repository.GetAllCategories();
         
         return Page();
     }
 
-    public void OnGet()
+    public void OnGet(int? pageIndex)
     {
-        Products = _context.GetProducts();
-        Categories = _context.GetAllCategories();
+        Categories = _repository.GetAllCategories();
         DeliveryDateSortLabel = "■";
         FitnessSortLabel = "■";
         NameSortLabel = "■";
-        redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"]; //Выражение для сохраниения пользователя, одинаково на каждой станице
+        
+        var categoryCheckCookie = Request.Cookies["CategoryCheck"];
+        
+        CategoryCheck = string.IsNullOrEmpty(categoryCheckCookie)
+            ? new List<string>()
+            : JsonConvert.DeserializeObject<List<string>>(categoryCheckCookie);
+        
+        SelectedCategories = Categories.Where(c => CategoryCheck.Contains(c)).ToList();
+        // shit shit shit shit
+        //SelectedCategories.Add("Fictitious category");
+        
+        PaginatedProducts = PaginatedList<Product>.Create(
+            _repository.GetProductsByCategories(CategoryCheck).ToList(), pageIndex ?? 1, _pageSize);
+        
+        redirectUserString = "?login=" + Request.Query["login"] + "&isadmin=" + Request.Query["isadmin"];
     }
 }

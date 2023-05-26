@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SIPI_CRM_System.Models;
+using SIPI_CRM_System.Pagination;
 
 namespace SIPI_CRM_System.Services.StockPage;
 
@@ -14,18 +15,12 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public IEnumerable<Product> GetProducts()
     {
-        List<Product> products = new List<Product>();
-        foreach (var product in _context.Products)
-        {
-            products.Add(product);
-        }
-
-        return products;
+        return _context.Products;
     }
 
     public List<string> GetAllCategories()
     {
-        List<string> categories = new List<string>();
+        var categories = new List<string>();
 
         foreach (var product in _context.Products)
         {
@@ -38,7 +33,7 @@ public class DataBaseStockPageRepository : IStockPageRepository
         return categories;
     }
 
-    public Product GetProductById(int id)
+    public Product? GetProductById(int id)
     {
         var product = _context.Products.FirstOrDefault(x => x.Id.Equals(id));
         return product;
@@ -75,9 +70,9 @@ public class DataBaseStockPageRepository : IStockPageRepository
 
     public IEnumerable<Product> GetProductsByCategories(List<string> categoryCheck)
     {
-        List<Product> products = new List<Product>();
+        var products = new List<Product>();
         
-        if (categoryCheck.Count() == 0)
+        if (!categoryCheck.Any())
         {
             foreach (var product in _context.Products)
             {

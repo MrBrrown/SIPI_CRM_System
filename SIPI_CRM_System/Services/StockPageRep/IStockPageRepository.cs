@@ -1,4 +1,5 @@
 using SIPI_CRM_System.Models;
+using SIPI_CRM_System.Pagination;
 
 namespace SIPI_CRM_System.Services.StockPage;
 
@@ -8,7 +9,7 @@ public interface IStockPageRepository
 
     List<string> GetAllCategories();
 
-    Product GetProductById(int id);
+    Product? GetProductById(int id);
 
     void AddProduct(Product product);
 
