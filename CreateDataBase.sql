@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `CRMdb`.`Product` (
   `Amount` DECIMAL(9,2) NOT NULL,
   `LifeTime` INT NOT NULL,
   `DeliveryDateTime` DATETIME NOT NULL,
+  `IsFit` TINYINT NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
