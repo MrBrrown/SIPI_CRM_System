@@ -78,7 +78,28 @@ public class StockPageModel : PageModel
         _repository.AddProduct(product);
 
         return Redirect("/StockPage/StockPage" + redirectUserString);
-    }    
+    }
+
+    public IActionResult OnPostResetCategories()
+    {
+        Categories = _repository.GetAllCategories();
+        PaginatedProducts = PaginatedList<Product>.Create(
+            _repository.GetProducts().ToList(), 1, _pageSize);
+        SelectedCategories = new List<string> {
+            // shit shit shit shit happens
+            "Fictitious category" };
+
+        return Page();
+    }
+    
+    public IActionResult OnPostResetSorting()
+    {
+        DeliveryDateSortLabel = "■";
+        FitnessSortLabel = "■";
+        NameSortLabel = "■";
+
+        return Redirect("/StockPage/StockPage" + redirectUserString);
+    }
     
     public async Task<IActionResult> OnPostAddByDocument(IFormFile formFile)
     {

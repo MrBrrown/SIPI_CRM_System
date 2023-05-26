@@ -117,6 +117,7 @@
                         </div>
                     }
                     <button class="btn btn-primary m-3 btn-lg">Обновить</button>
+                    <button class="btn btn-secondary btn-sm" asp-page-handler="ResetCategories">Сбросить</button>
                 </form>
             }
             <div class="card-body" style="background-color: #20c997">
@@ -180,13 +181,14 @@
                            class="btn btn-outline-dark btn-sm"/>
                 </form>
                 <form class="bg-light mx-2"
-                    asp-route-login="@login"
-                    asp-route-isadmin="@isAdmin"
-                    asp-page-handler="UpdateProductsOrderByName" method="post"
-                    asp-route-nameSortLabel="@Model.NameSortLabel">
+                      asp-route-login="@login"
+                      asp-route-isadmin="@isAdmin"
+                      asp-page-handler="UpdateProductsOrderByName" method="post"
+                      asp-route-nameSortLabel="@Model.NameSortLabel">
                     <label>Имя</label>                    
                     <input type="submit" value="@Model.NameSortLabel" 
                            class="btn btn-outline-dark btn-sm"/>
+                    <button class="btn btn-secondary mx-1 btn-sm" asp-page-handler="ResetSorting">Сбросить</button>
                 </form>
             </span>
             <div class="offcanvas offcanvas-end add-offcanvas" tabindex="-1"
