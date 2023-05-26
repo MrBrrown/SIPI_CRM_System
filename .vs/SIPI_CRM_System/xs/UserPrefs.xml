@@ -1,15 +1,25 @@
 ﻿<Properties StartupConfiguration="{E4C41CC0-9C81-4A9C-9916-149DD23785CA}|Default">
-  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml">
+    <Files>
+      <File FileName="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml" Line="310" Column="39" />
+      <File FileName="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml.css" Line="30" Column="27" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SIPI_CRM_System">
             <Node name="SIPI_CRM_System">
+              <Node name="Models" expanded="True" />
               <Node name="Pages">
                 <Node name="MainPage">
                   <Node name="MainPage.cshtml" expanded="True" selected="True" />
                 </Node>
+              </Node>
+              <Node name="Services" expanded="True">
+                <Node name="MainPageRep" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -17,10 +27,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
 </Properties>

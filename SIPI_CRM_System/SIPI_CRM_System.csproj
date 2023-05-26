@@ -20,6 +20,7 @@
     <None Remove="Pages\EditPages\DishEditPage\" />
     <None Remove="Pages\EditPages\OrderEditPage\" />
     <None Remove="Services\DishEditPageRep\" />
+    <None Remove="Services\OrderEditPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -35,6 +36,7 @@
     <Folder Include="Pages\EditPages\DishEditPage\" />
     <Folder Include="Pages\EditPages\OrderEditPage\" />
     <Folder Include="Services\DishEditPageRep\" />
+    <Folder Include="Services\OrderEditPageRep\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">

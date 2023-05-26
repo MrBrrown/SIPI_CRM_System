@@ -1,52 +1,52 @@
-.menu-offcanvas[b-fv1vnllla0] {
+.menu-offcanvas[b-1xoa2yvb0r] {
     background-color: #212529
 }
 
-.nav-item-divider[b-fv1vnllla0] {
+.nav-item-divider[b-1xoa2yvb0r] {
     height: 1px;
     margin: 1rem 0;
     overflow: hidden;
     background-color: rgba(236, 238, 239, 0.3);
 }
 
-.edit-dish-offcanvas[b-fv1vnllla0] {
+.edit-dish-offcanvas[b-1xoa2yvb0r] {
     background-color: #212529
 }
 
-.delete-dish-offcanvas[b-fv1vnllla0] {
+.delete-dish-offcanvas[b-1xoa2yvb0r] {
     background-color: #212529
 }
 
-.close-red[b-fv1vnllla0] {
+.close-red[b-1xoa2yvb0r] {
     background-color: red;
 }
 
-.close-button[b-fv1vnllla0] {
+.close-button[b-1xoa2yvb0r] {
     background-color: #696967;
     color: white;
     border: 0;
 }
 
-.collapse-card[b-fv1vnllla0] {
+.collapse-card[b-1xoa2yvb0r] {
     background-color: #212529;
     border-radius: 20px;
 }
 
-.sub-collapse-card[b-fv1vnllla0] {
+.sub-collapse-card[b-1xoa2yvb0r] {
     background-color: #2c3238;
 }
 
-.category-button[b-fv1vnllla0] {
+.category-button[b-1xoa2yvb0r] {
     background-color: #996806;
     border-radius: 20px;
 }
 
-.new-dish-button[b-fv1vnllla0] {
+.new-dish-button[b-1xoa2yvb0r] {
     background-color: #755107;
     border-radius: 20px;
 }
-.sub-category-button[b-fv1vnllla0] {
+
+.sub-category-button[b-1xoa2yvb0r] {
     background-color: #755107;
-    border: 0px;
     border-radius: 12px;
 }

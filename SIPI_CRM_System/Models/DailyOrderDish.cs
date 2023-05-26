@@ -8,6 +8,7 @@ namespace SIPI_CRM_System.Models
         public int Id { get; set; }
         public int DishId { get; set; }
         public int DailyOrderId { get; set; }
+        public int Amount { get; set; }
 
         public virtual DailyOrder DailyOrder { get; set; } = null!;
         public virtual Dish Dish { get; set; } = null!;

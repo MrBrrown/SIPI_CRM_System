@@ -92,6 +92,7 @@
 
 <section>
     <div>.</div>
+    <!--Close Work Day Alert-->
     @if (Request.Query["invalidpassword"] == "True")
     {
         <div class="alert alert-danger mb-2" role="alert">
@@ -99,6 +100,7 @@
         </div>
     }
 
+    <!--Info blok-->
     <div class="row mb-2">
         <div class="col-6 text-light text-center">
             @{
@@ -129,7 +131,7 @@
     </div>
     <div class="d-grid">
         <!--New Order Buttton-->
-        <button class="btn btn-primary text-light new-order-button"
+        <button class="btn btn-primary text-light new-order-button mb-1"
                 type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNewOrder"
@@ -295,14 +297,44 @@
                     </div>
                     <!--Card body-->
                     <div class="card-body">
-                        @foreach (var dish_order in item.DailyOrderDishes.ToList())
-                        {
-                            <ul>
-                                <li>
-                                    @Model.dishes.First(x => x.Id == dish_order.DishId).Name
-                                </li>
-                            </ul>
-                        }
+                        <div class="row">
+                            <div class="col-4 d-flex justify-content-center">
+                                first
+                            </div>
+                            <div class="col-4 d-flex justify-content-center">
+                                second
+                            </div>
+                            <div class="col-4 dish-list">
+                                <a class="nav-link d-grid mb-1 mt-1" asp-area=""
+                                    asp-page="/EditPages/OrderEditPage/OrderEditPage"
+                                    asp-route-id="@id"
+                                    asp-route-isadmin="@isAdmin"
+                                    asp-route-orderId="@item.Id">
+                                    <button class="btn btn-primary @doneButtonId add-dish-button">
+                                    Добвать блюда
+                                    </button>
+                                </a>
+                                <div class="d-flex justify-content-right">
+                                    <ul>
+                                        <li>
+                                            Gthdjt
+                                        </li>
+                                        <li>
+                                            Gthdjt
+                                        </li>
+                                        <li>
+                                            Gthdjt
+                                        </li>
+                                        <li>
+                                            Gthdjt
+                                        </li>
+                                        <li>
+                                            Gthdjt
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!--Card body-->
                     <div class="card-footer row">

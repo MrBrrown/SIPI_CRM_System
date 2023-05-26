@@ -1,0 +1,144 @@
+﻿@page
+@model SIPI_CRM_System.Pages.EditPages.OrderEditPage.OrderEditPageModel
+@{
+    ViewData["Title"] = "Order Edit Page";
+    Layout = "~/Pages/Shared/_LoginLayout.cshtml";
+
+    var orderId = Request.Query["orderId"];
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="text-center text-dark">Номер стола - @Model.dailyOrder.Table.Id</h3>
+            <h3 class="text-center text-dark">Время - @Model.dailyOrder.OrderDateTime.ToShortDateString() @Model.dailyOrder.OrderDateTime.ToShortTimeString()</h3>
+            <!--Update/Delete Form-->
+            <form asp-page-handler="Update" asp-route-orderId="@orderId">
+                <!--Dish Products-->
+                <div class="scroll-card">
+                    @foreach (var dailyOrderDishes in Model.dailyOrder.DailyOrderDishes)
+                    {
+                        var dishAmount = "dishAmount" + dailyOrderDishes.Id.ToString();
+                        <div class="card mb-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <p>@dailyOrderDishes.Dish.Name</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <!--Product Amount in Dish-->
+                                        <input type="text" class="form-control" value="@dailyOrderDishes.Amount" name="@dishAmount" />
+                                    </div>
+                                    <div class="col-2">
+                                        <p>шт</p>
+                                    </div>
+                                    <div class="col-1">
+                                        <button class="btn-close btn-sm float-right"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="row mt-4 text-center">
+                    <div class="col-md-6 d-grid">
+                        <!--Udpate Button-->
+                        <button class="btn btn-success" asp-page-handler="Update" asp-route-orderId="@orderId">Обновить заказ</button>
+                    </div>
+                    <div class="col-md-6 d-grid">
+                        <!--Exit Button-->
+                        <button class="btn btn-danger" asp-page-handler="Exit">Выйти</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <h3 class="text-center text-dark mt-5">Меню</h3>
+            <div class="row m-2">
+                <div class="col-10">
+                    <!--Category Collapse List-->
+                    @foreach (var category in Model.dishCategories)
+                    {
+                        var collapseId = "collapse" + category.Replace(" ", "");
+                        <!--Category Collapse-->
+                        <div class="collapse" id="@collapseId">
+                            <div class="card mb-2 collapse-card">
+                                <div class="card-header">
+                                    <div class="d-flex bd-highlight">
+                                        <div class="p-2 w-100 bd-highlight text-light">
+                                            <h5>@category</h5>
+                                        </div>
+                                        <div class="p-2 flex-shrink-1 bd-highlight">
+                                            <!--Close Button-->
+                                            <button class="close-button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#@collapseId"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseId">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!--Sub Category List-->
+                                        @foreach (var sub in Model.dishSubCategories[category])
+                                        {
+                                            var subId = "collapseSub" + category.Replace(" ", "") + sub.Replace(" ", "");
+                                            <!--Sub Category Collapse Control Button-->
+                                            <button class="btn sub-category-button text-light mb-2 " type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#@subId"
+                                                    aria-expanded="false"
+                                                    aria-controls="@subId">
+                                                @sub
+                                            </button>
+                                            <!--Sub Category Collapse -->
+                                            <div class="collapse" id="@subId">
+                                                <div class="row">
+                                                    @foreach (var dish in Model.dishes.Where(x => x.Category == category).Where(x => x.SubCategory == sub))
+                                                    {
+                                                        var dishOffcanvasId = "offcanvas" + dish.Id.ToString();
+                                                        var dishOffcanvasDeleteId = "offcanvasDelete" + dish.Id.ToString();
+
+                                                        <div class="col-3 mb-2">
+                                                            <form class="d-grid">
+                                                                <button class="btn btn-dark">@dish.Name @dish.Price</button>
+                                                            </form>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--Left Column of Categories-->
+                <div class="col-2">
+                    <!--Category List-->
+                    @foreach (var category in Model.dishCategories)
+                    {
+                        var collapseId = "collapse" + category.Replace(" ", "");
+                        <!--Category Collapse Control Button-->
+                        <div class="col-md-12 d-grid text-center mb-2 category-button">
+                            <button class="btn text-light" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#@collapseId"
+                                    aria-expanded="false"
+                                    aria-controls="@collapseId">
+                                @category
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
