@@ -14,12 +14,16 @@
             <h3 class="text-center text-dark">Время - @Model.dailyOrder.OrderDateTime.ToShortDateString() @Model.dailyOrder.OrderDateTime.ToShortTimeString()</h3>
             <!--Update/Delete Form-->
             <form asp-page-handler="Update" asp-route-orderId="@orderId">
+            @{
+                
+
                 <!--Dish Products-->
                 <div class="scroll-card">
                     @foreach (var dailyOrderDishes in Model.dailyOrder.DailyOrderDishes)
                     {
+                        int maxAmount = int.MaxValue;
                         var dishAmount = "dishAmount" + dailyOrderDishes.Id.ToString();
-                        <div class="card mb-1">
+                        <div class="card dish-card mb-1">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-5">
@@ -37,6 +41,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                @foreach (var dishProduct in dailyOrderDishes.Dish.ProductDishes)
+                                {
+                                    if (Decimal.ToInt32(dishProduct.Product.Amount / dishProduct.Amount) < maxAmount)
+                                    {
+                                        maxAmount = Decimal.ToInt32(dishProduct.Product.Amount / dishProduct.Amount);
+                                    }
+                                }
+                                <div class="alert alert-warning" role="alert">
+                                    Досупно для приготовления - @maxAmount
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>
@@ -50,6 +66,7 @@
                         <button class="btn btn-danger" asp-page-handler="Exit">Выйти</button>
                     </div>
                 </div>
+            }
             </form>
         </div>
         <div class="col-md-8">

@@ -26,11 +26,24 @@
 }
 
 .dish-list {
-    border: 3px solid #b9b9a9;
-    background-color: #eeedd8;
+    border: 3px solid #696967;
+    background-color: #212529;
     border-radius: 25px;
 }
 
 .add-dish-button {
     border-radius: 25px;
+    background-color: #696967;
+}
+
+.new-order-button {
+    background-color: #996806;
+}
+
+.reserve-button {
+    background-color: #755107;
+}
+
+.close-work-day {
+    background-color: #a22e0f;
 }

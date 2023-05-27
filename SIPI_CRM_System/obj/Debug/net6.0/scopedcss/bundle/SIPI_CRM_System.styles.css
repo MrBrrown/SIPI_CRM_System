@@ -40,6 +40,10 @@
     background-color: #212529;
     color: white;
 }
+
+.btn-action[b-j752z9p5mp] {
+    background-color: #996806;
+}
 /* _content/SIPI_CRM_System/Pages/EditPages/DishEditPage/DishEditPage.cshtml.rz.scp.css */
 .scroll-card[b-83pwj3b17m] {
     width: 100%;
@@ -141,6 +145,12 @@
     border: 0px;
     border-radius: 12px;
 }
+
+.dish-card[b-1xoa2yvb0r] {
+    background-color: #212529;
+    color: white;
+    border-radius: 12px;
+}
 /* _content/SIPI_CRM_System/Pages/Index.cshtml.rz.scp.css */
 .gradient-custom[b-ck5xepj1lm] {
     background: radial-gradient(circle, rgba(110,77,59,1) 0%, rgba(0,0,0,1) 98%);
@@ -174,13 +184,26 @@
 }
 
 .dish-list[b-708837tbp7] {
-    border: 3px solid #b9b9a9;
-    background-color: #eeedd8;
+    border: 3px solid #696967;
+    background-color: #212529;
     border-radius: 25px;
 }
 
 .add-dish-button[b-708837tbp7] {
     border-radius: 25px;
+    background-color: #696967;
+}
+
+.new-order-button[b-708837tbp7] {
+    background-color: #996806;
+}
+
+.reserve-button[b-708837tbp7] {
+    background-color: #755107;
+}
+
+.close-work-day[b-708837tbp7] {
+    background-color: #a22e0f;
 }
 /* _content/SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml.rz.scp.css */
 .menu-offcanvas[b-fv1vnllla0] {

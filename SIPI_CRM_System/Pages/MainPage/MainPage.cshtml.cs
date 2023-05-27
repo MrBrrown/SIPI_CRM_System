@@ -47,6 +47,9 @@ namespace SIPI_CRM_System.Pages
         public IActionResult OnPostSetOrderDone(int id)
         {
             _context.SetOrderStatusDone(id);
+
+            _context.RemoveProducts(id);
+
             return Redirect("/MainPage/MainPage" + redirectUserString);
         }
 

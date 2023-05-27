@@ -75,7 +75,7 @@
                 {
                 <div class="nav-item-divider"></div>
                 <a class="navbar-brand" asp-area=""
-                   asp-page="/MainPage/MainPage"
+                   asp-page="/AdminPanelPage/AdminPanelPage"
                    asp-route-id="@id"
                    asp-route-isadmin="@isAdmin">
                     Панель администатора
@@ -131,7 +131,7 @@
     </div>
     <div class="d-grid">
         <!--New Order Buttton-->
-        <button class="btn btn-primary text-light new-order-button mb-1"
+        <button class="btn new-order-button text-light new-order-button mb-1"
                 type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNewOrder"
@@ -191,7 +191,7 @@
                     {
                         <style type="text/css">
                         .@cardId {
-                            background-color: red;
+                            background-color:  #a22e0f ;
                             color: white;
                         }
                         .@doneButtonId {
@@ -203,7 +203,7 @@
                     {
                         <style type="text/css">
                         .@cardId {
-                            background-color: green;
+                            background-color:  #0c891b ;
                             pointer-events: none;
                             color: white;
                         }
@@ -213,7 +213,8 @@
                     {
                         <style type="text/css">
                         .@cardId {
-                            background-color: yellow;
+                            background-color:  #aa8d0d ;
+                            color: white;
                         }
                         </style>
                     }
@@ -231,7 +232,7 @@
                             <!--Reserve Order Activate Button-->
                             @if (item.IsReserved)
                             {
-                                <button class="btn btn-primary reserve-activate-button"
+                                <button class="btn text-light reserve-button reserve-activate-button"
                                         data-bs-toggle="offcanvas"
                                         data-bs-target="#@reserveActivateOffcanvasId"
                                         aria-controls="@reserveActivateOffcanvasId">
@@ -299,18 +300,16 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4 d-flex justify-content-center">
-                                first
                             </div>
                             <div class="col-4 d-flex justify-content-center">
-                                second
                             </div>
-                            <div class="col-4 dish-list">
+                            <div class="col-4 dish-list text-light">
                                 <a class="nav-link d-grid mb-1 mt-1" asp-area=""
                                     asp-page="/EditPages/OrderEditPage/OrderEditPage"
                                     asp-route-id="@id"
                                     asp-route-isadmin="@isAdmin"
                                     asp-route-orderId="@item.Id">
-                                    <button class="btn btn-primary @doneButtonId add-dish-button">
+                                    <button class="btn text-light add-dish-button @doneButtonId add-dish-button">
                                     Добвать блюда
                                     </button>
                                 </a>
@@ -318,7 +317,7 @@
                                     <ul>
                                         @foreach (var orderDish in item.DailyOrderDishes)
                                         {
-                                            <li>@orderDish.Dish.Name @orderDish.Amount</li>
+                                            <li>@orderDish.Dish.Name    -   @orderDish.Amount</li>
                                         }
                                     </ul>
                                 </div>
@@ -328,10 +327,10 @@
                     <!--Card body-->
                     <div class="card-footer row">
                         <div class="col-md-7">
-                            <button class="btn btn-primary w-100">Обновить заказ</button>
+                            <button class="btn text-light reserve-button w-100">Обновить заказ</button>
                         </div>
                         <div class="col-md-5">
-                            <p class="text-center">@item.Price</p>
+                            <p class="text-center">Сумма чека: @item.Price</p>
                         </div>
                     </div>
                 </div>
@@ -339,7 +338,7 @@
         }
 
         <!--Close Work Day Button-->
-        <button class="btn btn-danger mb-3"
+        <button class="btn text-light close-work-day mb-3"
                 type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#closeWorkDayOffcanvas"

@@ -62,6 +62,9 @@ namespace SIPI_CRM_System.Services.OrderEditPageRep
             return _context.DailyOrders
                 .Include(x => x.Table)
                 .Include(x => x.DailyOrderDishes)
+                .ThenInclude(x => x.Dish)
+                .ThenInclude(x => x.ProductDishes)
+                .ThenInclude(x => x.Product)
                 .FirstOrDefault(x => x.Id == id);
         }
 
@@ -82,6 +85,33 @@ namespace SIPI_CRM_System.Services.OrderEditPageRep
             var orderDish = _context.DailyOrderDishes.Find(id);
 
             _context.DailyOrderDishes.Remove(orderDish);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async void UpdateOrderDish(int id, int amount)
+        {
+            var updOredrDish = _context.DailyOrderDishes.Find(id);
+
+            updOredrDish.Amount = amount;
+
+            _context.DailyOrderDishes.Update(updOredrDish);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async void UpdatePrice(int id)
+        {
+            var order = GetDailyOrder(id);
+
+            order.Price = 0;
+
+            foreach (var orderDish in order.DailyOrderDishes)
+            {
+                order.Price += orderDish.Amount * orderDish.Dish.Price;
+            }
+
+            _context.DailyOrders.Update(order);
 
             await _context.SaveChangesAsync();
         }

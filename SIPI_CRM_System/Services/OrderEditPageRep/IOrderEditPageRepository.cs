@@ -18,6 +18,10 @@ namespace SIPI_CRM_System.Services.OrderEditPageRep
         void DeleteDailyOrderDish(int id);
 
         void AddDailyOrderDish(DailyOrderDish dailyOrderDish);
+
+        void UpdateOrderDish(int id, int amount);
+
+        void UpdatePrice(int id);
     }
 }
 

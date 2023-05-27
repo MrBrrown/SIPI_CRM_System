@@ -36,12 +36,18 @@ namespace SIPI_CRM_System.Services.MainPageRep
 
         public DailyOrder GetDailyOrderById(int id)
         {
-            return _context.DailyOrders.Find(id);
+            return _context.DailyOrders
+                .Include(x => x.Table)
+                .Include(x => x.DailyOrderDishes)
+                .ThenInclude(x => x.Dish)
+                .ThenInclude(x => x.ProductDishes)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public async void SetOrderStatusDone(int id)
         {
-            var dailyOrder = _context.DailyOrders.Include(x => x.DailyOrderDishes).ToList().First(x => x.Id == id);
+            var dailyOrder = _context.DailyOrders.Include(x => x.DailyOrderDishes).First(x => x.Id == id);
             dailyOrder.IsDone = true;
 
             var order = new Order()
@@ -63,7 +69,8 @@ namespace SIPI_CRM_System.Services.MainPageRep
                 {
                     Id = _context.OrderDishes.Any() ? _context.OrderDishes.OrderBy(x => x.Id).Last().Id + 1 : 1,
                     OrderId = order.Id,
-                    DishId = order_dish.Id
+                    DishId = order_dish.Id,
+                    Amount = order_dish.Amount
                 };
 
                 _context.OrderDishes.Add(navigation);
@@ -103,6 +110,22 @@ namespace SIPI_CRM_System.Services.MainPageRep
             {
                 if (!dailyOrder.IsReserved)
                     _context.DailyOrders.Remove(dailyOrder);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async void RemoveProducts(int id)
+        {
+            var order = GetDailyOrderById(id);
+
+            foreach (var orderDish in order.DailyOrderDishes)
+            {
+                foreach(var dishProduct in orderDish.Dish.ProductDishes)
+                {
+                    dishProduct.Product.Amount -= dishProduct.Amount;
+                    _context.Products.Update(dishProduct.Product);
+                }
             }
 
             await _context.SaveChangesAsync();

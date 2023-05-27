@@ -62,9 +62,32 @@ namespace SIPI_CRM_System.Pages.EditPages.OrderEditPage
             return Redirect("/EditPages/OrderEditPage/OrderEditPage" + redirectUserString + "&orderId=" + orderId.ToString());
         }
 
-        public IActionResult OnPostUpdate()
+        public IActionResult OnPostUpdate(int orderId)
         {
-            return Redirect("");
+            dailyOrder = _context.GetDailyOrder(orderId);
+
+            foreach(var orderDish in dailyOrder.DailyOrderDishes)
+            {
+                int maxAmount = int.MaxValue;
+                foreach (var dishProduct in orderDish.Dish.ProductDishes)
+                {
+                    if (Decimal.ToInt32(dishProduct.Product.Amount / dishProduct.Amount) < maxAmount)
+                    {
+                        maxAmount = Decimal.ToInt32(dishProduct.Product.Amount / dishProduct.Amount);
+                    }
+                }
+
+                int inputAmount = int.Parse(Request.Form["dishAmount" + orderDish.Id.ToString()]);
+
+                if (inputAmount <= maxAmount)
+                {
+                    _context.UpdateOrderDish(orderDish.Id, inputAmount);
+                }
+            }
+
+            _context.UpdatePrice(orderId);
+
+            return Redirect("/EditPages/OrderEditPage/OrderEditPage" + redirectUserString + "&orderId=" + orderId.ToString());
         }
 
         public void OnGet()

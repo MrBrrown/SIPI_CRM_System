@@ -19,6 +19,8 @@ namespace SIPI_CRM_System.Services.MainPageRep
 
 		void CloseWorkDay();
 
+		void RemoveProducts(int id);
+
         void SetOrderStatusDone(int id);
 
 		void DeleteDailyOrder(int id);

@@ -1,11 +1,17 @@
 ﻿<Properties StartupConfiguration="{E4C41CC0-9C81-4A9C-9916-149DD23785CA}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.SIPI__CRM__System PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/StockPage/StockPage.cshtml">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIPI_CRM_System/Pages/UserPage/UserPage.cshtml">
     <Files>
-      <File FileName="SIPI_CRM_System/Pages/StockPage/StockPage.cshtml" Line="8" Column="5" />
+      <File FileName="SIPI_CRM_System/Pages/StockPage/StockPage.cshtml" Line="78" Column="61" />
+      <File FileName="SIPI_CRM_System/Pages/MainPage/MainPage.cshtml" Line="78" Column="61" />
+      <File FileName="SIPI_CRM_System/Pages/MenuPage/MenuPage.cshtml" Line="78" Column="61" />
+      <File FileName="SIPI_CRM_System/Pages/UserPage/UserPage.cshtml" Line="78" Column="61" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,12 +19,16 @@
           <Node name="SIPI_CRM_System" expanded="True">
             <Node name="SIPI_CRM_System">
               <Node name="Pages" expanded="True">
-                <Node name="StockPage" expanded="True">
-                  <Node name="StockPage.cshtml" selected="True" />
+                <Node name="EditPages" expanded="True" />
+                <Node name="MainPage" expanded="True">
+                  <Node name="MainPage.cshtml" expanded="True" />
                 </Node>
-              </Node>
-              <Node name="Services" expanded="True">
-                <Node name="StockPageRep" expanded="True" />
+                <Node name="StockPage" expanded="True">
+                  <Node name="StockPage.cshtml" expanded="True" />
+                </Node>
+                <Node name="UserPage">
+                  <Node name="UserPage.cshtml" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -26,7 +36,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
